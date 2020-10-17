@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Noto Sans JP, sans-serif;
+}
+:root {
+  --color0: #fff;
+  --color1: #13887f;
+  --color2: #00c7b8;
+  --color3: #e4da4e;
+  --color4: #f2f6e6;
+  --color5: #022f2c;
+  --color6: #f2faf9; /*фон под сообщения*/
+  --color7: #f9ffff; /*фон: список акт.пользователей*/
+  --color8: #e100cb; /*личн.сообщения*/
+  --color9: #c4c4c4; /*доп.информация*/
+}
+$text-add {
+  font-size: 12px;
+}
+$text-main {
+  font-size: 14px;
+}
+$text-global {
+  font-size: 16px;
+}
+/*container for all content*/
+.flex-container {
+  display: flex;
+  width: 65%;
+  margin: 0 auto;
+}
+/*container for part with list*/
+.flex-container-1 {
+  flex-basis: 35%;
+  flex-grow: 1;
+  /* background-color: rgb(192, 191, 250); */
+}
+/*container for part with messages*/
+.flex-container-2 {
+  flex-basis: 65%;
+  flex-grow: 1;
+  /* background-color: rgb(255, 145, 231); */
+}
+header {
+  height: 60px;
+  background-color: #13887f;
+  color: var(--color0s);
+}
+.nickname {
+  color: var(--color0);
+  font-size: $text-main;
+  margin: 15px 25px;
+}
+.logo {
+  color: var(--color0);
+  font-family: "Courgette", cursive;
+  font-size: 24px;
+  text-align: center;
+  margin: 15px 25px;
+}
+main .flex-container-1 {
+  background-color: var(--color7);
+}
+main .flex-container-2 {
+  background-color: var(--color6);
+}
+main {
+  color: var(--color5);
+  font-size: $text-main;
+}
+main label {
+  display: block;
+  padding: 10px 25px;
+}
+main p {
+  margin: 25px 25px 10px;
+}
+main input {
+  margin-right: 25px;
+}
+main label:hover {
+  background-color: #e100cb;
+}
+
+/*styles of footer for all pages*/
+footer {
+  height: 54px;
+  background-color: #13887f;
+  /* width: auto; */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+footer div p {
+  color: var(--color0);
+  margin: 10px 0px;
+  font-size: 12px;
+  font-style: italic;
+}
+footer .flex-container-2 {
+  text-align: end;
+}
+
+/* for resizing DESKTOP*/
+@media all and (min-width: 1440px) {
+  .flex-container {
+    width: 930px;
+  }
+}
+@media all and (max-width: 800px) {
+  .flex-container {
+    width: 80%;
+  }
+}
+@media all and (max-width: 500px) {
+  .flex-container {
+    width: 100%;
+  }
+  footer {
+    height: auto;
+  }
+}
