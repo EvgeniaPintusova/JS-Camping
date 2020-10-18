@@ -47,12 +47,12 @@ header {
   background-color: #13887f;
   color: var(--color0s);
 }
-.nickname {
+header .nickname {
   color: var(--color0);
   font-size: $text-main;
   margin: 15px 25px;
 }
-.logo {
+header .logo {
   color: var(--color0);
   font-family: "Courgette", cursive;
   font-size: 24px;
@@ -82,13 +82,75 @@ main input {
 main label:hover {
   background-color: #e100cb;
 }
+main .find button {
+  float: right;
+  margin-right: 20px;
+  border: 0;
+  background: transparent;
+  color: var(--color5);
+  padding: 2px 5px;
+}
+main .find button:hover {
+  border-radius: 15px;
+  background: var(--color2);
+  color: #fff;
+}
+main .find button:focus {
+  outline: none;
+}
+main .find input {
+  display: block;
+  margin: 20px 25px;
+  background-color: var(--color0);
+  margin-right: 250px;
+  width: 45%;
+  /* border: 1px solid var(--color9); */
+  border: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+main .find input:focus {
+  /*??????*/
+  outline: 2px solid var(--color2);
+}
+.send {
+  padding: 10px 25px;
+  background-color: var(--color2);
+}
+.send p {
+  font-size: 12px;
+  color: var(--color0);
+  margin: 15px 0px;
+}
+.send button {
+  border: 0;
+  background: transparent;
+  float: right;
+}
+.send button svg path:hover {
+  stroke: var(--color1);
+}
+.send button:focus {
+  outline: none;
+}
 
+main .send input {
+  display: block;
+  background-color: var(--color0);
+  width: 70%;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+main .send input:focus {
+  /*??????*/
+  outline: 2px solid var(--color2);
+}
 /*styles of footer for all pages*/
 footer {
   height: 54px;
   background-color: #13887f;
-  /* width: auto; */
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -109,9 +171,19 @@ footer .flex-container-2 {
     width: 930px;
   }
 }
+@media all and (max-width: 1300px) {
+  main .find input {
+    width: 35%;
+  }
+}
 @media all and (max-width: 800px) {
   .flex-container {
     width: 80%;
+  }
+}
+@media all and (max-width: 1024px) {
+  main .find button {
+    margin-right: 0px;
   }
 }
 @media all and (max-width: 500px) {
