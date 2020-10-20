@@ -1,4 +1,8 @@
-* {
+body,
+html {
+  position: relative;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-family: Noto Sans JP, sans-serif;
@@ -14,16 +18,16 @@
   --color7: #f9ffff; /*фон: список акт.пользователей*/
   --color8: #e100cb; /*личн.сообщения*/
   --color9: #c4c4c4; /*доп.информация*/
+  --space0: 0;
+  --space-xs: 5px;
+  --space-s: 10px;
+  --space-m: 15px;
+  --space-l: 25px;
+  --text-add: 12px;
+  --text-main: 14px;
+  --text-big: 16px;
 }
-$text-add {
-  font-size: 12px;
-}
-$text-main {
-  font-size: 14px;
-}
-$text-global {
-  font-size: 16px;
-}
+
 /*container for all content*/
 .flex-container {
   display: flex;
@@ -42,90 +46,135 @@ $text-global {
   flex-grow: 1;
   /* background-color: rgb(255, 145, 231); */
 }
-header {
-  height: 60px;
-  background-color: #13887f;
-  color: var(--color0s);
-}
-header .nickname {
+.header {
+  height: 4rem;
+  background-color: var(--color1);
   color: var(--color0);
-  font-size: $text-main;
-  margin: 15px 25px;
 }
-header .logo {
+.nickname {
+  color: var(--color0);
+  font-size: var(--text-main);
+  margin: var(--space-l);
+}
+.logo {
   color: var(--color0);
   font-family: "Courgette", cursive;
   font-size: 24px;
   text-align: center;
-  margin: 15px 25px;
+  margin: var(--space-m);
 }
-main .flex-container-1 {
+.main .flex-container-1 {
   background-color: var(--color7);
 }
-main .flex-container-2 {
+.main .flex-container-2 {
   background-color: var(--color6);
+  position: relative;
 }
-main {
+.main {
+  height: calc(100% - 7rem);
+  overflow: auto;
   color: var(--color5);
-  font-size: $text-main;
+  font-size: var(--text-main);
 }
-main label {
+/* .listing{
+  height: calc(100% - 7rem);
+  overflow: auto;
+} */
+.listing label {
   display: block;
-  padding: 10px 25px;
+  padding: var(--space-s) var(--space-l);
 }
-main p {
-  margin: 25px 25px 10px;
+.listing p {
+  margin: var(--space-l) var(--space-l) var(--space-s);
 }
-main input {
-  margin-right: 25px;
+.listing input {
+  margin-right: var(--space-m);
 }
-main label:hover {
+.listing label:hover {
   background-color: #e100cb;
 }
-main .find button {
-  float: right;
-  margin-right: 20px;
+.find {
+  display: flex;
+  padding: var(--space-l) 0 var(--space-m);
+  justify-content: space-around;
+}
+.find button {
   border: 0;
   background: transparent;
   color: var(--color5);
   padding: 2px 5px;
 }
-main .find button:hover {
+.find button:hover {
   border-radius: 15px;
   background: var(--color2);
   color: #fff;
 }
-main .find button:focus {
+.find button:focus {
   outline: none;
 }
-main .find input {
+.find input {
   display: block;
-  margin: 20px 25px;
   background-color: var(--color0);
-  margin-right: 250px;
   width: 45%;
-  /* border: 1px solid var(--color9); */
   border: none;
-  padding: 5px 15px;
+  padding: var(--space-xs) var(--space-m);
   border-radius: 10px;
 }
-main .find input:focus {
+.find input:focus {
   /*??????*/
+  /* border: 1px solid var(--color9); */
   outline: 2px solid var(--color2);
 }
+.messages {
+  padding: 0 var(--space-l);
+}
+.own_mess {
+  width: 80%;
+  background-color: var(--color0);
+  border-radius: 10px;
+  padding: var(--space-s) var(--space-m);
+  margin-bottom: var(--space-s);
+  text-align: justify;
+}
+.own_mess p {
+  margin: 0;
+  margin-top: var(--space-s);
+}
+.own_mess span {
+  color: var(--color9);
+  font-size: var(--text-add);
+  font-style: italic;
+}
+.data_time {
+  text-align: end;
+}
+.data_time span {
+  font-style: normal;
+  margin-left: var(--space-m);
+}
+.my_mess {
+  margin-left: auto;
+}
+
 .send {
-  padding: 10px 25px;
+  padding: var(--space-l) var(--space0);
   background-color: var(--color2);
+  width: 100%;
+  /* position: absolute; */
+  bottom: 0;
+}
+.send form {
+  display: flex;
+  justify-content: space-around;
 }
 .send p {
-  font-size: 12px;
+  font-size: var(--text-add);
   color: var(--color0);
-  margin: 15px 0px;
+  margin: var(--space-s) var(--space-l);
 }
 .send button {
   border: 0;
   background: transparent;
-  float: right;
 }
 .send button svg path:hover {
   stroke: var(--color1);
@@ -134,34 +183,34 @@ main .find input:focus {
   outline: none;
 }
 
-main .send input {
+.send input {
   display: block;
   background-color: var(--color0);
   width: 70%;
   border: none;
-  padding: 5px 15px;
+  padding: var(--space-s);
   border-radius: 10px;
 }
-main .send input:focus {
+.send input:focus {
   /*??????*/
   outline: 2px solid var(--color2);
 }
 /*styles of footer for all pages*/
-footer {
-  height: 54px;
-  background-color: #13887f;
+.footer {
+  height: 3rem;
+  background-color: var(--color1);
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
 }
-footer div p {
+.footer p {
   color: var(--color0);
   margin: 10px 0px;
-  font-size: 12px;
+  font-size: var(--text-add);
   font-style: italic;
 }
-footer .flex-container-2 {
+.footer .flex-container-2 {
   text-align: end;
 }
 
@@ -171,26 +220,16 @@ footer .flex-container-2 {
     width: 930px;
   }
 }
-@media all and (max-width: 1300px) {
-  main .find input {
-    width: 35%;
-  }
-}
 @media all and (max-width: 800px) {
   .flex-container {
     width: 80%;
-  }
-}
-@media all and (max-width: 1024px) {
-  main .find button {
-    margin-right: 0px;
   }
 }
 @media all and (max-width: 500px) {
   .flex-container {
     width: 100%;
   }
-  footer {
+  .footer {
     height: auto;
   }
 }
