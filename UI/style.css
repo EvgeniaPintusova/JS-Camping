@@ -18,6 +18,7 @@ html {
   --color7: #f9ffff; /*фон: список акт.пользователей*/
   --color8: #e100cb; /*личн.сообщения*/
   --color9: #c4c4c4; /*доп.информация*/
+  --color10: #fffcd8; /*подложка фильтров*/
   --space0: 0;
   --space-xs: 5px;
   --space-s: 10px;
@@ -27,24 +28,33 @@ html {
   --text-main: 14px;
   --text-big: 16px;
 }
-
-/*container for all content*/
-.flex-container {
+button,
+input,
+label,
+svg{
+  cursor: pointer;
+}
+:hover{
+  transition: 0.1s;
+}
+.find,
+.filters,
+.delete_filters,
+.send{
+  padding: var(--space-l) var(--space-m) var(--space-s);
+}
+.flex-container {   /*container for all content*/
   display: flex;
   width: 65%;
   margin: 0 auto;
 }
-/*container for part with list*/
-.flex-container-1 {
+.flex-container-1 {   /*container for part with list*/
   flex-basis: 35%;
   flex-grow: 1;
-  /* background-color: rgb(192, 191, 250); */
 }
-/*container for part with messages*/
-.flex-container-2 {
+.flex-container-2 {   /*container for part with messages*/
   flex-basis: 65%;
   flex-grow: 1;
-  /* background-color: rgb(255, 145, 231); */
 }
 .header {
   height: 4rem;
@@ -63,6 +73,12 @@ html {
   text-align: center;
   margin: var(--space-m);
 }
+.main {
+  height: calc(100% - 7rem);
+  overflow: auto;
+  color: var(--color5);
+  font-size: var(--text-main);
+}
 .main .flex-container-1 {
   background-color: var(--color7);
 }
@@ -70,16 +86,36 @@ html {
   background-color: var(--color6);
   position: relative;
 }
-.main {
-  height: calc(100% - 7rem);
-  overflow: auto;
-  color: var(--color5);
-  font-size: var(--text-main);
+.main_button{
+  color: var(--color0);
+  background-color: var(--color2);
+  border: 0;
+  border-radius: 25px;
+  padding: var(--space-xs) 3%;
+  min-width: 100px;
+  min-height: 24px;
+  margin: 0 var(--space-s);
 }
-/* .listing{
-  height: calc(100% - 7rem);
-  overflow: auto;
-} */
+.main_button:hover{
+  background-color: var(--color0);
+  color: var(--color2);
+}
+.main_button:focus{
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color2);
+}
+.img_button{
+  border: 0;
+  height: 20px;
+  width: 20px;
+  background: transparent;
+  color: var(--color0);
+  margin: 0 var(--space-s);
+  display: none;
+}
+.img_button img{
+  height: 35px;
+}
 .listing label {
   display: block;
   padding: var(--space-s) var(--space-l);
@@ -91,42 +127,83 @@ html {
   margin-right: var(--space-m);
 }
 .listing label:hover {
-  background-color: #e100cb;
+  background-color: var(--color8);
 }
 .find {
   display: flex;
-  padding: var(--space-l) 0 var(--space-m);
-  justify-content: space-around;
-}
-.find button {
-  border: 0;
-  background: transparent;
-  color: var(--color5);
-  padding: 2px 5px;
-}
-.find button:hover {
-  border-radius: 15px;
-  background: var(--color2);
-  color: #fff;
-}
-.find button:focus {
-  outline: none;
+  justify-content: space-between;
 }
 .find input {
   display: block;
   background-color: var(--color0);
   width: 45%;
-  border: none;
+  border: 2px solid var(--color6);
   padding: var(--space-xs) var(--space-m);
   border-radius: 10px;
 }
 .find input:focus {
-  /*??????*/
-  /* border: 1px solid var(--color9); */
-  outline: 2px solid var(--color2);
+  border: 2px solid var(--color2);
+  outline: 0 solid var(--color6);
+}
+.filters{
+  background-color:var(--color10);
+  text-align: end;
+  /* display: none; */
+}
+.delete_filters{
+  background-color:var(--color10);
+  color: var(--color9);
+  font-style: italic;
+  display: flex;
+  justify-content: space-between;
+  /* display: none; */
+}
+.delete_filters .main_button:hover{
+  background-color: var(--color3);
+  color: var(--color0);
+}
+.delete_filters .main_button{
+  color: var(--color3);
+  background-color: var(--color0);
+}
+.delete_filters .main_button:focus{
+  box-shadow: 0 0 0 2px var(--color3);
+}
+.find:hover .form_filters{
+  display: block;
+  z-index: 1000;
+}
+.form_filters{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.form_filters p,
+.delete_filters p{
+  margin: 0;
+  padding: var(--space-xs);
+}
+.form_filters button{
+  word-wrap: wrap;
+}
+.form_filters input[type=text]{
+  border: 2px solid var(--color10);
+  border-radius: 5px;
+  padding: var(--space-xs);
+  background-image: url('/images/search_.png');
+  background-size: 10px;
+  background-repeat: no-repeat;
+  background-position: calc(90%);
+}
+.form_filters input:focus{
+  border: 2px solid var(--color3);
+  outline: 2px solid var(--color10);
+}
+.filters_date{
+  text-align: left;
 }
 .messages {
-  padding: 0 var(--space-l);
+  padding: var(--space-s) var(--space-l);
 }
 .own_mess {
   width: 80%;
@@ -145,6 +222,10 @@ html {
   font-size: var(--text-add);
   font-style: italic;
 }
+.owner{
+  color: var(--color8);
+  text-align: right;
+}
 .data_time {
   text-align: end;
 }
@@ -155,9 +236,35 @@ html {
 .my_mess {
   margin-left: auto;
 }
-
+.edit_tools {
+  display: flex;
+  flex-direction: row-reverse;
+  float: right;
+}
+.rewrite,
+.delete {
+  margin-left: var(--space-l);
+  position: relative;
+}
+.tool path:hover {
+  stroke: var(--color3);
+  fill: #e4da4e00;
+}
+.text_tool {
+  position: absolute;
+  z-index: 100;
+  display: none;
+  background-color: var(--color3);
+  padding: 2px 5px;
+  border-radius: 2px;
+  color: var(--color0);
+}
+.delete:hover .text_tool,
+.rewrite:hover .text_tool {
+  display: block;
+}
 .send {
-  padding: var(--space-l) var(--space0);
+  padding: var(--space-l) 0 var(--space-s);
   background-color: var(--color2);
   width: 100%;
   /* position: absolute; */
@@ -165,12 +272,13 @@ html {
 }
 .send form {
   display: flex;
-  justify-content: space-around;
+  padding: 0 var(--space-m);
+  justify-content: space-between;
 }
 .send p {
   font-size: var(--text-add);
   color: var(--color0);
-  margin: var(--space-s) var(--space-l);
+  margin: var(--space-m);
 }
 .send button {
   border: 0;
@@ -182,54 +290,87 @@ html {
 .send button:focus {
   outline: none;
 }
-
 .send input {
   display: block;
   background-color: var(--color0);
   width: 70%;
   border: none;
+  border: 2px solid var(--color2);
   padding: var(--space-s);
   border-radius: 10px;
 }
 .send input:focus {
-  /*??????*/
+  border: 2px solid var(--color3);
   outline: 2px solid var(--color2);
 }
-/*styles of footer for all pages*/
 .footer {
   height: 3rem;
   background-color: var(--color1);
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 100%; 
 }
 .footer p {
   color: var(--color0);
-  margin: 10px 0px;
+  margin: var(--space-s) var(--space-m);
   font-size: var(--text-add);
   font-style: italic;
 }
-.footer .flex-container-2 {
+.footer p:last-child{
   text-align: end;
+  margin-right: var(--space-m);
+}
+.footer .flex-container {
+  justify-content: space-between;
 }
 
-/* for resizing DESKTOP*/
+/*RESIZIHG*/
 @media all and (min-width: 1440px) {
   .flex-container {
     width: 930px;
   }
 }
-@media all and (max-width: 800px) {
+@media all and (max-width: 1024px) {
   .flex-container {
     width: 80%;
   }
 }
-@media all and (max-width: 500px) {
+@media all and (max-width: 770px) {
   .flex-container {
     width: 100%;
   }
-  .footer {
-    height: auto;
+  .find .main_button{
+    display: none;
   }
+  .find .img_button{
+    display: block;
+  }
+  .find{
+    justify-content: space-around;
+  }
+  .find input{
+    height: 25px;
+  }
+  .form_filters {
+    flex-direction: column;
+    text-align: start;
+  }
+  .form_filters input{
+    margin: var(--space-m) 0;
+    width: 90%;
+    min-height: 24px;
+  }
+}
+@media all and (max-width: 450px) {
+  .flex-container-1{
+    display: none;
+  }
+  :root{
+    --space-xs: 2px;
+  --space-s: 4px;
+  --space-m: 8px;
+  --space-l: 16px;
+  }
+  
 }
