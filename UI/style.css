@@ -31,28 +31,31 @@ html {
 button,
 input,
 label,
-svg{
+svg {
   cursor: pointer;
 }
-:hover{
+:hover {
   transition: 0.1s;
 }
 .find,
 .filters,
 .delete_filters,
-.send{
+.send {
   padding: var(--space-l) var(--space-m) var(--space-s);
 }
-.flex-container {   /*container for all content*/
+/*container for all content*/
+.flex-container {
   display: flex;
   width: 65%;
   margin: 0 auto;
 }
-.flex-container-1 {   /*container for part with list*/
+  /*container for part with list*/
+.flex-container-1 {
   flex-basis: 35%;
   flex-grow: 1;
 }
-.flex-container-2 {   /*container for part with messages*/
+/*container for part with messages*/
+.flex-container-2 {
   flex-basis: 65%;
   flex-grow: 1;
 }
@@ -66,16 +69,31 @@ svg{
   font-size: var(--text-main);
   margin: var(--space-l);
 }
+.header .flex-container-2 .nickname {
+  display: block;
+}
 .logo {
   color: var(--color0);
   font-family: "Courgette", cursive;
   font-size: 24px;
   text-align: center;
-  margin: var(--space-m);
+  margin: var(--space-m) 0 0 35px;
+}
+.exit {
+  text-align: end;
+}
+.exit button {
+  border: 0;
+  background: transparent;
+}
+.exit button svg path:hover {
+  stroke: var(--color5);
+}
+.exit button:focus {
+  outline: none;
 }
 .main {
-  height: calc(100% - 7rem);
-  overflow: auto;
+  position: relative;
   color: var(--color5);
   font-size: var(--text-main);
 }
@@ -86,7 +104,7 @@ svg{
   background-color: var(--color6);
   position: relative;
 }
-.main_button{
+.main_button {
   color: var(--color0);
   background-color: var(--color2);
   border: 0;
@@ -96,15 +114,15 @@ svg{
   min-height: 24px;
   margin: 0 var(--space-s);
 }
-.main_button:hover{
+.main_button:hover {
   background-color: var(--color0);
   color: var(--color2);
 }
-.main_button:focus{
+.main_button:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--color2);
 }
-.img_button{
+.img_button {
   border: 0;
   height: 20px;
   width: 20px;
@@ -113,8 +131,29 @@ svg{
   margin: 0 var(--space-s);
   display: none;
 }
-.img_button img{
+.img_button img {
   height: 35px;
+}
+.listing #users {
+  height: 60vh;
+  overflow: auto;
+  position: relative;
+  /* background-color: var(--color3); */
+}
+.place_messages {
+  height: calc(100vh - 18rem);
+  overflow: auto;
+  position: relative;
+  /* background-color: #e100cb; */
+}
+.main .flex-container-2 {
+  height: calc(100vh - 7rem);
+  overflow: auto;
+  position: relative;
+  /* background-color: #e4da4e; */
+}
+.message_nav {
+  height: 4rem;
 }
 .listing label {
   display: block;
@@ -145,61 +184,63 @@ svg{
   border: 2px solid var(--color2);
   outline: 0 solid var(--color6);
 }
-.filters{
-  background-color:var(--color10);
+/**/
+.filters {
+  background-color: var(--color10);
   text-align: end;
-  /* display: none; */
+  display: none;
 }
-.delete_filters{
-  background-color:var(--color10);
+/**/
+.delete_filters {
+  background-color: var(--color10);
   color: var(--color9);
   font-style: italic;
   display: flex;
   justify-content: space-between;
-  /* display: none; */
+  display: none;
 }
-.delete_filters .main_button:hover{
+.delete_filters .main_button:hover {
   background-color: var(--color3);
   color: var(--color0);
 }
-.delete_filters .main_button{
+.delete_filters .main_button {
   color: var(--color3);
   background-color: var(--color0);
 }
-.delete_filters .main_button:focus{
+.delete_filters .main_button:focus {
   box-shadow: 0 0 0 2px var(--color3);
 }
-.find:hover .form_filters{
+.find:hover .form_filters {
   display: block;
   z-index: 1000;
 }
-.form_filters{
+.form_filters {
   display: flex;
   justify-content: space-between;
   position: relative;
 }
 .form_filters p,
-.delete_filters p{
+.delete_filters p {
   margin: 0;
   padding: var(--space-xs);
 }
-.form_filters button{
+.form_filters button {
   word-wrap: wrap;
 }
-.form_filters input[type=text]{
+.form_filters input[type="text"] {
   border: 2px solid var(--color10);
   border-radius: 5px;
   padding: var(--space-xs);
-  background-image: url('/images/search_.png');
+  background-image: url("/images/search_.png");
   background-size: 10px;
   background-repeat: no-repeat;
   background-position: calc(90%);
 }
-.form_filters input:focus{
+.form_filters input:focus {
   border: 2px solid var(--color3);
   outline: 2px solid var(--color10);
 }
-.filters_date{
+.filters_date {
   text-align: left;
 }
 .messages {
@@ -222,7 +263,7 @@ svg{
   font-size: var(--text-add);
   font-style: italic;
 }
-.owner{
+.owner {
   color: var(--color8);
   text-align: right;
 }
@@ -252,6 +293,8 @@ svg{
 }
 .text_tool {
   position: absolute;
+  top: -130%;
+  right: 0%;
   z-index: 100;
   display: none;
   background-color: var(--color3);
@@ -264,11 +307,13 @@ svg{
   display: block;
 }
 .send {
+  height: 5rem;
   padding: var(--space-l) 0 var(--space-s);
   background-color: var(--color2);
   width: 100%;
-  /* position: absolute; */
+  position: absolute;
   bottom: 0;
+  z-index: 100;
 }
 .send form {
   display: flex;
@@ -309,7 +354,7 @@ svg{
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%; 
+  width: 100%;
 }
 .footer p {
   color: var(--color0);
@@ -317,7 +362,7 @@ svg{
   font-size: var(--text-add);
   font-style: italic;
 }
-.footer p:last-child{
+.footer p:last-child {
   text-align: end;
   margin-right: var(--space-m);
 }
@@ -325,7 +370,7 @@ svg{
   justify-content: space-between;
 }
 
-/*RESIZIHG*/
+/*RESIZING*/
 @media all and (min-width: 1440px) {
   .flex-container {
     width: 930px;
@@ -340,37 +385,39 @@ svg{
   .flex-container {
     width: 100%;
   }
-  .find .main_button{
+  .find .main_button {
     display: none;
   }
-  .find .img_button{
+  .find .img_button {
     display: block;
   }
-  .find{
+  .find {
     justify-content: space-around;
   }
-  .find input{
+  .find input {
     height: 25px;
   }
   .form_filters {
     flex-direction: column;
     text-align: start;
   }
-  .form_filters input{
+  .form_filters input {
     margin: var(--space-m) 0;
     width: 90%;
     min-height: 24px;
   }
 }
 @media all and (max-width: 450px) {
-  .flex-container-1{
+  .flex-container-1 {
     display: none;
   }
-  :root{
+  :root {
     --space-xs: 2px;
-  --space-s: 4px;
-  --space-m: 8px;
-  --space-l: 16px;
+    --space-s: 4px;
+    --space-m: 8px;
+    --space-l: 16px;
   }
-  
+  .header .flex-container-2 .nickname {
+    display: block;
+  }
 }
