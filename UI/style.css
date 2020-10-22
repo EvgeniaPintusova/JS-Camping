@@ -7,16 +7,21 @@ html {
   padding: 0;
   font-family: Noto Sans JP, sans-serif;
 }
+body{
+  background-image: url(/images/fon.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 :root {
   --color0: #fff;
   --color1: #13887f;
   --color2: #00c7b8;
-  --color3: #e4da4e;
+  --color3: #D1AD15;
   --color4: #f2f6e6;
   --color5: #022f2c;
-  --color6: #f2faf9; /*фон под сообщения*/
+  --color6: #f3fffd; /*фон под сообщения*/
   --color7: #f9ffff; /*фон: список акт.пользователей*/
-  --color8: #e100cb; /*личн.сообщения*/
+  --color8: #C714B2; /*личн.сообщения*/
   --color9: #c4c4c4; /*доп.информация*/
   --color10: #fffcd8; /*подложка фильтров*/
   --space0: 0;
@@ -46,12 +51,12 @@ svg {
 /*container for all content*/
 .flex-container {
   display: flex;
-  width: 65%;
+  width: 70%;
   margin: 0 auto;
 }
   /*container for part with list*/
 .flex-container-1 {
-  flex-basis: 35%;
+  flex-basis: 30%;
   flex-grow: 1;
 }
 /*container for part with messages*/
@@ -134,11 +139,14 @@ svg {
 .img_button img {
   height: 35px;
 }
+.img_button:focus{
+  outline: none;
+}
 .listing #users {
   height: 60vh;
   overflow: auto;
   position: relative;
-  /* background-color: var(--color3); */
+  /* background-color:  #e100cb; */
 }
 .place_messages {
   height: calc(100vh - 18rem);
@@ -153,7 +161,7 @@ svg {
   /* background-color: #e4da4e; */
 }
 .message_nav {
-  height: 4rem;
+  /* height: 4rem; */
 }
 .listing label {
   display: block;
@@ -265,7 +273,9 @@ svg {
 }
 .owner {
   color: var(--color8);
-  text-align: right;
+  /* text-align: right; */
+  float: left;
+  /* font-weight: bold; */
 }
 .data_time {
   text-align: end;
@@ -412,7 +422,7 @@ svg {
     display: none;
   }
   :root {
-    --space-xs: 2px;
+    --space-xs: 4px;
     --space-s: 4px;
     --space-m: 8px;
     --space-l: 16px;
