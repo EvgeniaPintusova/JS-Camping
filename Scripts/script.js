@@ -71,7 +71,7 @@ const module = (function Module() {
        },
        {
           id: '9',
-          text: 'МВ результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
+          text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
               'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
               ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
           createdAt: new Date('2020-10-12T23:10:10'),
@@ -99,7 +99,7 @@ const module = (function Module() {
    function validateMessage(message) {
       console.log('Method is validateMessage');
       let flag = true;
-      let count = 0;
+      let count = 0; //для кол-ва обязательных полей 
       for (const key in message){
          if (key === 'id' && typeof(message[key])==='string') { count++; }
          else if (key === 'text' && typeof(message[key])==='string' && message[key].length<=200) { count++; }
@@ -115,8 +115,8 @@ const module = (function Module() {
    function  addMessage(message) {
       console.log('Method is addMessage');
       let size = messages.length;
-      if (validateMessage(message)){
-         if (getMessage(message.id) === undefined){ 
+      if (validateMessage(message)){ //проверим Сообщение ли это
+         if (getMessage(message.id) === undefined){ //обеспечим уникальность id 
             messages.push(message);
             if (size<messages.length){ return true}
             else { return false; }
@@ -125,46 +125,50 @@ const module = (function Module() {
       }
       else{ return false;}
    }
+   function validatePart(message) {
+      console.log('Method is validatePart');
+      let flag = true;
+      for (const key in message){
+         if (key === 'id' && typeof(message[key])==='string') { }
+         else if (key === 'text' && typeof(message[key])==='string' && message[key].length<=200) {}
+         else if (key === 'createdAt' && typeof(message[key])==='object') { }
+         else if (key === 'author' && typeof(message[key])==='string' && message[key]!=='') {}
+         else if (key === 'isPersonal' && typeof(message[key])==='boolean') { }
+         else if (key === 'to' && typeof(message[key])==='string') { }
+         else flag = false;
+      }
+     if (flag) { return true; }
+     else { return false; }
+   }
    function  editMessage(id, message) {
       console.log('Method is editMessage');
-      console.log(messages); ////
-      if (getMessage(id) !== undefined){
-         if (validateMessage(getMessage(id))){
-            let mess = getMessage(id);
-            console.log('копия: ', mess);
-            console.log('оригинал: ', getMessage(id));
-            console.log('что получила ф-ция: ', message);
-
-            mess.text = 'blablabla';
-            console.log('копия: ', mess);
-            console.log('оригинал: ', getMessage(id));
-            console.log('что получила ф-ция: ', message);
-            // for (const key in message){
-            //    if (key === 'text'){
-            //       mess.text = message[key];
-            //    }
-            //    else if (key === 'isPersonal'){
-            //       mess.isPersonal = message[key];
-            //    }
-            //    else if (key === 'to'){
-            //       mess.to = message[key];
-            //    }
-            //    //я пишу код тут
-            //    console.log(key,':', message[key])
-            // }
-            // console.log(getMessage(id));
-            // console.log(messages); ////
-            return true;
+      let flag = true;
+      if (validateMessage(getMessage(id)) && validatePart(message) ){
+         let m = getMessage(id);
+         for (const key in message){
+            if (key === 'text') { 
+               m.text = message[key];
+            }
+            else if (key === 'isPersonal') {
+               m.isPersonal = message[key];
+            }
+            else if (key === 'to') {
+               m.to = message[key];
+               m.isPersonal = true;
+            }
+            else { flag = false; }
          }
-         else{ return false; }
       }
-      else { return false; }
+      else { flag = false; }
+      return flag;
    }
    function  removeMessage(id) {
       console.log('Method is removeMessage');
-      let index = +id;
+      let index = messages.indexOf(getMessage(id));
       let size = messages.length;
-      messages.splice(--index, 1);
+      if (index >-1){
+         messages.splice(index, 1);
+      }
       if (size>messages.length){return true;}
       else {return false;}
    }
@@ -199,10 +203,13 @@ const message1={
    
 }
 // console.log(module.getMessage('13')); 
-// console.log(module.removeMessage('8'));
+// console.log(module.removeMessage('1'));
 // console.log(module.validateMessage(message));
-// console.log(module.addMessage(message1));
-console.log(module.editMessage('1', { text: 'Allo! Hello!', to: 'gfvhjfd', isPersonal: 'jane'}));
+console.log(module.addMessage(message1));
+console.log(module.removeMessage('15'));
+// console.log(module.getMessage('9'))
+// console.log(module.editMessage('9', { text: 'Allo! Hello!', to: 'daddy'}));
+// console.log(module.getMessage('9'))
 
 
 
