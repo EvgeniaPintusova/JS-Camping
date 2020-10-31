@@ -33,29 +33,23 @@
                 <div class="listing">
                     <p>Активные пользователи</p>
                     <form method="post" action="" id="users">
-                        <label><input type="checkbox" id="user1" value="a1"/>NotPlactic</label>
-                        <label><input type="checkbox" id="user2" value="a2"/>ItsFantastic</label>
-                        <label><input type="checkbox" id="user3" value="a3"/>ecoLifer</label> 
-                        <label><input type="checkbox" id="user4" value="a4"/>my_eco_word</label>
-                        <label><input type="checkbox" id="user5" value="a5"/>NotPlactic</label>
-                        <label><input type="checkbox" id="user6" value="a6"/>ItsFantastic</label>
-                        <label><input type="checkbox" id="user7" value="a7"/>ecoLifer</label> 
-                        <label><input type="checkbox" id="user8" value="a8"/>my_eco_word</label>
+                        <label><input type="radio" id="user1" value="a1" name="user"/>NotPlactic</label>
+                        <label><input type="radio" id="user2" value="a2" name="user"/>ItsFantastic</label>
+                        <label><input type="radio" id="user3" value="a3" name="user"/>ecoLifer</label> 
+                        <label><input type="radio" id="user4" value="a4" name="user"/>my_eco_word</label>
+                        <label><input type="radio" id="user5" value="a5" name="user"/>NotPlactic</label>
+                        <label><input type="radio" id="user6" value="a6" name="user"/>ItsFantastic</label>
+                        <label><input type="radio" id="user7" value="a7" name="user"/>ecoLifer</label> 
+                        <label><input type="radio" id="user8" value="a8" name="user"/>my_eco_word</label>
 
-                        <label><input type="checkbox" id="user2" value="a2"/>ItsFantastic</label>
-                        <label><input type="checkbox" id="user3" value="a3"/>ecoLifer</label> 
-                        <label><input type="checkbox" id="user4" value="a5"/>my_eco_word</label>
-                        <label><input type="checkbox" id="user5" value="a1"/>NotPlactic</label>
-                        <label><input type="checkbox" id="user6" value="a2"/>ItsFantastic</label>
-                        <label><input type="checkbox" id="user7" value="a3"/>ecoLifer</label> 
-                        <label><input type="checkbox" id="user8" value="a5"/>my_eco_word</label>
-                        <label><input type="checkbox" id="user2" value="a2"/>ItsFantastic</label>
-                        <label><input type="checkbox" id="user3" value="a3"/>ecoLifer</label> 
-                        <label><input type="checkbox" id="user4" value="a5"/>my_eco_word</label>
-                        <label><input type="checkbox" id="user5" value="a1"/>NotPlactic</label>
-                        <label><input type="checkbox" id="user6" value="a2"/>ItsFantastic</label>
-                        <label><input type="checkbox" id="user7" value="a3"/>ecoLifer</label> 
-                        <label><input type="checkbox" id="user8" value="a5"/>my_eco_word</label>
+                        <label><input type="radio" id="user1" value="a1" name="user"/>NotPlactic</label>
+                        <label><input type="radio" id="user2" value="a2" name="user"/>ItsFantastic</label>
+                        <label><input type="radio" id="user3" value="a3" name="user"/>ecoLifer</label> 
+                        <label><input type="radio" id="user4" value="a4" name="user"/>my_eco_word</label>
+                        <label><input type="radio" id="user5" value="a5" name="user"/>NotPlactic</label>
+                        <label><input type="radio" id="user6" value="a6" name="user"/>ItsFantastic</label>
+                        <label><input type="radio" id="user7" value="a7" name="user"/>ecoLifer</label> 
+                        <label><input type="radio" id="user8" value="a8" name="user"/>my_eco_word</label>
                     </form>
                 </div>
             </div>
@@ -63,23 +57,23 @@
                 <div class="message_nav">
                     <div class="find">
                         <input type="text" id="search" placeholder="поиск" title="поиск сообщений"/>
-                        <button class="main_button" title="фильтровать сообщения">Фильтровать</button>
-                        <button class="main_button" title="загрузить сообщения"> Загрузить ещё</button> 
-                        <div class="img_button" title="фильтровать сообщения">
+                        <button class="main-button" title="фильтровать сообщения">Фильтровать</button>
+                        <button class="main-button" title="загрузить сообщения"> Загрузить ещё</button> 
+                        <div class="img-button" title="фильтровать сообщения">
                             <svg width="42" height="35" viewBox="0 0 42 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 20.6239L42 0H0L21 20.6239Z" fill="#00C7B8"/>
                                 <path d="M18.0301 14.5833H23.9698V35L18.0301 29.1667V14.5833Z" fill="#00C7B8"/>
                             </svg>
                         </div>
                         <div title="загрузить сообщения">
-                            <button class="img_button">
-                                <img alt="кнопка загрузить" src="/images/add_10.png"/>
+                            <button class="img-button">
+                                <img alt="кнопка загрузить" src="images/add-10.png"/>
                             </button>
                         </div> 
                     </div>
                     <div class="filters">
-                        <div class="form_filters">
-                            <form class="filters_date">
+                        <div class="form-filters">
+                            <form class="filters-date">
                                 <div>
                                     <label for="date1">Дата от:</label>
                                     <input type="date" id="date1"/>
@@ -89,28 +83,28 @@
                                     <input type="date" id="date2"/>
                                 </div> 
                             </form>
-                            <form class="filters_name">
+                            <form class="filters-name">
                                 <div>
                                     <input type="text" id="name" placeholder="Имя автора..." />
                                 </div> 
                             </form>
-                            <form class="filters_mess">
+                            <form class="filters-mess">
                                 <div>
                                     <input type="text" id="mess" placeholder="Сообщение..." />
                                 </div> 
                             </form>
                         </div>
-                        <button class="main_button" title="применить">Применить</button>
+                        <button class="main-button" title="применить">Применить</button>
                     </div>
-                    <div class="delete_filters">
+                    <div class="delete-filters">
                         <p>Фильтры применены</p>
                         <button class="main_button" title="Отменить фильтры">Сбросить</button>
                     </div>
                 </div>
                 
-                <div class="place_messages">
+                <div class="place-messages">
                     <div class="messages">
-                        <div class="own_mess chat_mess">
+                        <div class="own-mess chat-mess">
                             <span>friend_name:</span>
                             <p>
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
@@ -118,9 +112,9 @@
                                 molestiae aut maxime, vero ad ipsam excepturi dolorum aliquid facere 
                                 sunt omnis vitae.
                             </p>
-                            <p class="data_time"><span>13:35</span><span>21.10.2020</span></p>
+                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
                         </div>
-                        <div class="own_mess chat_mess">
+                        <div class="own-mess chat-mess">
                             <span>friend_name:</span>
                             <p>
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
@@ -128,13 +122,13 @@
                                 molestiae aut maxime, vero ad ipsam excepturi dolorum aliquid facere 
                                 sunt omnis vitae.
                             </p>
-                            <p class="data_time"><span>13:35</span><span>21.10.2020</span></p>
+                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
                         </div>
-                        <div class="own_mess my_mess">
+                        <div class="own-mess my-mess">
                             <span>my_name:</span>
-                            <div class="edit_tools">
+                            <div class="edit-tools">
                                 <div class="delete">
-                                   <p class="text_tool">Удалить</p>
+                                   <p class="text-tool">Удалить</p>
                                    <botton class="tool">
                                         <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
@@ -143,7 +137,7 @@
                                    </botton>
                                 </div> 
                                 <div class="rewrite">
-                                    <p class="text_tool">Редактировать</p>
+                                    <p class="text-tool">Редактировать</p>
                                     <botton class="tool">
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
@@ -159,9 +153,9 @@
                                 sunt omnis vitae.
                             </p>
                             <p class="owner">Личное сообщение</p>
-                            <p class="data_time"><span>13:35</span><span>21.10.2020</span></p>
+                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
                         </div>
-                        <div class="own_mess chat_mess">
+                        <div class="own-mess chat-mess">
                             <span>friend_name:</span>
                             <p>
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
@@ -170,7 +164,7 @@
                                 sunt omnis vitae.
                             </p>
                             <p class="owner">Личное сообщение</p>
-                            <p class="data_time"><span>13:35</span><span>21.10.2020</span></p>
+                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
                         </div>
                     </div>
                 </div>
