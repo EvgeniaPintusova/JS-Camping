@@ -7,8 +7,8 @@ html {
   padding: 0;
   font-family: Noto Sans JP, sans-serif;
 }
-body{
-  background-image: url(/images/fon.jpg);
+body {
+  background-image: url(images/fon.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -16,12 +16,12 @@ body{
   --color0: #fff;
   --color1: #13887f;
   --color2: #00c7b8;
-  --color3: #D1AD15;
+  --color3: #d1ad15;
   --color4: #f2f6e6;
   --color5: #022f2c;
   --color6: #f3fffd; /*фон под сообщения*/
   --color7: #f9ffff; /*фон: список акт.пользователей*/
-  --color8: #C714B2; /*личн.сообщения*/
+  --color8: #c714b2; /*личн.сообщения*/
   --color9: #c4c4c4; /*доп.информация*/
   --color10: #fffcd8; /*подложка фильтров*/
   --space0: 0;
@@ -33,6 +33,7 @@ body{
   --text-main: 14px;
   --text-big: 16px;
 }
+
 button,
 input,
 label,
@@ -44,7 +45,7 @@ svg {
 }
 .find,
 .filters,
-.delete_filters,
+.delete-filters,
 .send {
   padding: var(--space-l) var(--space-m) var(--space-s);
 }
@@ -54,7 +55,7 @@ svg {
   width: 70%;
   margin: 0 auto;
 }
-  /*container for part with list*/
+/*container for part with list*/
 .flex-container-1 {
   flex-basis: 30%;
   flex-grow: 1;
@@ -109,7 +110,7 @@ svg {
   background-color: var(--color6);
   position: relative;
 }
-.main_button {
+.main-button {
   color: var(--color0);
   background-color: var(--color2);
   border: 0;
@@ -119,15 +120,15 @@ svg {
   min-height: 24px;
   margin: 0 var(--space-s);
 }
-.main_button:hover {
+.main-button:hover {
   background-color: var(--color0);
   color: var(--color2);
 }
-.main_button:focus {
+.main-button:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--color2);
 }
-.img_button {
+.img-button {
   border: 0;
   height: 20px;
   width: 20px;
@@ -136,32 +137,26 @@ svg {
   margin: 0 var(--space-s);
   display: none;
 }
-.img_button img {
+.img-button img {
   height: 35px;
 }
-.img_button:focus{
+.img-button:focus {
   outline: none;
 }
 .listing #users {
   height: 60vh;
   overflow: auto;
   position: relative;
-  /* background-color:  #e100cb; */
 }
-.place_messages {
+.place-messages {
   height: calc(100vh - 18rem);
   overflow: auto;
   position: relative;
-  /* background-color: #e100cb; */
 }
 .main .flex-container-2 {
   height: calc(100vh - 7rem);
   overflow: auto;
   position: relative;
-  /* background-color: #e4da4e; */
-}
-.message_nav {
-  /* height: 4rem; */
 }
 .listing label {
   display: block;
@@ -199,7 +194,7 @@ svg {
   display: none;
 }
 /**/
-.delete_filters {
+.delete-filters {
   background-color: var(--color10);
   color: var(--color9);
   font-style: italic;
@@ -207,35 +202,35 @@ svg {
   justify-content: space-between;
   display: none;
 }
-.delete_filters .main_button:hover {
+.delete-filters .main-button:hover {
   background-color: var(--color3);
   color: var(--color0);
 }
-.delete_filters .main_button {
+.delete-filters .main-button {
   color: var(--color3);
   background-color: var(--color0);
 }
-.delete_filters .main_button:focus {
+.delete-filters .main-button:focus {
   box-shadow: 0 0 0 2px var(--color3);
 }
-.find:hover .form_filters {
+.find:hover .form-filters {
   display: block;
   z-index: 1000;
 }
-.form_filters {
+.form-filters {
   display: flex;
   justify-content: space-between;
   position: relative;
 }
-.form_filters p,
-.delete_filters p {
+.form-filters p,
+.delete-filters p {
   margin: 0;
   padding: var(--space-xs);
 }
-.form_filters button {
+.form-filters button {
   word-wrap: wrap;
 }
-.form_filters input[type="text"] {
+.form-filters input[type="text"] {
   border: 2px solid var(--color10);
   border-radius: 5px;
   padding: var(--space-xs);
@@ -244,17 +239,17 @@ svg {
   background-repeat: no-repeat;
   background-position: calc(90%);
 }
-.form_filters input:focus {
+.form-filters input:focus {
   border: 2px solid var(--color3);
   outline: 2px solid var(--color10);
 }
-.filters_date {
+.filters-date {
   text-align: left;
 }
 .messages {
   padding: var(--space-s) var(--space-l);
 }
-.own_mess {
+.own-mess {
   width: 80%;
   background-color: var(--color0);
   border-radius: 10px;
@@ -262,32 +257,30 @@ svg {
   margin-bottom: var(--space-s);
   text-align: justify;
 }
-.own_mess p {
+.own-mess p {
   margin: 0;
   margin-top: var(--space-s);
 }
-.own_mess span {
+.own-mess span {
   color: var(--color9);
   font-size: var(--text-add);
   font-style: italic;
 }
 .owner {
   color: var(--color8);
-  /* text-align: right; */
   float: left;
-  /* font-weight: bold; */
 }
-.data_time {
+.data-time {
   text-align: end;
 }
-.data_time span {
+.data-time span {
   font-style: normal;
   margin-left: var(--space-m);
 }
-.my_mess {
+.my-mess {
   margin-left: auto;
 }
-.edit_tools {
+.edit-tools {
   display: flex;
   flex-direction: row-reverse;
   float: right;
@@ -301,9 +294,9 @@ svg {
   stroke: var(--color3);
   fill: #e4da4e00;
 }
-.text_tool {
+.text-tool {
   position: absolute;
-  top: -130%;
+  bottom: 100%;
   right: 0%;
   z-index: 100;
   display: none;
@@ -312,8 +305,8 @@ svg {
   border-radius: 2px;
   color: var(--color0);
 }
-.delete:hover .text_tool,
-.rewrite:hover .text_tool {
+.delete:hover .text-tool,
+.rewrite:hover .text-tool {
   display: block;
 }
 .send {
@@ -395,10 +388,10 @@ svg {
   .flex-container {
     width: 100%;
   }
-  .find .main_button {
+  .find .main-button {
     display: none;
   }
-  .find .img_button {
+  .find .img-button {
     display: block;
   }
   .find {
@@ -407,11 +400,11 @@ svg {
   .find input {
     height: 25px;
   }
-  .form_filters {
+  .form-filters {
     flex-direction: column;
     text-align: start;
   }
-  .form_filters input {
+  .form-filters input {
     margin: var(--space-m) 0;
     width: 90%;
     min-height: 24px;
@@ -426,8 +419,5 @@ svg {
     --space-s: 4px;
     --space-m: 8px;
     --space-l: 16px;
-  }
-  .header .flex-container-2 .nickname {
-    display: block;
   }
 }
