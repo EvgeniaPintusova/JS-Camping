@@ -32,12 +32,14 @@ function print(arr){
 `)
 }
 //ввод массива пользователем
+document.write(`Ввод пользователя: <br/>`);
 let arr = getString();
 arr = getArray(arr);
 print(arr);
 console.log(arr);
 console.log(MaxSum(arr));
 //массивы
+document.write(`Смотреть код: <br/>`);
 let arr1 = [-2, -3, -3, -9];
 print(arr1);
 console.log(arr1);
