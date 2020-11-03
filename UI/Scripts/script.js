@@ -1,4 +1,5 @@
 const module = (function Module() {
+   const user = {name: 'ecoFriend'}
    const messages = [
       {
          id: '1',
@@ -173,74 +174,42 @@ const module = (function Module() {
           isPersonal: false
        }
     ];
-
-    ///???
-   //  const filterObject = {
-   //    autor: '',
-   //    dateFrom:  new Date(),
-   //    dateTo:  new Date(),
-   //    text: ''
-   //  }
+    const filterObject = {
+      autor: (item, author) => !author || item.author.toLowerCase().includes(author),
+      text: (item, text) => !text || item.text.toLowerCase().includes(text),
+      dateFrom:  (item, dateFrom) => !dateFrom || item.dateFrom > dateFrom,
+      dateTo:  (item, dateTo) => !dateTo || item.dateTo < dateTo
+    }
   
    function getMessages(skip = 0, top = 10, filterConfig) {
       // console.log('Method is getMessageS');
+      for (const key in filterConfig){
+        console.log(key, filterConfig[key]);
+      }
       if (skip<0 || top<0){ return false; }
-
-      //???
-      // let arr1 = [];
-      // for (const key in filterConfig){
-      //    console.log(key, ":", filterConfig[key]);
-      //    arr1 = messages.filter(m => m.key === filterConfig[key]);
-      // }
-     
-      messages.sort((a,b)=>{
+      let arr = messages.slice();
+      Object.keys(filterConfig).forEach((key) => {
+         arr = arr.filter((item) => filterObject[key](item, filterConfig[key]));
+      });
+      arr.sort((a,b)=>{
          return a.createdAt-b.createdAt;
       })
-      let arr = messages.slice(skip, skip+top);
+      arr = arr.slice(skip, skip+top);
       return arr;
    }
    function getMessage(id) {
       // console.log('Method is getMessage');
-      const result = messages.filter(m => m.id === id);
-      return  result[0];
+      const result = messages.find(m => m.id === id);
+      return  result;
    }
    function validateMessage(message) {
       // console.log('Method is validateMessage');
       let flag = true;
-      let count = 0; //для кол-ва обязательных полей 
-      for (const key in message){
-         if (key === 'id' && typeof(message[key])==='string') { count++; }
-         else if (key === 'text' && typeof(message[key])==='string' && message[key].length<=200) { count++; }
-         else if (key === 'createdAt' && typeof(message[key])==='object') { count++; }
-         else if (key === 'author' && typeof(message[key])==='string' && message[key]!=='') { count++; }
-         else if (key === 'isPersonal' && typeof(message[key])==='boolean') { }
-         else if (key === 'to' && typeof(message[key])==='string') { }
-         else flag = false;
-      }
-     if (flag && count === 4) { return true; }
-     else { return false; }
-   }
-   function  addMessage(message) {
-      // console.log('Method is addMessage');
-      if (validateMessage(message)){ //проверим Сообщение ли это
-         if (getMessage(message.id) === undefined){ //обеспечим уникальность id 
-            let size = messages.length;
-            messages.push(message);
-            if (size<messages.length){ return true}
-            else { return false; }
-         }
-         else { return false; }
-      }
-      else{ return false;}
-   }
-   function validatePart(message) {
-      // console.log('Method is validatePart');
-      let flag = true;
       for (const key in message){
          if (key === 'id' && typeof(message[key])==='string') { }
-         else if (key === 'text' && typeof(message[key])==='string' && message[key].length<=200) {}
+         else if (key === 'text' && typeof(message[key])==='string' && message[key].length<=200) { }
          else if (key === 'createdAt' && typeof(message[key])==='object') { }
-         else if (key === 'author' && typeof(message[key])==='string' && message[key]!=='') {}
+         else if (key === 'author' && typeof(message[key])==='string' && message[key]!=='') { }
          else if (key === 'isPersonal' && typeof(message[key])==='boolean') { }
          else if (key === 'to' && typeof(message[key])==='string') { }
          else flag = false;
@@ -248,11 +217,30 @@ const module = (function Module() {
      if (flag) { return true; }
      else { return false; }
    }
+   function  addMessage(message) {
+      // console.log('Method is addMessage');
+      message.id = `${+new Date()}`;
+      // message.id = (++messages.length).toString();
+      message.createdAt = new Date();
+      message.author = user.name;
+      let size = messages.length;
+      if (validateMessage(message)){
+         messages.push(message);
+      }
+      else { 
+         if (message.text.length>200){
+            message.text = message.text.slice(0,200);
+            messages.push(message);
+         }
+      }
+      if (size<messages.length){ return true; }
+      else { return false; }
+   }
    function  editMessage(id, message) {
       // console.log('Method is editMessage');
       let flag = true;
-      if (validateMessage(getMessage(id)) && validatePart(message) ){
-         let m = getMessage(id);
+      let m = getMessage(id);
+      if (validateMessage(message)){
          for (const key in message){
             if (key === 'text') { 
                m.text = message[key];
@@ -272,7 +260,7 @@ const module = (function Module() {
    }
    function  removeMessage(id) {
       // console.log('Method is removeMessage');
-      let index = messages.indexOf(getMessage(id));
+      let index = messages.findIndex( m => m.id === id );
       let size = messages.length;
       if (index >-1){
          messages.splice(index, 1);
@@ -284,7 +272,6 @@ const module = (function Module() {
        getMessages,
        getMessage,
        validateMessage,
-       validatePart,
        addMessage,
        editMessage,
        removeMessage
@@ -292,65 +279,51 @@ const module = (function Module() {
 })();
 
 const message={
-   id: '9',
-   text: 'МВ результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
+   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
        'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
        ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   createdAt: new Date('2020-10-12T23:10:10'),
-   author: 'NotPlastic',
    isPersonal: false
 }
 const message1={
-      id: 25,
       text: 'А также реальное распределение букв и пробелов в абзацах,'+
           'которое не получается при простой дубликации',
-      createdAt: new Date('2020-10-12T21:10:10'),
-      author: 'ecoLifer',
-      isPersonal: true,
+      isPersonal: 1,
       to: 'ghjk'
 }
 const message2={
-   id: '23',
-   text: 'МВ результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
+   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
        'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
        ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   author: 'NotPlastic',
    isPersonal: false
 }
 const message3={
-   id: '9',
-   text: 'МВ результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
+   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
        'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
        ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   createdAt: new Date('2020-10-12T23:10:10'),
-   author: 'NotPlastic',
-   isPersonal: false
+   isPersonal: true,
+   to: 'otherUser'
 }
 const message4={
-   id: '21',
-   text: 'МВ результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
+   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
        'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
        ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   createdAt: new Date('2020-10-12T23:10:10'),
-   author: 'NotPlastic',
    isPersonal: false
 }
-console.log(module.getMessage('13')); 
-console.log(module.getMessage('43')); //undefined, т к нет сообщения с id = '43'
-console.log(module.validateMessage(message)); //true
-console.log(module.validateMessage(message1)); //false, т к id - число, а не строка
-console.log(module.validateMessage(message2)); //false, т к нет обязательного поля createdAt
-console.log(module.addMessage(message3)); //false, т к сообщение с id = '9' уже сущ-т
-console.log(module.addMessage(message4)); //true
-console.log(module.editMessage('9', { text: 'Allo! Hello!', to: 'daddy'})); //true
-console.log('EditMessage:', module.getMessage('9'));
-console.log(module.editMessage('9', { text: 'Allo! Hello!', author: 'daddy'})); //false, т к поле author нельзя менять
-console.log(module.removeMessage('15')); //true
-console.log(module.removeMessage('25')); //false, т к нет сообщения с id = '25'
-console.log(module.getMessages(0,20)); //все сообщения, сортированные по дате
-console.log(module.getMessages(3,7)); //начиная с 4-го элемента, 7 сообщений, сортированных по дате
-console.log(module.getMessages(-3,7));//false, т к нельзя работать с отрицательными входными данными
-console.log(module.getMessages());//используются параметры по умолчанию: 0, 10
+// console.log(module.getMessage('13')); 
+// console.log(module.getMessage('43')); //undefined, т к нет сообщения с id = '43'
+// console.log(module.validateMessage(message)); //true
+// console.log(module.validateMessage(message1)); //false, т к isPersonal - число
+// console.log(module.addMessage(message3)); //true
+// console.log(module.addMessage(message4)); //true
+// console.log(module.editMessage('9', { text: 'Allo! Hello!', to: 'daddy'})); //true
+// console.log('EditMessage:', module.getMessage('9'));
+// console.log(module.editMessage('9', { text: 'Allo! Hello!', author: 'daddy'})); //false, т к поле author нельзя менять
+// console.log(module.removeMessage('15')); //true
+// console.log(module.removeMessage('25')); //false, т к нет сообщения с id = '25'
+// console.log(module.getMessages(0,20)); //все сообщения, сортированные по дате
+console.log(module.getMessages(0, 10, {author: 'itsFantactic' })) //начиная с 4-го элемента, 7 сообщений, сортированных по дате
+// console.log(module.getMessages(-3,7));//false, т к нельзя работать с отрицательными входными данными
+// console.log(module.getMessages());//используются параметры по умолчанию: 0, 10
 
 
 
