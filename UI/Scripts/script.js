@@ -174,22 +174,18 @@ const module = (function Module() {
           isPersonal: false
        }
     ];
-    const filterObject = {
-      autor: (item, author) => !author || item.author.toLowerCase().includes(author),
-      text: (item, text) => !text || item.text.toLowerCase().includes(text),
+   const filterObj = {
+      author: (item, author) => !author || item.author.toLowerCase().includes(author.toLowerCase()),
+      text: (item, text) => !text || item.text.toLowerCase().includes(text.toLowerCase()),
       dateFrom:  (item, dateFrom) => !dateFrom || item.dateFrom > dateFrom,
-      dateTo:  (item, dateTo) => !dateTo || item.dateTo < dateTo
-    }
-  
-   function getMessages(skip = 0, top = 10, filterConfig) {
+      dateTo:  (item, dateTo) => !dateTo || item.dateTo < dateTo,
+   };
+   function getMessages(skip = 0, top = 10, filterConfig = {}) {
       // console.log('Method is getMessageS');
-      for (const key in filterConfig){
-        console.log(key, filterConfig[key]);
-      }
       if (skip<0 || top<0){ return false; }
       let arr = messages.slice();
-      Object.keys(filterConfig).forEach((key) => {
-         arr = arr.filter((item) => filterObject[key](item, filterConfig[key]));
+      Object.keys(filterConfig).forEach(key => {
+         arr = arr.filter(item => filterObj[key](item, filterConfig[key]));
       });
       arr.sort((a,b)=>{
          return a.createdAt-b.createdAt;
@@ -220,7 +216,6 @@ const module = (function Module() {
    function  addMessage(message) {
       // console.log('Method is addMessage');
       message.id = `${+new Date()}`;
-      // message.id = (++messages.length).toString();
       message.createdAt = new Date();
       message.author = user.name;
       let size = messages.length;
@@ -321,7 +316,7 @@ const message4={
 // console.log(module.removeMessage('15')); //true
 // console.log(module.removeMessage('25')); //false, т к нет сообщения с id = '25'
 // console.log(module.getMessages(0,20)); //все сообщения, сортированные по дате
-console.log(module.getMessages(0, 10, {author: 'itsFantactic' })) //начиная с 4-го элемента, 7 сообщений, сортированных по дате
+console.log(module.getMessages(0, 10, {author: 'NotPlastic'})); //начиная с 4-го элемента, 7 сообщений, сортированных по дате
 // console.log(module.getMessages(-3,7));//false, т к нельзя работать с отрицательными входными данными
 // console.log(module.getMessages());//используются параметры по умолчанию: 0, 10
 
