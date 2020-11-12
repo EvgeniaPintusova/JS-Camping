@@ -1,189 +1,108 @@
-const module = (function Module() {
-   const user = {name: 'ecoFriend'}
-   const messages = [
-      {
-         id: '1',
-         text: 'Привет!',
-         createdAt: new Date('2020-10-12T23:00:00'),
-         author: 'ecoFfriend',
-         isPersonal: true,
-         to: 'my_word'
-      },
-      {
-         id: '2',
-         text: 'Какие дела?',
-         createdAt: new Date('2020-10-13T03:00:10'),
-         author: 'NotPlastic',
-         isPersonal: false
-      },
-      {
-          id: '3',
-          text: 'Давно выяснено, что при оценке дизайна и композиции' + 
-              'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
-              'что тот обеспечивает более или менее стандартное заполнение шаблона',
-          createdAt: new Date('2020-11-12T22:10:10'),
-          author: 'NotPlastic',
-          isPersonal: false
-       },
-       {
-          id: '4',
-          text: 'А также реальное распределение букв и пробелов в абзацах,'+
-              'которое не получается при простой дубликации',
-          createdAt: new Date('2020-09-12T21:10:10'),
-          author: 'ecoLifer',
-          isPersonal: false
-       },
-       {
-          id: '5',
-          text: 'Многие программы электронной вёрстки и редакторы HTML'+
-              'используют Lorem Ipsum в качестве текста по умолчанию,'+
-              'так что поиск по ключевым словам "lorem ipsum" сразу показывает, '+
-              'как много веб-страниц всё ещё дожидаются своего настоящего рождения.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: true,
-          to: 'ecoFriend'
-       },
-       {
-          id: '6',
-          text: 'За прошедшие годы текст Lorem Ipsum получил много версий.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-          id: '7',
-          text: 'Многие думают, что Lorem Ipsum - взятый с потолка'+
-              'псевдо-латинский набор слов, но это не совсем так.'+ 
-              'Его корни уходят в один фрагмент классической латыни 45 года н.э., '+
-              'то есть более двух тысячелетий назад.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-          id: '8',
-          text: 'Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney,'+
-              'штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur",'+
-              'и занялся его поисками в классической латинской литературе.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-          id: '9',
-          text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
-              'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
-              ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'NotPlastic',
-          isPersonal: false
-       },
-       {
-          id: '10',
-          text: 'Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", '+
-              'происходит от одной из строк в разделе 1.10.32.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-         id: '11',
-         text: 'Привет!',
-         createdAt: new Date('2020-10-12T23:00:00'),
-         author: 'ecoFfriend',
-         isPersonal: true,
-         to: 'my_word'
-      },
-      {
-         id: '12',
-         text: 'Какие дела?',
-         createdAt: new Date('2020-10-13T03:00:10'),
-         author: 'NotPlastic',
-         isPersonal: false
-      },
-      {
-          id: '13',
-          text: 'Давно выяснено, что при оценке дизайна и композиции' + 
-              'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
-              'что тот обеспечивает более или менее стандартное заполнение шаблона',
-          createdAt: new Date('2020-11-12T22:10:10'),
-          author: 'NotPlastic',
-          isPersonal: false
-       },
-       {
-          id: '14',
-          text: 'А также реальное распределение букв и пробелов в абзацах,'+
-              'которое не получается при простой дубликации',
-          createdAt: new Date('2020-09-12T21:10:10'),
-          author: 'ecoLifer',
-          isPersonal: false
-       },
-       {
-          id: '15',
-          text: 'Многие программы электронной вёрстки и редакторы HTML'+
-              'используют Lorem Ipsum в качестве текста по умолчанию,'+
-              'так что поиск по ключевым словам "lorem ipsum" сразу показывает, '+
-              'как много веб-страниц всё ещё дожидаются своего настоящего рождения.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: true,
-          to: 'ecoFriend'
-       },
-       {
-          id: '16',
-          text: 'За прошедшие годы текст Lorem Ipsum получил много версий.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-          id: '17',
-          text: 'Многие думают, что Lorem Ipsum - взятый с потолка'+
-              'псевдо-латинский набор слов, но это не совсем так.'+ 
-              'Его корни уходят в один фрагмент классической латыни 45 года н.э., '+
-              'то есть более двух тысячелетий назад.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-          id: '18',
-          text: 'Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney,'+
-              'штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur",'+
-              'и занялся его поисками в классической латинской литературе.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       },
-       {
-          id: '19',
-          text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
-              'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
-              ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'NotPlastic',
-          isPersonal: false
-       },
-       {
-          id: '20',
-          text: 'Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", '+
-              'происходит от одной из строк в разделе 1.10.32.',
-          createdAt: new Date('2020-10-12T23:10:10'),
-          author: 'itsFantactic',
-          isPersonal: false
-       }
-    ];
-   const filterObj = {
-      author: (item, author) => !author || item.author.toLowerCase().includes(author.toLowerCase()),
-      text: (item, text) => !text || item.text.toLowerCase().includes(text.toLowerCase()),
-      dateFrom:  (item, dateFrom) => !dateFrom || item.dateFrom > dateFrom,
-      dateTo:  (item, dateTo) => !dateTo || item.dateTo < dateTo,
-   };
-   function getMessages(skip = 0, top = 10, filterConfig = {}) {
-      // console.log('Method is getMessageS');
+const currentUser = {name: 'ecoFriend'};
+const TEXT_LEN = 200;
+let COUNT = 0; //переменная для установления Id для тестов
+class Message{
+   constructor(text, isPersonal=false, to){
+      // this._id = `${+new Date()}`;
+      this._id = COUNT.toString(); COUNT++; //для тестов
+      this.text = text;
+      this._createdAt = new Date();
+      this._author = currentUser.name;
+      this.isPersonal = isPersonal;
+      this.to = to;
+   }
+   set text(value) {
+      if (value.length < TEXT_LEN){
+         this._text = value;
+      }
+      else{
+         this._text = value.slice(0, TEXT_LEN);
+      }
+        
+   }
+   set isPersonal(value) {
+      this._isPersonal = value;
+   }
+   set to(value) {
+      this._to = value;
+      if (this._to !== undefined){
+         this._isPersonal = true;
+      } 
+      else{
+         this._isPersonal = false;
+      }
+   }
+   get id(){
+      return this._id;
+   }
+   get text(){
+      return this._text;
+   }
+   get createdAt(){
+      return this._createdAt;
+   }
+   get author(){
+      return this._author;
+   }
+   get isPersonal(){
+      return this._isPersonal;
+   }
+   get to(){
+      return this._to;
+   }
+}
+
+class MessageList{
+   constructor(arrMsgs){
+      this._messages = arrMsgs;
+      this.user = currentUser.name;
+      // this.user = 'me'; //для тестов
+   }
+   get messages(){
+      return this._messages;
+   }
+   set user(value){
+      this._user = value;
+   }
+   get user(){
+      return this._user;
+   }
+   _isAuthor(msg){
+      return msg.author  === this._user;
+   }
+   _addAll(arrMsgs){
+      let arrNoValidate = [];
+      for (let i=0; i<arrMsgs.length; i++){
+         if(MessageList._validate(arrMsgs[i])){
+            this._messages.push(arrMsgs[i]);
+         }
+         else {
+            arrNoValidate.push(arrMsgs[i]);
+         }
+      }
+      return arrNoValidate;
+   }
+   _clear(){
+      this._messages.splice(0);
+   }
+   getPage(skip = 0, top = 10, filterConfig = {}) {
       if (skip<0 || top<0){ return false; }
-      let arr = messages.slice();
+      const filterObj = {
+         author: (item, author) => !author || item.author.toLowerCase().includes(author.toLowerCase()),
+         text: (item, text) => !text || item.text.toLowerCase().includes(text.toLowerCase()),
+         dateFrom:  (item, dateFrom) => !dateFrom || item.dateFrom > dateFrom,
+         dateTo:  (item, dateTo) => !dateTo || item.dateTo < dateTo,
+      };
+      let arr = [];
+      //this._messages.slice();
+      for (let i = 0; i < this._messages.length; i++){
+         // console.log(this._messages[i]);
+         if (this._messages[i].author === this.user || 
+               this._messages[i].to === this.user || 
+                  this._messages[i]._isPersonal === false){
+            arr.push(this._messages[i]);
+         }
+      }
       Object.keys(filterConfig).forEach(key => {
          arr = arr.filter(item => filterObj[key](item, filterConfig[key]));
       });
@@ -193,135 +112,171 @@ const module = (function Module() {
       arr = arr.slice(skip, skip+top);
       return arr;
    }
-   function getMessage(id) {
-      // console.log('Method is getMessage');
-      const result = messages.find(m => m.id === id);
+   _get(id){
+      const result = this._messages.find(msg => msg.id === id);
       return  result;
    }
-   function validateMessage(message) {
-      // console.log('Method is validateMessage');
-      let flag = true;
-      for (const key in message){
-         if (key === 'id' && typeof(message[key])==='string') { }
-         else if (key === 'text' && typeof(message[key])==='string' && message[key].length<=200) { }
-         else if (key === 'createdAt' && typeof(message[key])==='object') { }
-         else if (key === 'author' && typeof(message[key])==='string' && message[key]!=='') { }
-         else if (key === 'isPersonal' && typeof(message[key])==='boolean') { }
-         else if (key === 'to' && typeof(message[key])==='string') { }
-         else flag = false;
-      }
-     if (flag) { return true; }
-     else { return false; }
-   }
-   function  addMessage(message) {
-      // console.log('Method is addMessage');
-      message.id = `${+new Date()}`;
-      message.createdAt = new Date();
-      message.author = user.name;
-      let size = messages.length;
-      if (validateMessage(message)){
-         messages.push(message);
-      }
-      else { 
-         if (message.text.length>200){
-            message.text = message.text.slice(0,200);
-            messages.push(message);
+   add(msg){
+      if (this._isAuthor(msg)){
+         console.log(this._isAuthor(msg));
+         let size = this._messages.length;
+         if(MessageList._validate(msg)){
+            this._messages.push(msg);
          }
+         else { return false;}
+         if (size<this._messages.length){return true;}
+         else {return false;}
       }
-      if (size<messages.length){ return true; }
-      else { return false; }
-   }
-   function  editMessage(id, message) {
-      // console.log('Method is editMessage');
-      let flag = true;
-      let m = getMessage(id);
-      if (validateMessage(message)){
-         for (const key in message){
-            if (key === 'text') { 
-               m.text = message[key];
-            }
-            else if (key === 'isPersonal') {
-               m.isPersonal = message[key];
-            }
-            else if (key === 'to') {
-               m.to = message[key];
-               m.isPersonal = true;
-            }
-            else { flag = false; }
-         }
-      }
-      else { flag = false; }
-      return flag;
-   }
-   function  removeMessage(id) {
-      // console.log('Method is removeMessage');
-      let index = messages.findIndex( m => m.id === id );
-      let size = messages.length;
-      if (index >-1){
-         messages.splice(index, 1);
-      }
-      if (size>messages.length){return true;}
       else {return false;}
    }
-   return {
-       getMessages,
-       getMessage,
-       validateMessage,
-       addMessage,
-       editMessage,
-       removeMessage
-   };
-})();
-
-const message={
-   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
-       'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
-       ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   isPersonal: false
+   edit(id, msg){
+      let m = new Message (msg.text, msg.isPersonal, msg.to);
+      if (MessageList._validate(m)){
+         if (this._isAuthor(this._get(id))){
+            m = this._get(id); 
+            for (const key in msg){
+               if (key === 'text') { 
+                  m.text = msg[key];
+               }
+               else if (key === 'isPersonal') {
+                  m.isPersonal = msg[key];
+               }
+               else if (key === 'to') {
+                  m.to = msg[key];
+                  m.isPersonal = true;
+               }
+               else { return false; }
+            }
+            return true;
+         }
+         else {return false; }
+      }
+      else {return false;}
+   }
+   remove(id){
+      if (this._isAuthor(this._get(id))){
+         let index = this._messages.findIndex( msg => msg.id === id );
+         let size = this._messages.length;
+         if (index >-1){
+            this._messages.splice(index, 1);
+         }
+         if (size>this._messages.length){return true;}
+         else {return false;}
+      }
+      else {return false;}
+   }
+   static _validate(msg){
+      const validateObj = {
+         id: (item) => item.id && typeof item.id === "string",
+         text: (item) => item.text && typeof item.text === "string" && item.text.length <= TEXT_LEN,
+         author: (item) => item.author && typeof item.author === "string",
+         createdAt: (item) => item.createdAt && typeof item.createdAt === "object",
+         isPersonal: (item) => {
+            if((item.isPersonal === false && !item.to) || 
+               (item.isPersonal && item.to && typeof item.to === "string")){
+                  return typeof item.isPersonal === "boolean";
+            }
+         }
+      }
+      return Object.keys(validateObj).every((key) => validateObj[key](msg));
+   }
 }
-const message1={
-      text: 'А также реальное распределение букв и пробелов в абзацах,'+
-          'которое не получается при простой дубликации',
-      isPersonal: 1,
-      to: 'ghjk'
-}
-const message2={
-   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
-       'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
-       ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   isPersonal: false
-}
-const message3={
-   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
-       'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
-       ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   isPersonal: true,
-   to: 'otherUser'
-}
-const message4={
-   text: 'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
-       'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
-       ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-   isPersonal: false
-}
-// console.log(module.getMessage('13')); 
-// console.log(module.getMessage('43')); //undefined, т к нет сообщения с id = '43'
-// console.log(module.validateMessage(message)); //true
-// console.log(module.validateMessage(message1)); //false, т к isPersonal - число
-// console.log(module.addMessage(message3)); //true
-// console.log(module.addMessage(message4)); //true
-// console.log(module.editMessage('9', { text: 'Allo! Hello!', to: 'daddy'})); //true
-// console.log('EditMessage:', module.getMessage('9'));
-// console.log(module.editMessage('9', { text: 'Allo! Hello!', author: 'daddy'})); //false, т к поле author нельзя менять
-// console.log(module.removeMessage('15')); //true
-// console.log(module.removeMessage('25')); //false, т к нет сообщения с id = '25'
-// console.log(module.getMessages(0,20)); //все сообщения, сортированные по дате
-console.log(module.getMessages(0, 10, {author: 'NotPlastic'})); //начиная с 4-го элемента, 7 сообщений, сортированных по дате
-// console.log(module.getMessages(-3,7));//false, т к нельзя работать с отрицательными входными данными
-// console.log(module.getMessages());//используются параметры по умолчанию: 0, 10
 
+let arrMessages = [
+   new Message('Привет!',true,'my_word'),
+   new Message('Какие дела?',false),
+   new Message(
+      'Давно выяснено, что при оценке дизайна и композиции' + 
+           'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
+           'что тот обеспечивает более или менее стандартное заполнение шаблона',
+   ),
+   new Message(
+       'А также реальное распределение букв и пробелов в абзацах,'+
+           'которое не получается при простой дубликации',
+   ),
+   new Message(
+       'Многие программы электронной вёрстки и редакторы HTML'+
+           'используют Lorem Ipsum в качестве текста по умолчанию,'+
+           'так что поиск по ключевым словам "lorem ipsum" сразу показывает, '+
+           'как много веб-страниц всё ещё дожидаются своего настоящего рождения.',
+       true,
+       'ecoFriend'
+   ),
+   new Message('За прошедшие годы текст Lorem Ipsum получил много версий.'),
+   new Message(
+       'Многие думают, что Lorem Ipsum - взятый с потолка'+
+           'псевдо-латинский набор слов, но это не совсем так.'+ 
+           'Его корни уходят в один фрагмент классической латыни 45 года н.э., '+
+           'то есть более двух тысячелетий назад.',
+    ),
+    new Message(
+      'Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney,'+
+           'штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur",'+
+           'и занялся его поисками в классической латинской литературе.',
+      true,
+      'NotPlastic'
+    ),
+    new Message(
+      'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '+
+           'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'+
+           ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
+      true,
+      'NotPlastic'
+    ),
+    new Message(
+      'Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", '+
+      'происходит от одной из строк в разделе 1.10.32.',
+    )
+]
+let list = new MessageList(arrMessages);
+let m1 = new Message('Привет!', true,'my_word');
+let m2 = new Message('Давно выяснено, что при оценке дизайна и композиции' + 
+         'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
+'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
+         'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
+         'что тот обеспечивает более или менее стандартное заполнение шаблона!', true,'my_word');
+let m3 = new Message('А также реальное распределение букв и пробелов в абзацах,'+
+         'которое не получается при простой дубликации', false);
+let m4 = new Message('А также реальное распределение букв и пробелов в абзацах,'+
+         'которое не получается при простой дубликации', true, 'mum');
 
+console.log(list.messages);
 
+// _addAll()
+let messages2 = [
+   new Message('П',true,'my_word'), 
+   new Message('Какие дела?',false),
+   new Message('Давно выяснено, что при оценке дизайна и композиции')
+]
+let inValid = list._addAll(messages2);
+console.log(inValid);
+console.log(list.messages);
 
+// MessageList._validate()
+console.log(MessageList._validate(m3));// true
 
-  
+// _get()
+console.log(list._get('5'));
+
+// getPage()
+console.log(list.getPage(0, 10, {text: 'многие'}));
+console.log(list.getPage(0, 10)); //для проверки изменить строки 58, 59
+
+// add
+console.log(list.add(m4));//true
+console.log(list.messages);//добавился эл-т
+
+// edit()
+console.log(list._get('4'));
+console.log(list.edit('4', {text: 'Hello word', to: 'mum'})); //true
+console.log(list.edit('4', {author: 'Hello word', text: 'Hello word'})); //false, нельзя изменять автора
+console.log(list._get('4'));
+
+// remove()
+console.log(list.remove('6')); //true
+console.log(list.messages);
+
+// _clear()
+console.log(list.messages);
+list._clear();
+console.log(list.messages);
