@@ -2,7 +2,7 @@ const currentUser = {name: 'ecoFriend'};
 const TEXT_LEN = 200;
 let COUNT = 0; //переменная для установления Id для тестов
 class Message{
-   constructor(text, isPersonal=false, to){
+   constructor(text, isPersonal=false, to = ''){
       // this._id = `${+new Date()}`;
       this._id = COUNT.toString(); COUNT++; //для тестов
       this.text = text;
@@ -25,7 +25,7 @@ class Message{
    }
    set to(value) {
       this._to = value;
-      if (this._to !== undefined){
+      if (this._to){
          this._isPersonal = true;
       } 
       else{
@@ -53,8 +53,8 @@ class Message{
 }
 
 class MessageList{
-   constructor(arrMsgs){
-      this._messages = arrMsgs;
+   constructor(){
+      this._messages = [];
       this.user = currentUser.name;
       // this.user = 'me'; //для тестов
    }
@@ -67,13 +67,13 @@ class MessageList{
    get user(){
       return this._user;
    }
-   _isAuthor(msg){
+   isAuthor(msg){
       return msg.author  === this._user;
    }
-   _addAll(arrMsgs){
+   addAll(arrMsgs){
       let arrNoValidate = [];
       for (let i=0; i<arrMsgs.length; i++){
-         if(MessageList._validate(arrMsgs[i])){
+         if(MessageList.validate(arrMsgs[i])){
             this._messages.push(arrMsgs[i]);
          }
          else {
@@ -82,7 +82,7 @@ class MessageList{
       }
       return arrNoValidate;
    }
-   _clear(){
+   clear(){
       this._messages.splice(0);
    }
    getPage(skip = 0, top = 10, filterConfig = {}) {
@@ -94,9 +94,7 @@ class MessageList{
          dateTo:  (item, dateTo) => !dateTo || item.dateTo < dateTo,
       };
       let arr = [];
-      //this._messages.slice();
       for (let i = 0; i < this._messages.length; i++){
-         // console.log(this._messages[i]);
          if (this._messages[i].author === this.user || 
                this._messages[i].to === this.user || 
                   this._messages[i]._isPersonal === false){
@@ -112,15 +110,15 @@ class MessageList{
       arr = arr.slice(skip, skip+top);
       return arr;
    }
-   _get(id){
+   get(id){
       const result = this._messages.find(msg => msg.id === id);
       return  result;
    }
    add(msg){
-      if (this._isAuthor(msg)){
-         console.log(this._isAuthor(msg));
+      if (this.isAuthor(msg)){
+         console.log(this.isAuthor(msg));
          let size = this._messages.length;
-         if(MessageList._validate(msg)){
+         if(MessageList.validate(msg)){
             this._messages.push(msg);
          }
          else { return false;}
@@ -131,9 +129,9 @@ class MessageList{
    }
    edit(id, msg){
       let m = new Message (msg.text, msg.isPersonal, msg.to);
-      if (MessageList._validate(m)){
-         if (this._isAuthor(this._get(id))){
-            m = this._get(id); 
+      if (MessageList.validate(m)){
+         if (this.isAuthor(this.get(id))){
+            m = this.get(id); 
             for (const key in msg){
                if (key === 'text') { 
                   m.text = msg[key];
@@ -154,7 +152,7 @@ class MessageList{
       else {return false;}
    }
    remove(id){
-      if (this._isAuthor(this._get(id))){
+      if (this.isAuthor(this.get(id))){
          let index = this._messages.findIndex( msg => msg.id === id );
          let size = this._messages.length;
          if (index >-1){
@@ -165,7 +163,7 @@ class MessageList{
       }
       else {return false;}
    }
-   static _validate(msg){
+   static validate(msg){
       const validateObj = {
          id: (item) => item.id && typeof item.id === "string",
          text: (item) => item.text && typeof item.text === "string" && item.text.length <= TEXT_LEN,
@@ -228,12 +226,13 @@ let arrMessages = [
       'происходит от одной из строк в разделе 1.10.32.',
     )
 ]
-let list = new MessageList(arrMessages);
+let list = new MessageList();
+let invalidList = list.addAll(arrMessages);
 let m1 = new Message('Привет!', true,'my_word');
 let m2 = new Message('Давно выяснено, что при оценке дизайна и композиции' + 
          'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
-'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
          'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'+ 
+         'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому'+ 
          'что тот обеспечивает более или менее стандартное заполнение шаблона!', true,'my_word');
 let m3 = new Message('А также реальное распределение букв и пробелов в абзацах,'+
          'которое не получается при простой дубликации', false);
@@ -242,21 +241,21 @@ let m4 = new Message('А также реальное распределение 
 
 console.log(list.messages);
 
-// _addAll()
+// addAll()
 let messages2 = [
    new Message('П',true,'my_word'), 
    new Message('Какие дела?',false),
    new Message('Давно выяснено, что при оценке дизайна и композиции')
 ]
-let inValid = list._addAll(messages2);
+let inValid = list.addAll(messages2);
 console.log(inValid);
 console.log(list.messages);
 
-// MessageList._validate()
-console.log(MessageList._validate(m3));// true
+// MessageList.validate()
+console.log(MessageList.validate(m3));// true
 
-// _get()
-console.log(list._get('5'));
+// get()
+console.log(list.get('5'));
 
 // getPage()
 console.log(list.getPage(0, 10, {text: 'многие'}));
@@ -267,16 +266,16 @@ console.log(list.add(m4));//true
 console.log(list.messages);//добавился эл-т
 
 // edit()
-console.log(list._get('4'));
+console.log(list.get('4'));
 console.log(list.edit('4', {text: 'Hello word', to: 'mum'})); //true
-console.log(list.edit('4', {author: 'Hello word', text: 'Hello word'})); //false, нельзя изменять автора
-console.log(list._get('4'));
+console.log(list.edit('4', {author: 'Hello word', text: 'Hello word'})); //false
+console.log(list.get('4'));
 
 // remove()
 console.log(list.remove('6')); //true
 console.log(list.messages);
 
-// _clear()
+// clear()
 console.log(list.messages);
-list._clear();
+list.clear();
 console.log(list.messages);

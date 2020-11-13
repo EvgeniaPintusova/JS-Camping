@@ -11,8 +11,8 @@ class List{
         this.root = this.addNode(root);
     }
     addNode(value) {
-        var node = new Node(value);
-        var currentNode = this.head;
+        let node = new Node(value);
+        let currentNode = this.head;
         if (!currentNode) {
             this.head = node;
             this._length++;
@@ -32,7 +32,7 @@ class List{
         let count = 1;
         let beforeNodeToDelete = null;
         let nodeToDelete = null;
-        var deletedNode = null;
+        let deletedNode = null;
 
         if (position <=1 || position > length) {
             return false;
