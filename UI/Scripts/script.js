@@ -62,7 +62,6 @@ class MessageList {
   constructor() {
     this._messages = [];
     this.user = currentUser.name;
-    // this.user = 'me'; //для тестов
   }
 
   get messages() {
@@ -128,7 +127,6 @@ class MessageList {
 
   add(msg) {
     if (this.isAuthor(msg)) {
-      console.log(this.isAuthor(msg));
       const size = this._messages.length;
       if (MessageList.validate(msg)) {
         this._messages.push(msg);
@@ -250,43 +248,43 @@ const m3 = new Message('А также реальное распределени�
 const m4 = new Message('А также реальное распределение букв и пробелов в абзацах,'
          + 'которое не получается при простой дубликации', true, 'mum');
 
-console.log(list.messages);
+// console.log(list.messages);
 
-// addAll()
-const messages2 = [
-  new Message('П', true, 'my_word'),
-  new Message('Какие дела?', false),
-  new Message('Давно выяснено, что при оценке дизайна и композиции'),
-];
-const inValid = list.addAll(messages2);
-console.log(inValid);
-console.log(list.messages);
+// // addAll()
+// const messages2 = [
+//   new Message('П', true, 'my_word'),
+//   new Message('Какие дела?', false),
+//   new Message('Давно выяснено, что при оценке дизайна и композиции'),
+// ];
+// const inValid = list.addAll(messages2);
+// console.log(inValid);
+// console.log(list.messages);
 
-// MessageList.validate()
-console.log(MessageList.validate(m3));// true
+// // MessageList.validate()
+// console.log(MessageList.validate(m1));// true
 
-// get()
-console.log(list.get('5'));
+// // get()
+// console.log(list.get('5'));
 
-// getPage()
-console.log(list.getPage(0, 10, { text: 'многие' }));
-console.log(list.getPage(0, 10)); // для проверки изменить строки 58, 59
+// // getPage()
+// console.log(list.getPage(0, 10, { text: 'многие' }));
+// console.log(list.getPage(0, 10)); // для проверки изменить строки 58, 59
 
-// add
-console.log(list.add(m4));// true
-console.log(list.messages);// добавился эл-т
+// // add
+// console.log(list.add(m4));// true
+// console.log(list.messages);// добавился эл-т
 
-// edit()
-console.log(list.get('4'));
-console.log(list.edit('4', { text: 'Hello word', to: 'mum' })); // true
-console.log(list.edit('4', { author: 'Hello word', text: 'Hello word' })); // false
-console.log(list.get('4'));
+// // edit()
+// console.log(list.get('4'));
+// console.log(list.edit('4', { text: 'Hello word', to: 'mum' })); // true
+// console.log(list.edit('4', { author: 'Hello word', text: 'Hello word' })); // false
+// console.log(list.get('4'));
 
-// remove()
-console.log(list.remove('6')); // true
-console.log(list.messages);
+// // remove()
+// console.log(list.remove('6')); // true
+// console.log(list.messages);
 
-// clear()
-console.log(list.messages);
-list.clear();
-console.log(list.messages);
+// // clear()
+// console.log(list.messages);
+// list.clear();
+// console.log(list.messages);
