@@ -10,17 +10,23 @@ class List{
         this.head = null;
         this.root = this.addNode(root);
     }
-    addNode(value) {
-        var node = new Node(value);
-        var currentNode = this.head;
+    addNode(value, index = this._length) {
+        if (index < 0 || index > this._length) {
+            index = this._length
+        }
+        let node = new Node(value);
+        let currentNode = this.head;
+        let count = 1;
         if (!currentNode) {
             this.head = node;
             this._length++;
             return node;
         }
-        while (currentNode.next) {
+        while (count<index && currentNode.next) {
             currentNode = currentNode.next;
+            count++;
         }
+        node.next = currentNode.next;
         currentNode.next = node;
         this._length++;
         if (length < this._length){return true;}
@@ -32,7 +38,7 @@ class List{
         let count = 1;
         let beforeNodeToDelete = null;
         let nodeToDelete = null;
-        var deletedNode = null;
+        let deletedNode = null;
 
         if (position <=1 || position > length) {
             return false;
@@ -62,15 +68,16 @@ class List{
 }
 
 let list = new List(5);
-console.log(list.addNode(2));
+list.addNode(2);
 list.addNode(54);
 list.addNode(4);
-list.addNode(94);
-list.addNode(43);
+list.addNode(94,3);
+list.addNode(43,5);
 list.addNode(14);
 list.addNode(-34);
 list.print();
 console.log(list.remove(5));
+console.log(list.remove(10));
 list.print();
 
 

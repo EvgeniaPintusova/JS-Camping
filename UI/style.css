@@ -270,10 +270,11 @@ svg {
   color: var(--color8);
   float: left;
 }
-.data-time {
+.date-time {
   text-align: end;
 }
-.data-time span {
+.date,
+.time {
   font-style: normal;
   margin-left: var(--space-m);
 }
