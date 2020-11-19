@@ -32,6 +32,7 @@ body {
   --text-add: 12px;
   --text-main: 14px;
   --text-big: 16px;
+  --header-height: 4rem;
 }
 
 button,
@@ -115,7 +116,7 @@ svg {
   background-color: var(--color2);
   border: 0;
   border-radius: 25px;
-  padding: var(--space-xs) 3%;
+  padding: var(--space-xs) 1%;
   min-width: 100px;
   min-height: 24px;
   margin: 0 var(--space-s);
@@ -143,7 +144,8 @@ svg {
 .img-button:focus {
   outline: none;
 }
-.listing #users {
+/* .listing { */
+#active-users {
   height: 60vh;
   overflow: auto;
   position: relative;
@@ -269,6 +271,13 @@ svg {
 .owner {
   color: var(--color8);
   float: left;
+  font-size: var(--text-add);
+}
+.to {
+  float: left;
+  color: var(--color9);
+  padding-left: var(--space-s);
+  font-size: var(--text-add);
 }
 .date-time {
   text-align: end;
