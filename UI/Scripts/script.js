@@ -1,13 +1,14 @@
-const currentUser = { name: 'ecoFriend' };
+let currentUser = 'nameUser';
+const currentUser1 = { name: 'Zenya' };
 const TEXT_LEN = 200;
 let COUNT = 0; // переменная для установления Id для тестов
 class Message {
   constructor(text, isPersonal = false, to = '') {
-    // this._id = `${+new Date()}`;
+    this._id = `${+new Date()}`;
     this._id = COUNT.toString(); COUNT++; // для тестов
     this.text = text;
     this._createdAt = new Date();
-    this._author = currentUser.name;
+    this._author = currentUser;
     this.isPersonal = isPersonal;
     this.to = to;
   }
@@ -61,7 +62,8 @@ class Message {
 class MessageList {
   constructor() {
     this._messages = [];
-    this.user = currentUser.name;
+    this.user = currentUser;
+    // this.user = 'Zenya';
   }
 
   get messages() {
@@ -237,54 +239,3 @@ const arrMessages = [
 ];
 const list = new MessageList();
 const invalidList = list.addAll(arrMessages);
-const m1 = new Message('Привет!', true, 'my_word');
-const m2 = new Message('Давно выяснено, что при оценке дизайна и композиции'
-         + 'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'
-         + 'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'
-         + 'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому'
-         + 'что тот обеспечивает более или менее стандартное заполнение шаблона!', true, 'my_word');
-const m3 = new Message('А также реальное распределение букв и пробелов в абзацах,'
-         + 'которое не получается при простой дубликации', false);
-const m4 = new Message('А также реальное распределение букв и пробелов в абзацах,'
-         + 'которое не получается при простой дубликации', true, 'mum');
-
-// console.log(list.messages);
-
-// // addAll()
-// const messages2 = [
-//   new Message('П', true, 'my_word'),
-//   new Message('Какие дела?', false),
-//   new Message('Давно выяснено, что при оценке дизайна и композиции'),
-// ];
-// const inValid = list.addAll(messages2);
-// console.log(inValid);
-// console.log(list.messages);
-
-// // MessageList.validate()
-// console.log(MessageList.validate(m1));// true
-
-// // get()
-// console.log(list.get('5'));
-
-// // getPage()
-// console.log(list.getPage(0, 10, { text: 'многие' }));
-// console.log(list.getPage(0, 10)); // для проверки изменить строки 58, 59
-
-// // add
-// console.log(list.add(m4));// true
-// console.log(list.messages);// добавился эл-т
-
-// // edit()
-// console.log(list.get('4'));
-// console.log(list.edit('4', { text: 'Hello word', to: 'mum' })); // true
-// console.log(list.edit('4', { author: 'Hello word', text: 'Hello word' })); // false
-// console.log(list.get('4'));
-
-// // remove()
-// console.log(list.remove('6')); // true
-// console.log(list.messages);
-
-// // clear()
-// console.log(list.messages);
-// list.clear();
-// console.log(list.messages);

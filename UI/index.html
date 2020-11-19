@@ -32,24 +32,15 @@
             <div class="flex-container-1"> 
                 <div class="listing">
                     <p>Активные пользователи</p>
-                    <form method="post" action="" id="users">
-                        <label class="active-users" id="u1"><input type="radio" id="user1" value="a1" name="user"/>NotPlactic</label>
-                        <label><input type="radio" id="user2" value="a2" name="user"/>ItsFantastic</label>
-                        <label><input type="radio" id="user3" value="a3" name="user"/>ecoLifer</label> 
-                        <label><input type="radio" id="user4" value="a4" name="user"/>my_eco_word</label>
-                        <label><input type="radio" id="user5" value="a5" name="user"/>NotPlactic</label>
-                        <label><input type="radio" id="user6" value="a6" name="user"/>ItsFantastic</label>
-                        <label><input type="radio" id="user7" value="a7" name="user"/>ecoLifer</label> 
-                        <label><input type="radio" id="user8" value="a8" name="user"/>my_eco_word</label>
+                    <form method="post" action="" id="active-users">
 
-                        <label><input type="radio" id="user1" value="a1" name="user"/>NotPlactic</label>
-                        <label><input type="radio" id="user2" value="a2" name="user"/>ItsFantastic</label>
-                        <label><input type="radio" id="user3" value="a3" name="user"/>ecoLifer</label> 
-                        <label><input type="radio" id="user4" value="a4" name="user"/>my_eco_word</label>
-                        <label><input type="radio" id="user5" value="a5" name="user"/>NotPlactic</label>
-                        <label><input type="radio" id="user6" value="a6" name="user"/>ItsFantastic</label>
-                        <label><input type="radio" id="user7" value="a7" name="user"/>ecoLifer</label> 
-                        <label><input type="radio" id="user8" value="a8" name="user"/>my_eco_word</label>
+                        <template id = "user-template">
+                            <label>
+                                <input class="input-user" type="radio" id="" name="user"/>
+                                <span class = "user-name"></span>
+                            </label>
+                        </template>
+                        <label><input type="radio" id="none" name="user"/>none</label>
                     </form>
                 </div>
             </div>
@@ -109,6 +100,7 @@
                             <div class="own-mess">
                                 <span class="author"></span>
                                 <p class="message-text"></p>
+                                <p class="owner"></p>
                                 <p class="date-time">
                                     <span class="time"></span>
                                     <span class="date"></span>
@@ -116,71 +108,38 @@
                             </div>
                         </template>
 
-                        <!-- <div class="own-mess chat-mess">
-                            <span class="author">friend_name:</span>
-                            <p class="message-text">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
-                                obcaecati. Modi ipsa aspernatur repellat accusamus ex, corrupti 
-                                molestiae aut maxime, vero ad ipsam excepturi dolorum aliquid facere 
-                                sunt omnis vitae.
-                            </p>
-                            <p class="date-time">
-                                <span class="time">13:35</span>
-                                <span class="date">21.10.2020</span>
-                            </p>
-                        </div> -->
-                        <!-- <div class="own-mess chat-mess">
-                            <span>friend_name:</span>
-                            <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
-                                obcaecati. Modi ipsa aspernatur repellat accusamus ex, corrupti 
-                                molestiae aut maxime, vero ad ipsam excepturi dolorum aliquid facere 
-                                sunt omnis vitae.
-                            </p>
-                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
-                        </div> -->
-                        <div class="own-mess my-mess">
-                            <span>my_name:</span>
-                            <div class="edit-tools">
-                                <div class="delete">
-                                   <p class="text-tool">Удалить</p>
-                                   <botton class="tool">
-                                        <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
-                                            <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/>
-                                        </svg> 
-                                   </botton>
-                                </div> 
-                                <div class="rewrite">
-                                    <p class="text-tool">Редактировать</p>
+                        <template id="msg-template-mine">
+                            <div class="own-mess my-mess">
+                                <span class="author"></span>
+                                <div class="edit-tools">
+                                    <div class="delete">
+                                    <p class="text-tool">Удалить</p>
                                     <botton class="tool">
-                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
-                                            <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/>
-                                        </svg>
+                                            <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
+                                                <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/>
+                                            </svg> 
                                     </botton>
+                                    </div> 
+                                    <div class="rewrite">
+                                        <p class="text-tool">Редактировать</p>
+                                        <botton class="tool">
+                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
+                                                <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/>
+                                            </svg>
+                                        </botton>
+                                    </div>
                                 </div>
+                                <p class="message-text"></p>
+                                <p class="owner"></p>
+                                <p class="to"></p>
+                                <p class="date-time">
+                                    <span class="time"></span>
+                                    <span class="date"></span>
+                                </p>
                             </div>
-                            <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
-                                obcaecati. Modi ipsa aspernatur repellat accusamus ex, corrupti 
-                                molestiae aut maxime, vero ad ipsam excepturi dolorum aliquid facere 
-                                sunt omnis vitae.
-                            </p>
-                            <p class="owner">Личное сообщение</p>
-                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
-                        </div>
-                        <!-- <div class="own-mess chat-mess">
-                            <span>friend_name:</span>
-                            <p>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident, 
-                                obcaecati. Modi ipsa aspernatur repellat accusamus ex, corrupti 
-                                molestiae aut maxime, vero ad ipsam excepturi dolorum aliquid facere 
-                                sunt omnis vitae.
-                            </p>
-                            <p class="owner">Личное сообщение</p>
-                            <p class="data-time"><span>13:35</span><span>21.10.2020</span></p>
-                        </div> -->
+                        </template>
                     </div>
                 </div>
                 <div class="send">
