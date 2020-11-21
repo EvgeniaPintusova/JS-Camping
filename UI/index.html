@@ -33,13 +33,6 @@
                 <div class="listing">
                     <p>Активные пользователи</p>
                     <form method="post" action="" id="active-users">
-
-                        <template id = "user-template">
-                            <label>
-                                <input class="input-user" type="radio" id="" name="user"/>
-                                <span class = "user-name"></span>
-                            </label>
-                        </template>
                         <label><input type="radio" id="none" name="user"/>none</label>
                     </form>
                 </div>
@@ -95,51 +88,6 @@
                 
                 <div class="place-messages">
                     <div class="messages" id="messages-list">
-
-                        <template id="msg-template">
-                            <div class="own-mess">
-                                <span class="author"></span>
-                                <p class="message-text"></p>
-                                <p class="owner"></p>
-                                <p class="date-time">
-                                    <span class="time"></span>
-                                    <span class="date"></span>
-                                </p>
-                            </div>
-                        </template>
-
-                        <template id="msg-template-mine">
-                            <div class="own-mess my-mess">
-                                <span class="author"></span>
-                                <div class="edit-tools">
-                                    <div class="delete">
-                                    <p class="text-tool">Удалить</p>
-                                    <botton class="tool">
-                                            <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
-                                                <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/>
-                                            </svg> 
-                                    </botton>
-                                    </div> 
-                                    <div class="rewrite">
-                                        <p class="text-tool">Редактировать</p>
-                                        <botton class="tool">
-                                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
-                                                <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/>
-                                            </svg>
-                                        </botton>
-                                    </div>
-                                </div>
-                                <p class="message-text"></p>
-                                <p class="owner"></p>
-                                <p class="to"></p>
-                                <p class="date-time">
-                                    <span class="time"></span>
-                                    <span class="date"></span>
-                                </p>
-                            </div>
-                        </template>
                     </div>
                 </div>
                 <div class="send">
@@ -169,7 +117,56 @@
             </p>
         </div>
     </footer> 
+    <template id = "user-template">
+        <label>
+            <input class="input-user" type="radio" id="" name="user"/>
+            <span class = "user-name"></span>
+        </label>
+    </template>
+    <template id="msg-template">
+        <div class="own-mess">
+            <span class="author"></span>
+                <p class="message-text"></p>
+                <p class="owner"></p>
+                <p class="date-time">
+                    <span class="time"></span>
+                    <span class="date"></span>
+                </p>
+        </div>
+    </template>
+    <template id="msg-template-mine">
+        <div class="own-mess my-mess">
+            <span class="author"></span>
+            <div class="edit-tools">
+                <div class="delete">
+                    <p class="text-tool">Удалить</p>
+                    <botton class="tool">
+                        <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
+                        <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/></svg> 
+                    </botton>
+                </div> 
+                <div class="rewrite">
+                    <p class="text-tool">Редактировать</p>
+                    <botton class="tool">
+                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
+                        <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/></svg>
+                    </botton>
+                </div>
+            </div>
+            <p class="message-text"></p>
+            <p class="owner"></p>
+            <p class="to"></p>
+            <p class="date-time">
+            <span class="time"></span>
+            <span class="date"></span>
+            </p>
+        </div>
+    </template>
+
 </body>
  <script type="text/javascript" src="Scripts/script.js"></script>
   <script type="text/javascript" src="Scripts/UserList.js"></script>
 </html>
+ 

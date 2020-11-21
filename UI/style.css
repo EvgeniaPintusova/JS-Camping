@@ -430,4 +430,7 @@ svg {
     --space-m: 8px;
     --space-l: 16px;
   }
+  .logo{
+    margin-top: var(--space-l);
+  }
 }

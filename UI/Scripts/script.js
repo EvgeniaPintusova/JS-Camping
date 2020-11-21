@@ -1,14 +1,12 @@
-let currentUser = 'nameUser';
-const currentUser1 = { name: 'Zenya' };
 const TEXT_LEN = 200;
 let COUNT = 0; // переменная для установления Id для тестов
 class Message {
-  constructor(text, isPersonal = false, to = '') {
-    this._id = `${+new Date()}`;
+  constructor(text, author, isPersonal = false, to = '') {
+    // this._id = `${+new Date()}`;
     this._id = COUNT.toString(); COUNT++; // для тестов
     this.text = text;
     this._createdAt = new Date();
-    this._author = currentUser;
+    this.author = author;
     this.isPersonal = isPersonal;
     this.to = to;
   }
@@ -19,6 +17,10 @@ class Message {
     } else {
       this._text = value.slice(0, TEXT_LEN);
     }
+  }
+
+  set author(value) {
+    this._author = value;
   }
 
   set isPersonal(value) {
@@ -60,10 +62,13 @@ class Message {
 }
 
 class MessageList {
-  constructor() {
-    this._messages = [];
-    this.user = currentUser;
-    // this.user = 'Zenya';
+  constructor(msgList, user) {
+    this.messages = msgList;
+    this.user = user;
+  }
+
+  set messages(value) {
+    this._messages = value;
   }
 
   get messages() {
@@ -79,7 +84,7 @@ class MessageList {
   }
 
   isAuthor(msg) {
-    return msg.author === this._user;
+    return msg.author === this.user;
   }
 
   addAll(arrMsgs) {
@@ -107,7 +112,7 @@ class MessageList {
       dateTo: (item, dateTo) => !dateTo || item.dateTo < dateTo,
     };
     let arr = [];
-    for (let i = 0; i < this._messages.length; i++) {
+    for (let i = 0; i < this.messages.length; i++) {
       if (this._messages[i].author === this.user
                || this._messages[i].to === this.user
                   || this._messages[i]._isPersonal === false) {
@@ -140,7 +145,7 @@ class MessageList {
   }
 
   edit(id, msg) {
-    let m = new Message(msg.text, msg.isPersonal, msg.to);
+    let m = new Message(msg.text, this.get(id).author, msg.isPersonal, msg.to);
     if (MessageList.validate(m)) {
       if (this.isAuthor(this.get(id))) {
         m = this.get(id);
@@ -192,50 +197,44 @@ class MessageList {
 }
 
 const arrMessages = [
-  new Message('Привет!', true, 'my_word'),
-  new Message('Какие дела?', false),
+  new Message('Привет!', 'Zhenya', true, 'dad'),
+  new Message('Какие дела?', 'mum'),
   new Message(
     'Давно выяснено, что при оценке дизайна и композиции'
            + 'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'
            + 'что тот обеспечивает более или менее стандартное заполнение шаблона',
+    'mum',
   ),
   new Message(
     'А также реальное распределение букв и пробелов в абзацах,'
            + 'которое не получается при простой дубликации',
+    'mum',
+    true,
+    'Zhenya',
   ),
   new Message(
     'Многие программы электронной вёрстки и редакторы HTML'
            + 'используют Lorem Ipsum в качестве текста по умолчанию,'
            + 'так что поиск по ключевым словам "lorem ipsum" сразу показывает, '
            + 'как много веб-страниц всё ещё дожидаются своего настоящего рождения.',
+    'dady',
     true,
-    'ecoFriend',
-  ),
-  new Message('За прошедшие годы текст Lorem Ipsum получил много версий.'),
-  new Message(
-    'Многие думают, что Lorem Ipsum - взятый с потолка'
-           + 'псевдо-латинский набор слов, но это не совсем так.'
-           + 'Его корни уходят в один фрагмент классической латыни 45 года н.э., '
-           + 'то есть более двух тысячелетий назад.',
-  ),
-  new Message(
-    'Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney,'
-           + 'штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur",'
-           + 'и занялся его поисками в классической латинской литературе.',
-    true,
-    'NotPlastic',
-  ),
-  new Message(
-    'В результате он нашёл неоспоримый первоисточник Lorem Ipsum '
-           + 'в разделах 1.10.32 и 1.10.33 книги "de Finibus Bonorum et Malorum"'
-           + ' ("О пределах добра и зла"), написанной Цицероном в 45 году н.э.',
-    true,
-    'NotPlastic',
-  ),
-  new Message(
-    'Первая строка Lorem Ipsum, "Lorem ipsum dolor sit amet..", '
-      + 'происходит от одной из строк в разделе 1.10.32.',
+    'mum',
   ),
 ];
-const list = new MessageList();
+const list = new MessageList([], 'Zhenya');
 const invalidList = list.addAll(arrMessages);
+// console.log(list);
+// console.log(invalidList);
+// console.log(list.isAuthor(arrMessages[1]));
+// console.log(list.isAuthor(arrMessages[4]));
+// console.log(list.remove('3'));
+// console.log(list.remove('4'));
+// console.log(list.getPage());
+// const message = new Message ("Hi! How are u?", 'Zhenya');
+// list.add(message);
+// console.log(list);
+// console.log(list.edit('5', {text: 'you'}));
+// console.log(list);
+// list.clear();
+// console.log(list);

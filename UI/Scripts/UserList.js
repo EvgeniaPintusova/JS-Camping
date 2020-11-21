@@ -12,19 +12,18 @@ class UserList {
     return this._users;
   }
 }
-// const a = new UserList(['mum', 'dad', 'sis'], ['mum', 'dad', 'sis', 'granny']);
 
 class HeaderView {
   constructor(containerId) {
     this._headerElement = document.getElementById(containerId);
   }
 
-  display(params = 'Гость') {
-    this._headerElement.textContent = params;
+  display(userName = 'Гость') {
+    this._headerElement.textContent = userName;
   }
 }
 // const b = new HeaderView("nickname");
-// b.display(currentUser.name);
+// b.display('Zhenya');
 
 class MessagesView {
   constructor(containerId) {
@@ -32,6 +31,7 @@ class MessagesView {
   }
 
   display(msgList, currUser) {
+    this._messagesList.innerHTML = '';
     const msgTpl = document.getElementById('msg-template');
     const msgTplmine = document.getElementById('msg-template-mine');
     const fragment = new DocumentFragment();
@@ -53,7 +53,7 @@ class MessagesView {
         el.querySelector('.message-text').textContent = item.text;
         el.querySelector('.time').textContent = item.createdAt.toLocaleTimeString().slice(0, -3);
         el.querySelector('.date').textContent = item.createdAt.toLocaleDateString();
-        if (item.to === currentUser.name) {
+        if (item.to === currUser) {
           el.querySelector('.owner').textContent = 'Личное сообщение';
         }
       }
@@ -63,7 +63,7 @@ class MessagesView {
   }
 }
 // const c = new MessagesView('messages-list');
-// c.display(arrMessages, "ecoFriend");
+// c.display(arrMessages, "Zhenya");
 
 class ActiveUsersView {
   constructor(containerId) {
@@ -83,55 +83,53 @@ class ActiveUsersView {
     this._activeUsersView.appendChild(fragment);
   }
 }
-// const d = new ActiveUsersView();
+// const d = new ActiveUsersView('active-users');
 // d.display(a.activeUsers);
 
-const model = new MessageList();
+const model = new MessageList(arrMessages, '');
+console.log(model);
 const headerView = new HeaderView('nickname');
 const messagesView = new MessagesView('messages-list');
 const activeUsersView = new ActiveUsersView('active-users');
-const activeUsers = ['mum', 'dad', 'sis', 'bro', 'cat'];
+const users = new UserList(['mum', 'dad', 'sis', 'bro'], ['mum', 'dad', 'sis', 'bro', 'cat', 'dog', 'gra']);
 
 function setCurrentUser(user) {
-  currentUser = user;
   model.user = user;
-  model.author = user;
   headerView.display(user);
+  messagesView.display(model.getPage(), user);
 }
-setCurrentUser('Zhenya');
+setCurrentUser('mum');
 
 function addMessage(msg) {
   if (model.add(msg)) {
-    messagesView.display(model.getPage(), model.author);
+    messagesView.display(model.getPage(), model.user);
   }
 }
-const m = new Message('Какие дела?', false);
-const m1 = new Message('Что делаешь?', true, 'mum');
-const m2 = new Message('Привет)');
+const m = new Message('Приехали?', 'mum', true, 'Zhenya');
+const m1 = new Message('всё ок', 'mum');
 addMessage(m);
 addMessage(m1);
-// addMessage(m2);
 
 function showActiveUsers() {
-  activeUsersView.display(activeUsers);
+  activeUsersView.display(users.activeUsers);
 }
 showActiveUsers();
 
 function editMessage(id, msg) {
   if (model.edit(id, msg)) {
-    messagesView.display(model.getPage(), model.author);
+    messagesView.display(model.getPage(), model.user);
   }
 }
-editMessage('10', { text: 'lili' });
+editMessage('3', { text: 'lili', to: 'dad' });
 
 function removeMessage(id) {
   if (model.remove(id)) {
-    messagesView.display(model.getPage(), model.author);
+    messagesView.display(model.getPage(), model.user);
   }
 }
-removeMessage('10');
+removeMessage('2');
 
 function showMessages(skip = 0, top = 10, filterConfig = {}) {
-  messagesView.display(model.getPage(skip, top, filterConfig), model.author);
+  messagesView.display(model.getPage(skip, top, filterConfig), model.user);
 }
-showMessages(0, 1, { text: '?' });
+// showMessages(0, 1, { text: 'h' });
