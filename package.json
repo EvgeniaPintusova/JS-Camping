@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./UI/Scripts",
-    "lint:fix": "eslint ./UI/Scripts --fix"
+    "lint": "eslint ./UI",
+    "lint:fix": "eslint ./UI --fix"
   },
   "repository": {
     "type": "git",
