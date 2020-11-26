@@ -24,6 +24,7 @@ body {
   --color8: #c714b2; /*личн.сообщения*/
   --color9: #c4c4c4; /*доп.информация*/
   --color10: #fffcd8; /*подложка фильтров*/
+  --color11: #f2faf9; /*для форм регистрации*/
   --space0: 0;
   --space-xs: 5px;
   --space-s: 10px;
@@ -382,7 +383,117 @@ svg {
 .footer .flex-container {
   justify-content: space-between;
 }
+.login,
+.registration {
+  background-color: var(--color11);
+  min-width: 30%;
+  padding: var(--space-l);
+  border-radius: 10px;
+  margin: var(--space-l);
+  box-shadow: 5px 5px 10px rgba(19, 136, 127, 0.4);
+  font-size: var(--text-big);
+}
+.registration {
+  margin-left: 50%;
+}
+.login-text,
+.registration-text {
+  font-size: var(--text-big);
+  color: var(--color5);
+  font-weight: bold;
+}
+.login-input,
+.login-button {
+  display: block;
+  padding: 15px 5px;
+  margin: 15px 0px;
+  border: none;
+}
+.login-input {
+  background-color: var(--color0);
+  width: 95%;
+  border: 2px solid var(--color11);
+  border-radius: 10px;
+}
+.login-input:focus {
+  border: 2px solid var(--color3);
+  outline: 2px solid var(--color11);
+}
+.login-button {
+  color: var(--color0);
+  background-color: var(--color2);
+  border-radius: 25px;
+  width: 100%;
+  min-width: 100px;
+  min-height: 24px;
+  box-shadow: 0 0 0 2px var(--color2);
+}
+.login-button:hover {
+  background-color: var(--color0);
+  color: var(--color2);
+  box-shadow: 0 0 0 2px var(--color2);
+}
 
+.login-button-second {
+  background-color: var(--color0);
+  color: var(--color2);
+  box-shadow: 0 0 0 2px var(--color2);
+}
+.login-button-second:hover {
+  background-color: var(--color2);
+  color: var(--color0);
+}
+.login-button-third {
+  color: var(--color2);
+  text-decoration: underline;
+  display: block;
+  margin: auto;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.login-button-third:hover {
+  color: var(--color3);
+}
+.login-p {
+  text-align: center;
+  font-size: var(--text-add);
+  color: var(--color5);
+  margin: 15px 0;
+}
+.login-button-fourth {
+  background-color: var(--color0);
+  color: var(--color3);
+  box-shadow: 0 0 0 2px var(--color3);
+}
+.login-button-fourth:hover {
+  background-color: var(--color3);
+  color: var(--color0);
+  box-shadow: 0 0 0 2px var(--color3);
+}
+.login-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color5);
+}
+.login-picture {
+  height: 400px;
+  margin: var(--space-l);
+}
+.login-picture-mobile {
+  display: none;
+}
+.login-page,
+.registration-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.registration-page {
+  background-image: url(images/registr.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: flex-start;
+}
 /*RESIZING*/
 @media all and (min-width: 1440px) {
   .flex-container {
@@ -392,6 +503,10 @@ svg {
 @media all and (max-width: 1024px) {
   .flex-container {
     width: 80%;
+  }
+  .login,
+  .registration {
+    min-width: 40%;
   }
 }
 @media all and (max-width: 770px) {
@@ -419,6 +534,28 @@ svg {
     width: 90%;
     min-height: 24px;
   }
+  .login-page,
+  .registration-page {
+    flex-direction: column-reverse;
+  }
+  .login,
+  .registration {
+    min-width: 70%;
+    margin: 5% auto;
+  }
+  .login-picture {
+    display: none;
+  }
+  .login-picture-mobile {
+    display: block;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    height: 250px;
+  }
+  .registration-page {
+    background-image: none;
+  }
 }
 @media all and (max-width: 450px) {
   .flex-container-1 {
@@ -430,7 +567,10 @@ svg {
     --space-m: 8px;
     --space-l: 16px;
   }
-  .logo{
+  .logo {
     margin-top: var(--space-l);
+  }
+  .login-picture-mobile {
+    height: 150px;
   }
 }

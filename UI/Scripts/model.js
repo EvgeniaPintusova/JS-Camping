@@ -1,9 +1,10 @@
 const TEXT_LEN = 200;
 let COUNT = 0; // переменная для установления Id для тестов
 class Message {
-  constructor(text, author, isPersonal = false, to = '') {
+  constructor(text, author, isPersonal = false, to = "") {
     // this._id = `${+new Date()}`;
-    this._id = COUNT.toString(); COUNT++; // для тестов
+    this._id = COUNT.toString();
+    COUNT++; // для тестов
     this.text = text;
     this._createdAt = new Date();
     this.author = author;
@@ -104,18 +105,24 @@ class MessageList {
   }
 
   getPage(skip = 0, top = 10, filterConfig = {}) {
-    if (skip < 0 || top < 0) { return false; }
+    if (skip < 0 || top < 0) {
+      return false;
+    }
     const filterObj = {
-      author: (item, author) => !author || item.author.toLowerCase().includes(author.toLowerCase()),
-      text: (item, text) => !text || item.text.toLowerCase().includes(text.toLowerCase()),
+      author: (item, author) =>
+        !author || item.author.toLowerCase().includes(author.toLowerCase()),
+      text: (item, text) =>
+        !text || item.text.toLowerCase().includes(text.toLowerCase()),
       dateFrom: (item, dateFrom) => !dateFrom || item.dateFrom > dateFrom,
       dateTo: (item, dateTo) => !dateTo || item.dateTo < dateTo,
     };
     let arr = [];
     for (let i = 0; i < this.messages.length; i++) {
-      if (this._messages[i].author === this.user
-               || this._messages[i].to === this.user
-                  || this._messages[i]._isPersonal === false) {
+      if (
+        this._messages[i].author === this.user ||
+        this._messages[i].to === this.user ||
+        this._messages[i]._isPersonal === false
+      ) {
         arr.push(this._messages[i]);
       }
     }
@@ -137,8 +144,12 @@ class MessageList {
       const size = this._messages.length;
       if (MessageList.validate(msg)) {
         this._messages.push(msg);
-      } else { return false; }
-      if (size < this._messages.length) { return true; }
+      } else {
+        return false;
+      }
+      if (size < this._messages.length) {
+        return true;
+      }
       return false;
     }
     return false;
@@ -150,14 +161,16 @@ class MessageList {
       if (this.isAuthor(this.get(id))) {
         m = this.get(id);
         for (const key in msg) {
-          if (key === 'text') {
+          if (key === "text") {
             m.text = msg[key];
-          } else if (key === 'isPersonal') {
+          } else if (key === "isPersonal") {
             m.isPersonal = msg[key];
-          } else if (key === 'to') {
+          } else if (key === "to") {
             m.to = msg[key];
             m.isPersonal = true;
-          } else { return false; }
+          } else {
+            return false;
+          }
         }
         return true;
       }
@@ -173,7 +186,9 @@ class MessageList {
       if (index > -1) {
         this._messages.splice(index, 1);
       }
-      if (size > this._messages.length) { return true; }
+      if (size > this._messages.length) {
+        return true;
+      }
       return false;
     }
     return false;
@@ -181,14 +196,19 @@ class MessageList {
 
   static validate(msg) {
     const validateObj = {
-      id: (item) => item.id && typeof item.id === 'string',
-      text: (item) => item.text && typeof item.text === 'string' && item.text.length <= TEXT_LEN,
-      author: (item) => item.author && typeof item.author === 'string',
-      createdAt: (item) => item.createdAt && typeof item.createdAt === 'object',
+      id: (item) => item.id && typeof item.id === "string",
+      text: (item) =>
+        item.text &&
+        typeof item.text === "string" &&
+        item.text.length <= TEXT_LEN,
+      author: (item) => item.author && typeof item.author === "string",
+      createdAt: (item) => item.createdAt && typeof item.createdAt === "object",
       isPersonal: (item) => {
-        if ((item.isPersonal === false && !item.to)
-               || (item.isPersonal && item.to && typeof item.to === 'string')) {
-          return typeof item.isPersonal === 'boolean';
+        if (
+          (item.isPersonal === false && !item.to) ||
+          (item.isPersonal && item.to && typeof item.to === "string")
+        ) {
+          return typeof item.isPersonal === "boolean";
         }
       },
     };
@@ -197,32 +217,32 @@ class MessageList {
 }
 
 const arrMessages = [
-  new Message('Привет!', 'Zhenya', true, 'dad'),
-  new Message('Какие дела?', 'mum'),
+  new Message("Привет!", "Zhenya", true, "dad"),
+  new Message("Какие дела?", "mum"),
   new Message(
-    'Давно выяснено, что при оценке дизайна и композиции'
-           + 'читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому,'
-           + 'что тот обеспечивает более или менее стандартное заполнение шаблона',
-    'mum',
+    "Давно выяснено, что при оценке дизайна и композиции" +
+      "читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому," +
+      "что тот обеспечивает более или менее стандартное заполнение шаблона",
+    "mum"
   ),
   new Message(
-    'А также реальное распределение букв и пробелов в абзацах,'
-           + 'которое не получается при простой дубликации',
-    'mum',
+    "А также реальное распределение букв и пробелов в абзацах," +
+      "которое не получается при простой дубликации",
+    "mum",
     true,
-    'Zhenya',
+    "Zhenya"
   ),
   new Message(
-    'Многие программы электронной вёрстки и редакторы HTML'
-           + 'используют Lorem Ipsum в качестве текста по умолчанию,'
-           + 'так что поиск по ключевым словам "lorem ipsum" сразу показывает, '
-           + 'как много веб-страниц всё ещё дожидаются своего настоящего рождения.',
-    'dady',
+    "Многие программы электронной вёрстки и редакторы HTML" +
+      "используют Lorem Ipsum в качестве текста по умолчанию," +
+      'так что поиск по ключевым словам "lorem ipsum" сразу показывает, ' +
+      "как много веб-страниц всё ещё дожидаются своего настоящего рождения.",
+    "dady",
     true,
-    'mum',
+    "mum"
   ),
 ];
-const list = new MessageList([], 'Zhenya');
+const list = new MessageList([], "Zhenya");
 const invalidList = list.addAll(arrMessages);
 // console.log(list);
 // console.log(invalidList);
