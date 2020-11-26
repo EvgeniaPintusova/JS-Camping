@@ -26,8 +26,36 @@
             </p>
         </div>
     </header>
-    
-    <main class="main">
+    <div class="login-page" style="display: flex;">
+        <img class="login-picture" src="images/login.png" alt="картинка: девушка в чате"/>
+        <img class="login-picture-mobile" src="images/login-mobile.png"/>
+        <form class="login">
+            <p class="login-text">Войдите</p>
+
+            <input class="login-input" type="text" placeholder="Логин*" />
+            <input class="login-input" type="password" placeholder="Пароль*" />
+            <button class="login-button ">Войти</button>
+            <button class="login-button login-button-second">Зарегистрироваться</button>
+            <button class="login-button-third">Войти без регистрации</button>
+            <p class="login-p">или</p>
+            <button class="login-button login-button-fourth">Продолжить с Google</button>
+        </form>
+    </div>
+    <div class="registration-page" style="display: none;">
+        <img class="login-picture-mobile" src="images/registr-mobile.png"/>
+        <form class="registration">
+            <p class="registration-text">Зарегистрируйтесь</p>
+            <input class="login-input" type="text" placeholder="Придумайте логин*" />
+            <input class="login-input" type="password" placeholder="Придумайте пароль*" />
+            <input class="login-input" type="password" placeholder="Подтвердите пароль*" />
+            <button class="login-button ">Зарегистрироваться</button>
+            <button class="login-button login-button-second">Войти</button>
+            <button class="login-button-third">Войти без регистрации</button>
+            <p class="login-p">или</p>
+            <button class="login-button login-button-fourth">Продолжить с Google</button>
+        </form>
+    </div>
+    <main class="main" style="display: none;">
         <div class="flex-container">
             <div class="flex-container-1"> 
                 <div class="listing">
@@ -41,13 +69,12 @@
                 <div class="message_nav">
                     <div class="find">
                         <input type="text" id="search" placeholder="поиск" title="поиск сообщений"/>
-                        <button class="main-button" title="фильтровать сообщения">Фильтровать</button>
+                         <button class="main-button" title="фильтровать сообщения" onclick="openbox('box'); return false">Фильтры</button>
                         <button class="main-button" title="загрузить сообщения"> Загрузить ещё</button> 
-                        <div class="img-button" title="фильтровать сообщения">
-                            <svg width="42" height="35" viewBox="0 0 42 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 20.6239L42 0H0L21 20.6239Z" fill="#00C7B8"/>
-                                <path d="M18.0301 14.5833H23.9698V35L18.0301 29.1667V14.5833Z" fill="#00C7B8"/>
-                            </svg>
+                        <div title="фильтровать сообщения" >
+                            <button class="img-button" onclick="openbox('box'); return false">
+                                <img alt="кнопка загрузить" src="images/filter.png"/>
+                            </button>
                         </div>
                         <div title="загрузить сообщения">
                             <button class="img-button">
@@ -55,7 +82,7 @@
                             </button>
                         </div> 
                     </div>
-                    <div class="filters">
+                    <div class="filters" id = "box">
                         <div class="form-filters">
                             <form class="filters-date">
                                 <div>
@@ -82,7 +109,7 @@
                     </div>
                     <div class="delete-filters">
                         <p>Фильтры применены</p>
-                        <button class="main_button" title="Отменить фильтры">Сбросить</button>
+                        <button class="main-button" title="Отменить фильтры">Сбросить</button>
                     </div>
                 </div>
                 
@@ -91,9 +118,9 @@
                     </div>
                 </div>
                 <div class="send">
-                    <form>
-                        <input type="text" id="send"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
-                        <button title="отправить сообщение">
+                    <form action="" onsubmit="controller.addMessage(this.send.value)">
+                        <input type="text" name="send"id="send"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
+                        <button type="submit" title="отправить сообщение" >
                             <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M41 1.99023L14.0159 29.8538L17.1905 8.84896L1 1.99023H41Z" fill="#00C7B8" stroke="white" stroke-width="2" stroke-linejoin="round"/>
                             </svg>
@@ -164,9 +191,20 @@
             </p>
         </div>
     </template>
-
 </body>
- <script type="text/javascript" src="Scripts/script.js"></script>
-  <script type="text/javascript" src="Scripts/UserList.js"></script>
+<script type="text/javascript" src="Scripts/model.js"></script>
+<script type="text/javascript" src="Scripts/view.js"></script>
+<script type="text/javascript" src="Scripts/controller.js"></script>
+<script type="text/javascript">
+    function openbox(id){
+        display = document.getElementById(id).style.display;
+        if(display=='none'){
+            document.getElementById(id).style.display='block';
+        }
+        else{
+            document.getElementById(id).style.display='none';
+        }
+    }
+    </script>
 </html>
  
