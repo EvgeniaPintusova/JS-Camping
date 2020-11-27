@@ -12,7 +12,7 @@
     <header class="header">
         <div class="flex-container">
             <div class="flex-container-1">
-                <p class="nickname" id="nickname">eco_friendman</p>
+                <p class="nickname" id="nickname">Гость</p>
             </div>
             <div class="flex-container-2">
                 <p class="logo">ecoChat</p>
@@ -26,20 +26,22 @@
             </p>
         </div>
     </header>
-    <div class="login-page" style="display: flex;">
+    <div class="login-page" id="login-page">
         <img class="login-picture" src="images/login.png" alt="картинка: девушка в чате"/>
-        <img class="login-picture-mobile" src="images/login-mobile.png"/>
-        <form class="login">
+        <img class="login-picture-mobile" src="images/login-mobile.png" alt="картинка: девушка в чате"/>
+
+        <form class="login" action="" onsubmit="controller.setCurrentUser(this.login.value); return false">
             <p class="login-text">Войдите</p>
 
-            <input class="login-input" type="text" placeholder="Логин*" />
-            <input class="login-input" type="password" placeholder="Пароль*" />
-            <button class="login-button ">Войти</button>
-            <button class="login-button login-button-second">Зарегистрироваться</button>
-            <button class="login-button-third">Войти без регистрации</button>
+            <input class="login-input" type="text" placeholder="Логин*" title="введите свой логин" name="login" required/>
+            <input class="login-input" type="password" placeholder="Пароль*" title="введите свой пароль" name="password" required/>
+            <button class="login-button" id="loginEntry" title="вход в чат">Войти</button>
+            <button class="login-button login-button-second" id="loginRegistratiion" title="регистрация в чате">Зарегистрироваться</button>
+            <button class="login-button-third" id="loginGuest" title="вход в чат гостем">Войти без регистрации</button>
             <p class="login-p">или</p>
-            <button class="login-button login-button-fourth">Продолжить с Google</button>
+            <button class="login-button login-button-fourth" title="вход в чат">Продолжить с Google</button>
         </form>
+
     </div>
     <div class="registration-page" style="display: none;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
@@ -55,7 +57,7 @@
             <button class="login-button login-button-fourth">Продолжить с Google</button>
         </form>
     </div>
-    <main class="main" style="display: none;">
+    <main class="main" id="main">
         <div class="flex-container">
             <div class="flex-container-1"> 
                 <div class="listing">
@@ -69,7 +71,7 @@
                 <div class="message_nav">
                     <div class="find">
                         <input type="text" id="search" placeholder="поиск" title="поиск сообщений"/>
-                         <button class="main-button" title="фильтровать сообщения" onclick="openbox('box'); return false">Фильтры</button>
+                         <button class="main-button" title="фильтровать сообщения" onclick="openbox('box')">Фильтры</button>
                         <button class="main-button" title="загрузить сообщения"> Загрузить ещё</button> 
                         <div title="фильтровать сообщения" >
                             <button class="img-button" onclick="openbox('box'); return false">
@@ -118,7 +120,7 @@
                     </div>
                 </div>
                 <div class="send">
-                    <form action="" onsubmit="controller.addMessage(this.send.value)">
+                    <form action="" onsubmit="controller.addMessage(this.send.value); return false;">
                         <input type="text" name="send"id="send"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
                         <button type="submit" title="отправить сообщение" >
                             <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -192,19 +194,36 @@
         </div>
     </template>
 </body>
+
+<script type="text/javascript">
+    function loginEntry() {
+        alert('Вы хотите войти');
+    }
+    function loginRegistratiion() {
+        alert('Вы хотите зарегаться');
+    }
+    function loginGuest() {
+        alert('Вы гость');
+    }
+    document.getElementById('loginEntry').addEventListener("click", loginEntry);
+    document.getElementById('loginRegistratiion').addEventListener("click", loginRegistratiion);
+    document.getElementById('loginGuest').addEventListener("click", loginGuest);
+
+</script>
+
 <script type="text/javascript" src="Scripts/model.js"></script>
 <script type="text/javascript" src="Scripts/view.js"></script>
 <script type="text/javascript" src="Scripts/controller.js"></script>
 <script type="text/javascript">
     function openbox(id){
         display = document.getElementById(id).style.display;
-        if(display=='none'){
+        if(display==='none' || !display){
             document.getElementById(id).style.display='block';
         }
         else{
             document.getElementById(id).style.display='none';
         }
     }
-    </script>
+</script>
 </html>
  

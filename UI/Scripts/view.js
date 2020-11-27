@@ -3,13 +3,14 @@ class UserList {
     this._activeUsers = activeUsers;
     this._users = users;
   }
-
   get activeUsers() {
     return this._activeUsers;
   }
-
   get users() {
     return this._users;
+  }
+  addUser(user){
+    this._users.push(user);
   }
 }
 
@@ -104,12 +105,12 @@ const users = new UserList(
   ["mum", "dad", "sis", "bro", "cat", "dog", "gra"]
 );
 
-function setCurrentUser(user) {
-  model.user = user;
-  headerView.display(user);
-  messagesView.display(model.getPage(), user);
-}
-setCurrentUser("mum");
+// function setCurrentUser(user) {
+//   model.user = user;
+//   headerView.display(user);
+//   messagesView.display(model.getPage(), user);
+// }
+//setCurrentUser("mum");
 
 function addMessage(msg) {
   if (model.add(msg)) {
@@ -121,10 +122,10 @@ const m1 = new Message("всё ок", "mum");
 addMessage(m);
 addMessage(m1);
 
-function showActiveUsers() {
-  activeUsersView.display(users.activeUsers);
-}
-showActiveUsers();
+// function showActiveUsers() {
+//   activeUsersView.display(users.activeUsers);
+// }
+// showActiveUsers();
 
 function editMessage(id, msg) {
   if (model.edit(id, msg)) {
