@@ -88,6 +88,7 @@ svg {
 }
 .exit {
   text-align: end;
+  display: none;
 }
 .exit button {
   border: 0;
@@ -487,6 +488,7 @@ svg {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  transition: all 2s linear;
 }
 .registration-page {
   background-image: url(images/registr.png);
@@ -534,7 +536,7 @@ svg {
   .find input {
     height: 25px;
   }
-  
+
   .login-page,
   .registration-page {
     flex-direction: column-reverse;

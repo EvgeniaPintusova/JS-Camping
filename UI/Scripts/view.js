@@ -95,15 +95,15 @@ class ActiveUsersView {
 // const d = new ActiveUsersView('active-users');
 // d.display(a.activeUsers);
 
-const model = new MessageList(arrMessages, "");
-console.log(model);
-const headerView = new HeaderView("nickname");
-const messagesView = new MessagesView("messages-list");
-const activeUsersView = new ActiveUsersView("active-users");
-const users = new UserList(
-  ["mum", "dad", "sis", "bro"],
-  ["mum", "dad", "sis", "bro", "cat", "dog", "gra"]
-);
+// const model = new MessageList(arrMessages, "");
+// console.log(model);
+// const headerView = new HeaderView("nickname");
+// const messagesView = new MessagesView("messages-list");
+// const activeUsersView = new ActiveUsersView("active-users");
+// const users = new UserList(
+//   ["mum", "dad", "sis", "bro"],
+//   ["mum", "dad", "sis", "bro", "cat", "dog", "gra"]
+// );
 
 // function setCurrentUser(user) {
 //   model.user = user;
@@ -112,36 +112,36 @@ const users = new UserList(
 // }
 //setCurrentUser("mum");
 
-function addMessage(msg) {
-  if (model.add(msg)) {
-    messagesView.display(model.getPage(), model.user);
-  }
-}
-const m = new Message("Приехали?", "mum", true, "Zhenya");
-const m1 = new Message("всё ок", "mum");
-addMessage(m);
-addMessage(m1);
+// function addMessage(msg) {
+//   if (model.add(msg)) {
+//     messagesView.display(model.getPage(), model.user);
+//   }
+// }
+// const m = new Message("Приехали?", "mum", true, "Zhenya");
+// const m1 = new Message("всё ок", "mum");
+// addMessage(m);
+// addMessage(m1);
 
 // function showActiveUsers() {
 //   activeUsersView.display(users.activeUsers);
 // }
 // showActiveUsers();
 
-function editMessage(id, msg) {
-  if (model.edit(id, msg)) {
-    messagesView.display(model.getPage(), model.user);
-  }
-}
-editMessage("3", { text: "lili", to: "dad" });
+// function editMessage(id, msg) {
+//   if (model.edit(id, msg)) {
+//     messagesView.display(model.getPage(), model.user);
+//   }
+// }
+// editMessage("3", { text: "lili", to: "dad" });
 
-function removeMessage(id) {
-  if (model.remove(id)) {
-    messagesView.display(model.getPage(), model.user);
-  }
-}
-removeMessage("2");
+// function removeMessage(id) {
+//   if (model.remove(id)) {
+//     messagesView.display(model.getPage(), model.user);
+//   }
+// }
+// removeMessage("2");
 
-function showMessages(skip = 0, top = 10, filterConfig = {}) {
-  messagesView.display(model.getPage(skip, top, filterConfig), model.user);
-}
+// function showMessages(skip = 0, top = 10, filterConfig = {}) {
+//   messagesView.display(model.getPage(skip, top, filterConfig), model.user);
+// }
 // showMessages(0, 1, { text: 'h' });
