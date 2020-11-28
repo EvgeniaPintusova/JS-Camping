@@ -9,7 +9,7 @@ class UserList {
   get users() {
     return this._users;
   }
-  addUser(user){
+  addUser(user) {
     this._users.push(user);
   }
 }
