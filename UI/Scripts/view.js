@@ -9,11 +9,13 @@ class UserList {
   get users() {
     return this._users;
   }
+  addActiveUser(user) {
+    this._activeUsers.push(user);
+  }
   addUser(user) {
     this._users.push(user);
   }
 }
-
 class HeaderView {
   constructor(containerId) {
     this._headerElement = document.getElementById(containerId);
@@ -23,9 +25,6 @@ class HeaderView {
     this._headerElement.textContent = userName;
   }
 }
-// const b = new HeaderView("nickname");
-// b.display('Zhenya');
-
 class MessagesView {
   constructor(containerId) {
     this._messagesList = document.getElementById(containerId);
@@ -40,6 +39,7 @@ class MessagesView {
     for (const item of msgList) {
       if (item.author === currUser) {
         el = msgTplmine.content.cloneNode(true);
+        el.querySelector(".own-mess").setAttribute("id", `${+new Date()}`);
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -71,19 +71,21 @@ class MessagesView {
     this._messagesList.appendChild(fragment);
   }
 }
-// const c = new MessagesView('messages-list');
-// c.display(arrMessages, "Zhenya");
 
 class ActiveUsersView {
   constructor(containerId) {
     this._activeUsersView = document.getElementById(containerId);
   }
 
-  display(activeUsers) {
+  display(activeUsers, user) {
+    this._activeUsersView.innerHTML = "";
     let index = 0;
     const tpl = document.getElementById("user-template");
     const fragment = new DocumentFragment();
     for (const item of activeUsers) {
+      if (item === user) {
+        continue;
+      }
       const el = tpl.content.cloneNode(true);
       el.querySelector(".user-name").textContent = item;
       el.querySelector(".input-user").setAttribute("id", ++index);
@@ -92,8 +94,6 @@ class ActiveUsersView {
     this._activeUsersView.appendChild(fragment);
   }
 }
-// const d = new ActiveUsersView('active-users');
-// d.display(a.activeUsers);
 
 // const model = new MessageList(arrMessages, "");
 // console.log(model);
@@ -105,6 +105,7 @@ class ActiveUsersView {
 //   ["mum", "dad", "sis", "bro", "cat", "dog", "gra"]
 // );
 
+//СДЕЛАЛА
 // function setCurrentUser(user) {
 //   model.user = user;
 //   headerView.display(user);
@@ -112,6 +113,7 @@ class ActiveUsersView {
 // }
 //setCurrentUser("mum");
 
+//СДЕЛАЛА
 // function addMessage(msg) {
 //   if (model.add(msg)) {
 //     messagesView.display(model.getPage(), model.user);
@@ -122,10 +124,17 @@ class ActiveUsersView {
 // addMessage(m);
 // addMessage(m1);
 
+//СДЕЛАЛА
 // function showActiveUsers() {
 //   activeUsersView.display(users.activeUsers);
 // }
 // showActiveUsers();
+
+//СДЕЛАЛА
+// function showMessages(skip = 0, top = 10, filterConfig = {}) {
+//   messagesView.display(model.getPage(skip, top, filterConfig), model.user);
+// }
+// showMessages(0, 1, { text: 'h' });
 
 // function editMessage(id, msg) {
 //   if (model.edit(id, msg)) {
@@ -140,8 +149,3 @@ class ActiveUsersView {
 //   }
 // }
 // removeMessage("2");
-
-// function showMessages(skip = 0, top = 10, filterConfig = {}) {
-//   messagesView.display(model.getPage(skip, top, filterConfig), model.user);
-// }
-// showMessages(0, 1, { text: 'h' });

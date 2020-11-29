@@ -2,9 +2,9 @@ const TEXT_LEN = 200;
 let COUNT = 0; // переменная для установления Id для тестов
 class Message {
   constructor(text, author, isPersonal = false, to = "") {
-    // this._id = `${+new Date()}`;
-    this._id = COUNT.toString();
-    COUNT++; // для тестов
+    this._id = `${+new Date()}`;
+    // this._id = COUNT.toString();
+    // COUNT++; // для тестов
     this.text = text;
     this._createdAt = new Date();
     this.author = author;
@@ -216,34 +216,34 @@ class MessageList {
   }
 }
 
-const arrMessages = [
-  new Message("Привет!", "Zhenya", true, "dad"),
-  new Message("Какие дела?", "mum"),
-  new Message(
-    "Давно выяснено, что при оценке дизайна и композиции" +
-      "читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому," +
-      "что тот обеспечивает более или менее стандартное заполнение шаблона",
-    "mum"
-  ),
-  new Message(
-    "А также реальное распределение букв и пробелов в абзацах," +
-      "которое не получается при простой дубликации",
-    "mum",
-    true,
-    "Zhenya"
-  ),
-  new Message(
-    "Многие программы электронной вёрстки и редакторы HTML" +
-      "используют Lorem Ipsum в качестве текста по умолчанию," +
-      'так что поиск по ключевым словам "lorem ipsum" сразу показывает, ' +
-      "как много веб-страниц всё ещё дожидаются своего настоящего рождения.",
-    "dady",
-    true,
-    "mum"
-  ),
-];
-const list = new MessageList([], "Zhenya");
-const invalidList = list.addAll(arrMessages);
+// const arrMessages = [
+//   new Message("Привет!", "Zhenya", true, "dad"),
+//   new Message("Какие дела?", "mum"),
+//   new Message(
+//     "Давно выяснено, что при оценке дизайна и композиции" +
+//       "читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому," +
+//       "что тот обеспечивает более или менее стандартное заполнение шаблона",
+//     "mum"
+//   ),
+//   new Message(
+//     "А также реальное распределение букв и пробелов в абзацах," +
+//       "которое не получается при простой дубликации",
+//     "mum",
+//     true,
+//     "Zhenya"
+//   ),
+//   new Message(
+//     "Многие программы электронной вёрстки и редакторы HTML" +
+//       "используют Lorem Ipsum в качестве текста по умолчанию," +
+//       'так что поиск по ключевым словам "lorem ipsum" сразу показывает, ' +
+//       "как много веб-страниц всё ещё дожидаются своего настоящего рождения.",
+//     "dady",
+//     true,
+//     "mum"
+//   ),
+// ];
+// const list = new MessageList([], "Zhenya");
+// const invalidList = list.addAll(arrMessages);
 // console.log(list);
 // console.log(invalidList);
 // console.log(list.isAuthor(arrMessages[1]));

@@ -46,9 +46,12 @@ svg {
 }
 .find,
 .filters,
-.delete-filters,
 .send {
   padding: var(--space-l) var(--space-m) var(--space-s);
+}
+.invalid {
+  font-size: var(--text-add);
+  color: red;
 }
 /*container for all content*/
 .flex-container {
@@ -122,6 +125,7 @@ svg {
   min-width: 100px;
   min-height: 24px;
   margin: 0 var(--space-s);
+  max-width: 150px;
 }
 .main-button:hover {
   background-color: var(--color0);
@@ -179,15 +183,16 @@ svg {
   display: flex;
   justify-content: space-between;
 }
-.find input {
+.find-input {
   display: block;
   background-color: var(--color0);
-  width: 45%;
+  /* width: 90%; */
   border: 2px solid var(--color6);
   padding: var(--space-xs) var(--space-m);
   border-radius: 10px;
+  min-height: 24px;
 }
-.find input:focus {
+.find-input:focus {
   border: 2px solid var(--color2);
   outline: 0 solid var(--color6);
 }
@@ -202,9 +207,9 @@ svg {
   background-color: var(--color10);
   color: var(--color9);
   font-style: italic;
-  display: flex;
   justify-content: space-between;
   display: none;
+  padding: var(--space-s);
 }
 .delete-filters .main-button:hover {
   background-color: var(--color3);
@@ -223,16 +228,14 @@ svg {
 }
 .form-filters {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   position: relative;
+  flex-wrap: wrap;
 }
 .form-filters p,
 .delete-filters p {
   margin: 0;
   padding: var(--space-xs);
-}
-.form-filters button {
-  word-wrap: wrap;
 }
 .form-filters input[type="text"] {
   border: 2px solid var(--color10);
@@ -249,6 +252,7 @@ svg {
 }
 .filters-date {
   text-align: left;
+  width: 30%;
 }
 .messages {
   padding: var(--space-s) var(--space-l);
@@ -515,7 +519,7 @@ svg {
     text-align: start;
   }
   .form-filters input {
-    margin: var(--space-m) 0;
+    margin: var(--space-s) 0;
     width: 90%;
     min-height: 24px;
   }

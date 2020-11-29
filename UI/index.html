@@ -17,7 +17,7 @@
             <div class="flex-container-2">
                 <p class="logo">ecoChat</p>
             </div>
-            <p class="exit" title="выйти" id ="button-exit">
+            <p class="exit" title="вход/выход/регистрация" id ="button-exit" onclick="controller.exitButton(this)">
                 <button>
                     <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.87179 2H35V36.1667H9.87179M-2.38419e-07 17.7346H10.0962H20.1923M20.1923 17.7346L9.87179 9.64254M20.1923 17.7346L10.0962 27.1754" stroke="white" stroke-width="3" stroke-linejoin="round"/>
@@ -26,15 +26,16 @@
             </p>
         </div>
     </header>
-    <div class="login-page" id="login-page" >
+    <div class="login-page" id="login-page" style="display: flex;">
         <img class="login-picture" src="images/login.png" alt="картинка: девушка в чате"/>
         <img class="login-picture-mobile" src="images/login-mobile.png" alt="картинка: девушка в чате"/>
 
-        <form class="login" id="login" action="" onsubmit="controller.setCurrentUser(this.login.value); return false">
+        <form class="login" id="login" action="" onsubmit="controller.userLogin(this.login.value); return false;">
             <p class="login-text">Войдите</p>
-
             <input class="login-input" type="text" placeholder="Логин*" title="введите свой логин" name="login" required/>
+            <p id="login-message" class="invalid"></p>
             <input class="login-input" type="password" placeholder="Пароль*" title="введите свой пароль" name="password" required/>
+             <p id="password-message" class="invalid"></p>
             <button class="login-button" id="loginEntry" title="вход в чат">Войти</button>
             <button class="login-button login-button-second" id="loginRegistratiion" title="регистрация в чате">Зарегистрироваться</button>
             <button class="login-button-third" id="loginGuest" title="вход в чат гостем">Войти без регистрации</button>
@@ -46,16 +47,18 @@
     </div>
     <div class="registration-page" id="registration-page" style="display: none;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
-        <form class="registration">
+        <form class="registration" onsubmit="controller.userRegistration(this.newLogin.value); return false;">
             <p class="registration-text">Зарегистрируйтесь</p>
-            <input class="login-input" type="text" name="new-login" title="придумайте свой логин" placeholder="Придумайте логин*" />
-            <input class="login-input" type="password" name="new-password" title="придумайте свой пароль" placeholder="Придумайте пароль*" />
-            <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" />
-            <button class="login-button" title="регистрация в чате">Зарегистрироваться</button>
-            <button class="login-button login-button-second" title="вход в чат">Войти</button>
-            <button class="login-button-third" title="вход в чат гостем">Войти без регистрации</button>
+            <input class="login-input" type="text" name="newLogin" id="newLogin" title="придумайте свой логин" placeholder="Придумайте логин*" required/>
+            <p id="registration-login-message" class="invalid"></p>
+            <input class="login-input" type="password" name="new-password" title="придумайте свой пароль" placeholder="Придумайте пароль*" required/>
+            <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/>
+            <p id="registration-password-message" class="invalid"></p>
+            <button class="login-button" title="регистрация в чате" >Зарегистрироваться</button>
+            <button class="login-button login-button-second" title="вход в чат" id="registrEntry">Войти</button>
+            <button class="login-button-third" title="вход в чат гостем" id="registrGuest">Войти без регистрации</button>
             <p class="login-p">или</p>
-            <button class="login-button login-button-fourth" title="вход в чат">Продолжить с Google</button>
+            <button class="login-button login-button-fourth" title="вход в чат" id="registrGoogle">Продолжить с Google</button>
         </form>
     </div>
     <main class="main" id="main">
@@ -71,9 +74,11 @@
             <div class="flex-container-2">
                 <div class="message_nav">
                     <div class="find">
-                        <input type="text" id="search" placeholder="поиск" title="поиск сообщений"/>
+                        <form onsubmit ="controller.findText(this); return false">
+                            <input class="find-input" type="text" name="search" placeholder="поиск" title="поиск сообщений"  />
+                        </form>
                          <button class="main-button" title="фильтровать сообщения" onclick="openbox('box')">Фильтры</button>
-                        <button class="main-button" title="загрузить сообщения"> Загрузить ещё</button> 
+                        <button class="main-button" title="загрузить сообщения" onclick="controller.pagination(this)"> Загрузить ещё</button> 
                         <div title="фильтровать сообщения" >
                             <button class="img-button" onclick="openbox('box'); return false">
                                 <img alt="кнопка загрузить" src="images/filter.png"/>
@@ -86,34 +91,36 @@
                         </div> 
                     </div>
                     <div class="filters" id = "box">
-                        <div class="form-filters">
-                            <form class="filters-date">
+                        <form class="form-filters" id="filters" onsubmit ="controller.filterMessages(this); return false">
+                            <div class="filters-date" >
                                 <div>
                                     <label for="date1">Дата от:</label>
-                                    <input type="date" id="date1"/>
+                                    <input type="date" name="date1"/>
                                 </div> 
                                 <div>
                                     <label for="date2">Дата до:</label>
-                                    <input type="date" id="date2"/>
+                                    <input type="date" name="date2"/>
                                 </div> 
-                            </form>
-                            <form class="filters-name">
+                            </div>
+                            <div class="filters-name">
                                 <div>
-                                    <input type="text" id="name" placeholder="Имя автора..." />
+                                    <input type="text" name="name" placeholder="Имя автора..." />
                                 </div> 
-                            </form>
-                            <form class="filters-mess">
+                            </div>
+                            <div class="filters-mess">
                                 <div>
-                                    <input type="text" id="mess" placeholder="Сообщение..." />
+                                    <input type="text" name="mess" placeholder="Сообщение..." />
                                 </div> 
-                            </form>
-                        </div>
-                        <button class="main-button" title="применить">Применить</button>
+                            </div>
+                            <button class="main-button" title="применить">Применить</button>
+                        </form>
+                        
                     </div>
-                    <div class="delete-filters">
+                    <div class="delete-filters" id="box2">
                         <p>Фильтры применены</p>
-                        <button class="main-button" title="Отменить фильтры">Сбросить</button>
+                        <button class="main-button" title="Отменить фильтры" onclick="controller.defaultFilter()">Сбросить</button>
                     </div>
+                     <div class="delete-filters" id="info"><p></p></div>
                 </div>
                 
                 <div class="place-messages">
@@ -154,7 +161,7 @@
         </label>
     </template>
     <template id="msg-template">
-        <div class="own-mess">
+        <div class="own-mess" id="">
             <span class="author"></span>
                 <p class="message-text"></p>
                 <p class="owner"></p>
@@ -165,7 +172,7 @@
         </div>
     </template>
     <template id="msg-template-mine">
-        <div class="own-mess my-mess">
+        <div class="own-mess my-mess" id="">
             <span class="author"></span>
             <div class="edit-tools">
                 <div class="delete">
