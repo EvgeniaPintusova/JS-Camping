@@ -1,7 +1,7 @@
 class UserList {
-  constructor(activeUsers = [], users = []) {
-    this._activeUsers = activeUsers;
-    this._users = users;
+  constructor() {
+    this._users = JSON.parse(localStorage.getItem("userList"));
+    this._activeUsers = JSON.parse(localStorage.getItem("activeUserList"));
   }
   get activeUsers() {
     return this._activeUsers;
@@ -11,9 +11,18 @@ class UserList {
   }
   addActiveUser(user) {
     this._activeUsers.push(user);
+    this.save();
+  }
+  removeActiveUser(user){
+    
   }
   addUser(user) {
     this._users.push(user);
+    this.save();
+  }
+  save() {
+    localStorage.setItem("userList", JSON.stringify(this._users));
+    localStorage.setItem("activeUserList", JSON.stringify(this._activeUsers));
   }
 }
 class HeaderView {
@@ -32,6 +41,7 @@ class MessagesView {
 
   display(msgList, currUser) {
     this._messagesList.innerHTML = "";
+    let COUNTID = 0;
     const msgTpl = document.getElementById("msg-template");
     const msgTplmine = document.getElementById("msg-template-mine");
     const fragment = new DocumentFragment();
@@ -39,7 +49,8 @@ class MessagesView {
     for (const item of msgList) {
       if (item.author === currUser) {
         el = msgTplmine.content.cloneNode(true);
-        el.querySelector(".own-mess").setAttribute("id", `${+new Date()}`);
+        el.querySelector(".own-mess").setAttribute("id", `${+COUNTID}`);
+        COUNTID++;
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -54,6 +65,8 @@ class MessagesView {
         }
       } else {
         el = msgTpl.content.cloneNode(true);
+        el.querySelector(".own-mess").setAttribute("id", `${+COUNTID}`);
+        COUNTID++;
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -94,16 +107,6 @@ class ActiveUsersView {
     this._activeUsersView.appendChild(fragment);
   }
 }
-
-// const model = new MessageList(arrMessages, "");
-// console.log(model);
-// const headerView = new HeaderView("nickname");
-// const messagesView = new MessagesView("messages-list");
-// const activeUsersView = new ActiveUsersView("active-users");
-// const users = new UserList(
-//   ["mum", "dad", "sis", "bro"],
-//   ["mum", "dad", "sis", "bro", "cat", "dog", "gra"]
-// );
 
 //СДЕЛАЛА
 // function setCurrentUser(user) {

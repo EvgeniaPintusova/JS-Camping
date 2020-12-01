@@ -5,20 +5,10 @@ class Controller {
         new Message("Привет!", "Bob", true, "dad"),
         new Message("Какие дела?", "mum"),
         new Message("Всё прекрасно.", "dad"),
-        new Message("Надо машину помыть", "mum", true, "Bob"),
-        new Message("Какие планы", "dad", true, "mum"),
-        new Message("Всем привет!", "Bob"),
-        new Message("Снег идёт, холодно.", "mum"),
-        new Message("Катаюсь на коньках.", "Mary"),
-        new Message("Иду в магазин, там встетимся", "mum", true, "Bob"),
-        new Message("Какие планы", "Janni", true, "mum"),
       ],
       ""
     );
-    this.userList = new UserList(
-      ["mum", "dad", "Janni", "Bob", "Mary"],
-      ["Гость", "mum", "dad", "Janni", "Bob", "Mary", "Jon", "Red"]
-    );
+    this.userList = new UserList();
     this.headerView = new HeaderView("nickname");
     this.messagesView = new MessagesView("messages-list");
     this.activeUsersView = new ActiveUsersView("active-users");
@@ -43,7 +33,9 @@ class Controller {
         "Такого пользователя нет. Повторите попытку.";
       return;
     }
+    this.userList.addActiveUser(user);
     this.setCurrentUser(user);
+    this.click = 10;
   }
   setCurrentUser(user) {
     this.model.user = user;
@@ -58,6 +50,7 @@ class Controller {
     let form = document.getElementById("login");
     form.login.value = "";
     form.password.value = "";
+    document.getElementById("active-users")[0].checked = true;
   }
   exitButton(button) {
     button.style.display = "none";
@@ -92,22 +85,24 @@ class Controller {
       }
     }
     if (this.model.add(m)) {
+      console.log(m);
       this.messagesView.display(this.model.getPage(), this.model.user);
     }
     document.getElementById("send").value = "";
+    radioTo[0].checked = true;
   }
+  // removeMessage(id) {
+  //   if (model.remove(id)) {
+  //     messagesView.display(model.getPage(), model.user);
+  //   }
+  // }
   showActiveUsers() {
     this.activeUsersView.display(this.userList.activeUsers, this.model.user);
   }
-  // editMessage(id, msg) {
-  //   if (this.model.edit(id, msg)) {
-  //     this.messagesView.display(this.model.getPage(), this.model.user);
-  //   }
-  // }
   findText(form) {
     const find = form.search.value;
     this.messagesView.display(
-      this.model.getPage(0, 10, { text: find }),
+      this.model.getPage(0, 10, { text: find, author: find }),
       this.model.user
     );
   }
@@ -149,6 +144,16 @@ class Controller {
     }
   }
 }
+document
+  .getElementById("messages-list")
+  .addEventListener("click", function (event) {
+    if (event.target.id === "delete") {
+      alert("delete");
+    }
+    if (event.target.id === "rewrite") {
+      alert("rewrite");
+    }
+  });
 
 function loginRegistratiion() {
   document.getElementById("login-page").style.display = "none";

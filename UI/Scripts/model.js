@@ -65,8 +65,13 @@ class Message {
 class MessageList {
   constructor(msgList, user) {
     this.messages = msgList;
+    // this.messages = JSON.parse(localStorage.getItem("messageList") ?? "[]");
     this.user = user;
   }
+
+  // save() {
+  //   localStorage.setItem("messageList", JSON.stringify(this._messages));
+  // }
 
   set messages(value) {
     this._messages = value;
@@ -97,11 +102,13 @@ class MessageList {
         arrNoValidate.push(arrMsgs[i]);
       }
     }
+    // this.save();
     return arrNoValidate;
   }
 
   clear() {
     this._messages.splice(0);
+    // this.save();
   }
 
   getPage(skip = 0, top = 10, filterConfig = {}) {
@@ -144,6 +151,7 @@ class MessageList {
       const size = this._messages.length;
       if (MessageList.validate(msg)) {
         this._messages.push(msg);
+        // this.save();
       } else {
         return false;
       }
@@ -172,6 +180,7 @@ class MessageList {
             return false;
           }
         }
+        // this.save();
         return true;
       }
       return false;
@@ -187,6 +196,7 @@ class MessageList {
         this._messages.splice(index, 1);
       }
       if (size > this._messages.length) {
+        // this.save();
         return true;
       }
       return false;

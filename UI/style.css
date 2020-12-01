@@ -232,6 +232,9 @@ svg {
   position: relative;
   flex-wrap: wrap;
 }
+.form-filters button {
+  align-self: start;
+}
 .form-filters p,
 .delete-filters p {
   margin: 0;
@@ -246,6 +249,7 @@ svg {
   background-repeat: no-repeat;
   background-position: calc(90%);
 }
+
 .form-filters input:focus {
   border: 2px solid var(--color3);
   outline: 2px solid var(--color10);
@@ -258,7 +262,7 @@ svg {
   padding: var(--space-s) var(--space-l);
 }
 .own-mess {
-  width: 80%;
+  width: 60%;
   background-color: var(--color0);
   border-radius: 10px;
   padding: var(--space-s) var(--space-m);
@@ -305,7 +309,9 @@ svg {
 .delete {
   margin-left: var(--space-l);
   position: relative;
+  padding: var(--space-xs);
 }
+
 .tool path:hover {
   stroke: var(--color3);
   fill: #e4da4e00;
