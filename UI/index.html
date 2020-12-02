@@ -11,8 +11,10 @@
 <body>
     <header class="header">
         <div class="flex-container">
-            <div class="flex-container-1">
-                <p class="nickname" id="nickname"></p>
+            <div class="flex-container-1" id="nickname-flex">
+                <button class="nickname-button" id="nickname-button">
+                    <p class="nickname" id="nickname"></p>
+                </button>
             </div>
             <div class="flex-container-2">
                 <p class="logo">ecoChat</p>
@@ -64,27 +66,27 @@
     <main class="main" id="main">
         <div class="flex-container">
             <div class="flex-container-1"> 
-                <div class="listing">
+                <div class="listing" id="listing">
                     <p>Активные пользователи</p>
                     <form method="post" action="" id="active-users">
                         <!-- <label><input type="radio" id="none" name="user" Checked/>none</label> -->
                     </form>
                 </div>
             </div>
-            <div class="flex-container-2">
+            <div class="flex-container-2" id="flex-container-2">
                 <div class="message_nav">
                     <div class="find">
                         <form onsubmit ="controller.findText(this); return false">
                             <input class="find-input" type="text" name="search" placeholder="поиск" title="поиск сообщений"  />
                         </form>
                          <button class="main-button" title="фильтровать сообщения" onclick="openbox('box')">Фильтры</button>
-                        <button class="main-button" title="загрузить сообщения" onclick="controller.pagination(this)"> Загрузить ещё</button> 
+                        <button class="main-button" title="загрузить сообщения" onclick="controller.pagination()"> Загрузить ещё</button> 
                         <div title="фильтровать сообщения" >
                             <button class="img-button" onclick="openbox('box'); return false">
                                 <img alt="кнопка загрузить" src="images/filter.png"/>
                             </button>
                         </div>
-                        <div title="загрузить сообщения">
+                        <div title="загрузить сообщения" onclick="controller.pagination(this)">
                             <button class="img-button">
                                 <img alt="кнопка загрузить" src="images/add-10.png"/>
                             </button>
@@ -206,16 +208,5 @@
 <script type="text/javascript" src="Scripts/model.js"></script>
 <script type="text/javascript" src="Scripts/view.js"></script>
 <script type="text/javascript" src="Scripts/controller.js"></script>
-<script type="text/javascript">
-    function openbox(id){
-        display = document.getElementById(id).style.display;
-        if(display==='none' || !display){
-            document.getElementById(id).style.display='block';
-        }
-        else{
-            document.getElementById(id).style.display='none';
-        }
-    }
-</script>
 </html>
  

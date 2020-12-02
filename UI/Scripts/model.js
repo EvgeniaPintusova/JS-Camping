@@ -111,10 +111,8 @@ class MessageList {
     // this.save();
   }
 
-  getPage(skip = 0, top = 10, filterConfig = {}) {
-    if (skip < 0 || top < 0) {
-      return false;
-    }
+  getPage(skip = -10, filterConfig = {}) {
+    console.log(filterConfig);
     const filterObj = {
       author: (item, author) =>
         !author || item.author.toLowerCase().includes(author.toLowerCase()),
@@ -137,7 +135,7 @@ class MessageList {
       arr = arr.filter((item) => filterObj[key](item, filterConfig[key]));
     });
     arr.sort((a, b) => a.createdAt - b.createdAt);
-    arr = arr.slice(skip, skip + top);
+    arr = arr.slice(skip);
     return arr;
   }
 

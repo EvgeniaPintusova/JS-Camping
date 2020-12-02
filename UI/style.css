@@ -74,6 +74,9 @@ svg {
   background-color: var(--color1);
   color: var(--color0);
 }
+#nickname-flex {
+  display: none;
+}
 .nickname {
   color: var(--color0);
   font-size: var(--text-main);
@@ -256,7 +259,7 @@ svg {
 }
 .filters-date {
   text-align: left;
-  width: 30%;
+  /* width: 50%; */
 }
 .messages {
   padding: var(--space-s) var(--space-l);
@@ -463,6 +466,12 @@ svg {
   border: none;
   outline: none;
 }
+.nickname-button {
+  display: block;
+  background: transparent;
+  border: none;
+  outline: none;
+}
 .login-button-third:hover {
   color: var(--color3);
 }
@@ -572,8 +581,20 @@ svg {
 }
 @media all and (max-width: 450px) {
   .flex-container-1 {
-    display: none;
+    width: 0;
+    height: 0;
+    position: absolute;
   }
+  .listing {
+    position: absolute;
+    z-index: 100;
+    display: none;
+    background-color: var(--color10);
+  }
+  /* .nickname-button {
+    color: var(--color2);
+    text-decoration: underline;
+  } */
   :root {
     --space-xs: 4px;
     --space-s: 4px;
@@ -584,6 +605,6 @@ svg {
     margin-top: var(--space-l);
   }
   .login-picture-mobile {
-    height: 150px;
+    height: 200px;
   }
 }

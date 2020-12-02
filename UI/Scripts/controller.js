@@ -2,9 +2,19 @@ class Controller {
   constructor() {
     this.model = new MessageList(
       [
-        new Message("Привет!", "Bob", true, "dad"),
-        new Message("Какие дела?", "mum"),
+        // new Message("Привет!", "Bob", true, "dad"),
+        // new Message("Какие дела?", "mum"),
+        // new Message("Всё прекрасно.", "dad"),
+        // new Message("Привет!", "Bob", true, "dad"),
+        // new Message("Какие дела?", "mum"),
+        // new Message("Всё прекрасно.", "dad"),
+        // new Message("Привет!", "Bob", true, "dad"),
+        // new Message("Какие дела?", "mum"),
+        new Message("Всё супер.", "dad"),
+        // new Message("Привет!", "Bob", true, "dad"),
+        new Message("Привет!", "mum"),
         new Message("Всё прекрасно.", "dad"),
+        new Message("Какие дела?", "mum"),
       ],
       ""
     );
@@ -46,6 +56,7 @@ class Controller {
     document.getElementById("registration-page").style.display = "none";
     document.getElementById("main").style.display = "block";
     document.getElementById("button-exit").style.display = "block";
+    document.getElementById("nickname-flex").style.display = "block";
     this.showActiveUsers();
     let form = document.getElementById("login");
     form.login.value = "";
@@ -61,6 +72,7 @@ class Controller {
       document.getElementById("main").style.display = "none";
       document.getElementById("login-page").style.display = "flex";
     }
+    document.getElementById("nickname-flex").style.display = "none";
     this.headerView.display("");
   }
   addMessage(msg) {
@@ -85,8 +97,8 @@ class Controller {
       }
     }
     if (this.model.add(m)) {
-      console.log(m);
       this.messagesView.display(this.model.getPage(), this.model.user);
+      this.click = 10;
     }
     document.getElementById("send").value = "";
     radioTo[0].checked = true;
@@ -102,13 +114,13 @@ class Controller {
   findText(form) {
     const find = form.search.value;
     this.messagesView.display(
-      this.model.getPage(0, 10, { text: find, author: find }),
+      this.model.getPage(-10, { text: find }),
       this.model.user
     );
   }
   filterMessages(form) {
     this.messagesView.display(
-      this.model.getPage(0, 10, {
+      this.model.getPage(-10, {
         author: form.name.value,
         text: form.mess.value,
         dateTo: form.date1.value,
@@ -128,13 +140,11 @@ class Controller {
     this.messagesView.display(this.model.getPage(), this.model.user);
     document.getElementById("box2").style.display = "none";
   }
-  pagination(button) {
+  pagination() {
     this.click += 10;
-    this.messagesView.display(
-      this.model.getPage(0, this.click),
-      this.model.user
-    );
-    // условие для блокировки кнопки???
+    console.log(this.click, this.model._messages.length);
+    this.messagesView.display(this.model.getPage(-this.click), this.model.user);
+    //  условие для блокировки кнопки???
     if (this.click >= this.model._messages.length) {
       document.getElementById("info").textContent = "Все сообщения отображены";
       document.getElementById("info").style.display = "block";
@@ -154,6 +164,23 @@ document
       alert("rewrite");
     }
   });
+document
+  .getElementById("nickname-button")
+  .addEventListener("click", function () {
+    element = document.getElementById("listing");
+    display = element.style.display;
+    let w = document.documentElement.clientWidth;
+    console.log(w);
+    if (w <= 450) {
+      if (display === "none" || !display) {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    } else {
+      element.style.display = "block";
+    }
+  });
 
 function loginRegistratiion() {
   document.getElementById("login-page").style.display = "none";
@@ -168,11 +195,23 @@ function loginGuest() {
 function registrEntry() {
   document.getElementById("registration-page").style.display = "none";
   document.getElementById("login-page").style.display = "flex";
+  document.getElementById("nickname-flex").style.display = "none";
   return false;
 }
 function registrGuest() {
   controller.setCurrentUser("Гость");
   return false;
+}
+
+function openbox(id) {
+  display = document.getElementById(id).style.display;
+  if (display === "none" || !display) {
+    document.getElementById(id).style.display = "block";
+    document.getElementById("flex-container-2").style.overflow = "hidden";
+  } else {
+    document.getElementById(id).style.display = "none";
+    document.getElementById("flex-container-2").style.overflow = "auto";
+  }
 }
 
 document
