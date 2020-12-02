@@ -11,18 +11,16 @@ class UserList {
   }
   addActiveUser(user) {
     this._activeUsers.push(user);
-    this.save();
+    // this.save();
   }
-  removeActiveUser(user){
-    
-  }
+  removeActiveUser(user) {}
   addUser(user) {
     this._users.push(user);
     this.save();
   }
   save() {
     localStorage.setItem("userList", JSON.stringify(this._users));
-    localStorage.setItem("activeUserList", JSON.stringify(this._activeUsers));
+    // localStorage.setItem("activeUserList", JSON.stringify(this._activeUsers));
   }
 }
 class HeaderView {
@@ -41,7 +39,6 @@ class MessagesView {
 
   display(msgList, currUser) {
     this._messagesList.innerHTML = "";
-    let COUNTID = 0;
     const msgTpl = document.getElementById("msg-template");
     const msgTplmine = document.getElementById("msg-template-mine");
     const fragment = new DocumentFragment();
@@ -49,8 +46,7 @@ class MessagesView {
     for (const item of msgList) {
       if (item.author === currUser) {
         el = msgTplmine.content.cloneNode(true);
-        el.querySelector(".own-mess").setAttribute("id", `${+COUNTID}`);
-        COUNTID++;
+        el.querySelector(".own-mess").setAttribute("id", item.id);
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -65,8 +61,7 @@ class MessagesView {
         }
       } else {
         el = msgTpl.content.cloneNode(true);
-        el.querySelector(".own-mess").setAttribute("id", `${+COUNTID}`);
-        COUNTID++;
+        el.querySelector(".own-mess").setAttribute("id", item.id);
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -100,6 +95,12 @@ class ActiveUsersView {
         continue;
       }
       const el = tpl.content.cloneNode(true);
+      if (index === 0) {
+        el.querySelector(".user-name").textContent = "none";
+        el.querySelector(".input-user").setAttribute("id", ++index);
+        fragment.appendChild(el);
+        continue;
+      }
       el.querySelector(".user-name").textContent = item;
       el.querySelector(".input-user").setAttribute("id", ++index);
       fragment.appendChild(el);
@@ -108,37 +109,6 @@ class ActiveUsersView {
   }
 }
 
-//СДЕЛАЛА
-// function setCurrentUser(user) {
-//   model.user = user;
-//   headerView.display(user);
-//   messagesView.display(model.getPage(), user);
-// }
-//setCurrentUser("mum");
-
-//СДЕЛАЛА
-// function addMessage(msg) {
-//   if (model.add(msg)) {
-//     messagesView.display(model.getPage(), model.user);
-//   }
-// }
-// const m = new Message("Приехали?", "mum", true, "Zhenya");
-// const m1 = new Message("всё ок", "mum");
-// addMessage(m);
-// addMessage(m1);
-
-//СДЕЛАЛА
-// function showActiveUsers() {
-//   activeUsersView.display(users.activeUsers);
-// }
-// showActiveUsers();
-
-//СДЕЛАЛА
-// function showMessages(skip = 0, top = 10, filterConfig = {}) {
-//   messagesView.display(model.getPage(skip, top, filterConfig), model.user);
-// }
-// showMessages(0, 1, { text: 'h' });
-
 // function editMessage(id, msg) {
 //   if (model.edit(id, msg)) {
 //     messagesView.display(model.getPage(), model.user);
@@ -146,9 +116,3 @@ class ActiveUsersView {
 // }
 // editMessage("3", { text: "lili", to: "dad" });
 
-// function removeMessage(id) {
-//   if (model.remove(id)) {
-//     messagesView.display(model.getPage(), model.user);
-//   }
-// }
-// removeMessage("2");

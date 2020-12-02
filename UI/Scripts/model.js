@@ -1,17 +1,23 @@
 const TEXT_LEN = 200;
-let COUNT = 0; // переменная для установления Id для тестов
 class Message {
-  constructor(text, author, isPersonal = false, to = "") {
-    this._id = `${+new Date()}`;
-    // this._id = COUNT.toString();
-    // COUNT++; // для тестов
+  constructor(
+    id = `${+new Date()}`,
+    createdAt = new Date(),
+    text = "",
+    author,
+    isPersonal = false,
+    to = ""
+  ) {
+    this.id = id;
     this.text = text;
-    this._createdAt = new Date();
+    this.createdAt = createdAt;
     this.author = author;
     this.isPersonal = isPersonal;
     this.to = to;
   }
-
+  set id(value) {
+    this._id = value;
+  }
   set text(value) {
     if (value.length < TEXT_LEN) {
       this._text = value;
@@ -19,7 +25,9 @@ class Message {
       this._text = value.slice(0, TEXT_LEN);
     }
   }
-
+  set createdAt(value) {
+    this._createdAt = value;
+  }
   set author(value) {
     this._author = value;
   }
@@ -63,18 +71,28 @@ class Message {
 }
 
 class MessageList {
-  constructor(msgList, user) {
-    this.messages = msgList;
-    // this.messages = JSON.parse(localStorage.getItem("messageList") ?? "[]");
+  constructor(user) {
+    this.messages = JSON.parse(localStorage.getItem("messageList"));
     this.user = user;
   }
 
-  // save() {
-  //   localStorage.setItem("messageList", JSON.stringify(this._messages));
-  // }
+  save() {
+    localStorage.setItem("messageList", JSON.stringify(this._messages));
+  }
 
   set messages(value) {
-    this._messages = value;
+    this._messages = [];
+    for (let i = 0; i < value.length; i++) {
+      const msg = new Message(
+        value[i]._id,
+        value[i]._date,
+        value[i]._text,
+        value[i]._author,
+        value[i]._isPersonal,
+        value[i]._to
+      );
+      this._messages.push(msg);
+    }
   }
 
   get messages() {
@@ -102,17 +120,16 @@ class MessageList {
         arrNoValidate.push(arrMsgs[i]);
       }
     }
-    // this.save();
+    this.save();
     return arrNoValidate;
   }
 
   clear() {
     this._messages.splice(0);
-    // this.save();
+    this.save();
   }
 
-  getPage(skip = -10, filterConfig = {}) {
-    console.log(filterConfig);
+  getPage(skip = 0, top = 10, filterConfig = {}) {
     const filterObj = {
       author: (item, author) =>
         !author || item.author.toLowerCase().includes(author.toLowerCase()),
@@ -135,7 +152,7 @@ class MessageList {
       arr = arr.filter((item) => filterObj[key](item, filterConfig[key]));
     });
     arr.sort((a, b) => a.createdAt - b.createdAt);
-    arr = arr.slice(skip);
+    arr = arr.slice(skip, skip + top);
     return arr;
   }
 
@@ -149,7 +166,7 @@ class MessageList {
       const size = this._messages.length;
       if (MessageList.validate(msg)) {
         this._messages.push(msg);
-        // this.save();
+        this.save();
       } else {
         return false;
       }
@@ -178,7 +195,7 @@ class MessageList {
             return false;
           }
         }
-        // this.save();
+        this.save();
         return true;
       }
       return false;
@@ -194,7 +211,7 @@ class MessageList {
         this._messages.splice(index, 1);
       }
       if (size > this._messages.length) {
-        // this.save();
+        this.save();
         return true;
       }
       return false;
@@ -223,46 +240,3 @@ class MessageList {
     return Object.keys(validateObj).every((key) => validateObj[key](msg));
   }
 }
-
-// const arrMessages = [
-//   new Message("Привет!", "Zhenya", true, "dad"),
-//   new Message("Какие дела?", "mum"),
-//   new Message(
-//     "Давно выяснено, что при оценке дизайна и композиции" +
-//       "читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому," +
-//       "что тот обеспечивает более или менее стандартное заполнение шаблона",
-//     "mum"
-//   ),
-//   new Message(
-//     "А также реальное распределение букв и пробелов в абзацах," +
-//       "которое не получается при простой дубликации",
-//     "mum",
-//     true,
-//     "Zhenya"
-//   ),
-//   new Message(
-//     "Многие программы электронной вёрстки и редакторы HTML" +
-//       "используют Lorem Ipsum в качестве текста по умолчанию," +
-//       'так что поиск по ключевым словам "lorem ipsum" сразу показывает, ' +
-//       "как много веб-страниц всё ещё дожидаются своего настоящего рождения.",
-//     "dady",
-//     true,
-//     "mum"
-//   ),
-// ];
-// const list = new MessageList([], "Zhenya");
-// const invalidList = list.addAll(arrMessages);
-// console.log(list);
-// console.log(invalidList);
-// console.log(list.isAuthor(arrMessages[1]));
-// console.log(list.isAuthor(arrMessages[4]));
-// console.log(list.remove('3'));
-// console.log(list.remove('4'));
-// console.log(list.getPage());
-// const message = new Message ("Hi! How are u?", 'Zhenya');
-// list.add(message);
-// console.log(list);
-// console.log(list.edit('5', {text: 'you'}));
-// console.log(list);
-// list.clear();
-// console.log(list);

@@ -189,7 +189,6 @@ svg {
 .find-input {
   display: block;
   background-color: var(--color0);
-  /* width: 90%; */
   border: 2px solid var(--color6);
   padding: var(--space-xs) var(--space-m);
   border-radius: 10px;
@@ -259,7 +258,6 @@ svg {
 }
 .filters-date {
   text-align: left;
-  /* width: 50%; */
 }
 .messages {
   padding: var(--space-s) var(--space-l);
@@ -314,7 +312,6 @@ svg {
   position: relative;
   padding: var(--space-xs);
 }
-
 .tool path:hover {
   stroke: var(--color3);
   fill: #e4da4e00;
@@ -342,6 +339,9 @@ svg {
   position: absolute;
   bottom: 0;
   z-index: 100;
+}
+#editmsg {
+  display: none;
 }
 .send form {
   display: flex;
@@ -591,10 +591,6 @@ svg {
     display: none;
     background-color: var(--color10);
   }
-  /* .nickname-button {
-    color: var(--color2);
-    text-decoration: underline;
-  } */
   :root {
     --space-xs: 4px;
     --space-s: 4px;

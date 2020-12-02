@@ -129,9 +129,20 @@
                     <div class="messages" id="messages-list">
                     </div>
                 </div>
-                <div class="send">
+                <div class="send" id="addmsg">
                     <form action="" onsubmit="controller.addMessage(this.send.value); return false;">
                         <input type="text" name="send"id="send"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
+                        <button type="submit" title="отправить сообщение" >
+                            <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M41 1.99023L14.0159 29.8538L17.1905 8.84896L1 1.99023H41Z" fill="#00C7B8" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <p>Выберите получателя для личного сообщения.</p>
+                </div>
+                <div class="send" id="editmsg">
+                    <form action="" onsubmit="controller.editMessage(this.send.value); return false;">
+                        <input type="text" name="send"id="edit"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
                         <button type="submit" title="отправить сообщение" >
                             <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M41 1.99023L14.0159 29.8538L17.1905 8.84896L1 1.99023H41Z" fill="#00C7B8" stroke="white" stroke-width="2" stroke-linejoin="round"/>
