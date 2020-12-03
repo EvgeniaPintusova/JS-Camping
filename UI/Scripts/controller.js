@@ -59,7 +59,6 @@ class Controller {
     this.headerView.display("");
   }
   addMessage(msg) {
-    console.log(msg);
     if (this.model.user === "Гость") {
       document.getElementById("info").textContent =
         "Для отправки сообщения нужно войти или зарегистрироваться!";
@@ -81,7 +80,6 @@ class Controller {
       }
     }
     if (this.model.add(m)) {
-      // let len = this.model.messages.length % 10;
       this.messagesView.display(this.model.getPage(), this.model.user);
       this.click = 10;
     }
@@ -126,7 +124,6 @@ class Controller {
       this.model.getPage(0, this.click),
       this.model.user
     );
-    //  условие для блокировки кнопки???
     if (this.click >= this.model._messages.length) {
       document.getElementById("info").textContent = "Все сообщения отображены";
       document.getElementById("info").style.display = "block";
@@ -140,41 +137,40 @@ class Controller {
       this.messagesView.display(this.model.getPage(), this.model.user);
     }
   }
-  editMessage(value, el) {
-    console.log(el);
-    document.getElementById("editmsg").style.display = "block";
-    document.getElementById("addmsg").style.display = "none";
-    console.log(el);
-    const activeUsers = document.getElementById("activeUsers");
-    document.getElementById("edit").value = el.querySelector(
-      ".message-text"
-    ).textContent;
-    // if (el.querySelector(".to").textContent !== "") {
-    //   for (const item of activeUsers) {
-    //     if (item === el.querySelector(".to").textContent) {
-    //       console.log(el.querySelector(".to").textContent);
-    //     }
-    //   }
-    // }
-    // if (this.model.edit(id, msg)) {
-    //   messagesView.display(model.getPage(), model.user);
-    // }
+  editMessage(value) {
+    const msg = { text: value };
+    document.getElementById("edit").value = "";
+    console.log(msg, ID);
+    if (this.model.edit(ID, msg)) {
+      this.messagesView.display(this.model.getPage(), this.model.user);
+      this.click = 10;
+    }
+    document.getElementById("editmsg").style.display = "none";
+    document.getElementById("addmsg").style.display = "block";
   }
 }
-//делегирование на редактирование Сообщений в списке
+//редактирование Сообщений в списке
+let ID;
 document
   .getElementById("messages-list")
   .addEventListener("click", function (event) {
     if (event.target.id === "delete") {
       alert("delete");
-      const id = document.getElementById("delete").parentNode.parentNode.id;
+      const id = event.target.parentNode.parentNode.id;
       controller.removeMessage(id);
+      console.log(id);
     }
     if (event.target.id === "rewrite") {
       alert("rewrite");
       console.log(document.getElementById("rewrite").parentNode.parentNode);
-      const id = document.getElementById("rewrite").parentNode.parentNode.id;
-      controller.editMessage(document.getElementById(id));
+      const id = event.target.parentNode.parentNode.id;
+      ID = id;
+      const el = document.getElementById(id);
+      document.getElementById("editmsg").style.display = "block";
+      document.getElementById("addmsg").style.display = "none";
+      document.getElementById("edit").value = el.querySelector(
+        ".message-text"
+      ).textContent;
     }
   });
 //список пользователей в мобилке
@@ -240,5 +236,12 @@ document.getElementById("registrGuest").addEventListener("click", registrGuest);
 document
   .getElementById("registrGoogle")
   .addEventListener("click", registrGuest);
-
+function localStorageCreate() {
+  if (localStorage.length === 0) {
+    localStorage.setItem("activeUserList", '["none","David", "Bob"]');
+    localStorage.setItem("messageList", "[]");
+    localStorage.setItem("userList", '["Гость", "David", "Bob", "Zhenya"]');
+  }
+}
+localStorageCreate();
 window.controller = new Controller();

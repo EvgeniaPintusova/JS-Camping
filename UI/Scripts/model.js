@@ -152,7 +152,7 @@ class MessageList {
       arr = arr.filter((item) => filterObj[key](item, filterConfig[key]));
     });
     arr.sort((a, b) => a.createdAt - b.createdAt);
-    arr = arr.slice(skip, skip + top);
+    arr = arr.slice(skip - top);
     return arr;
   }
 
@@ -177,9 +177,15 @@ class MessageList {
     }
     return false;
   }
-
   edit(id, msg) {
-    let m = new Message(msg.text, this.get(id).author, msg.isPersonal, msg.to);
+    let m = new Message(
+      id,
+      new Date(),
+      msg.text,
+      this.get(id).author,
+      msg.isPersonal,
+      msg.to
+    );
     if (MessageList.validate(m)) {
       if (this.isAuthor(this.get(id))) {
         m = this.get(id);

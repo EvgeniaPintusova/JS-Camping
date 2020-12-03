@@ -13,7 +13,6 @@ class UserList {
     this._activeUsers.push(user);
     // this.save();
   }
-  removeActiveUser(user) {}
   addUser(user) {
     this._users.push(user);
     this.save();
@@ -95,12 +94,6 @@ class ActiveUsersView {
         continue;
       }
       const el = tpl.content.cloneNode(true);
-      if (index === 0) {
-        el.querySelector(".user-name").textContent = "none";
-        el.querySelector(".input-user").setAttribute("id", ++index);
-        fragment.appendChild(el);
-        continue;
-      }
       el.querySelector(".user-name").textContent = item;
       el.querySelector(".input-user").setAttribute("id", ++index);
       fragment.appendChild(el);
@@ -108,11 +101,4 @@ class ActiveUsersView {
     this._activeUsersView.appendChild(fragment);
   }
 }
-
-// function editMessage(id, msg) {
-//   if (model.edit(id, msg)) {
-//     messagesView.display(model.getPage(), model.user);
-//   }
-// }
-// editMessage("3", { text: "lili", to: "dad" });
 
