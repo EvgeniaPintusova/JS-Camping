@@ -11,13 +11,15 @@
 <body>
     <header class="header">
         <div class="flex-container">
-            <div class="flex-container-1">
-                <p class="nickname" id="nickname">eco_friendman</p>
+            <div class="flex-container-1" id="nickname-flex">
+                <button class="nickname-button" id="nickname-button">
+                    <p class="nickname" id="nickname"></p>
+                </button>
             </div>
             <div class="flex-container-2">
                 <p class="logo">ecoChat</p>
             </div>
-            <p class="exit" title="выйти">
+            <p class="exit" title="вход/выход/регистрация" id ="button-exit" onclick="controller.exitButton(this)">
                 <button>
                     <svg width="37" height="38" viewBox="0 0 37 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9.87179 2H35V36.1667H9.87179M-2.38419e-07 17.7346H10.0962H20.1923M20.1923 17.7346L9.87179 9.64254M20.1923 17.7346L10.0962 27.1754" stroke="white" stroke-width="3" stroke-linejoin="round"/>
@@ -26,100 +28,121 @@
             </p>
         </div>
     </header>
-    <div class="login-page" style="display: flex;">
+    <div class="login-page" id="login-page" style="display: flex;">
         <img class="login-picture" src="images/login.png" alt="картинка: девушка в чате"/>
-        <img class="login-picture-mobile" src="images/login-mobile.png"/>
-        <form class="login">
-            <p class="login-text">Войдите</p>
+        <img class="login-picture-mobile" src="images/login-mobile.png" alt="картинка: девушка в чате"/>
 
-            <input class="login-input" type="text" placeholder="Логин*" />
-            <input class="login-input" type="password" placeholder="Пароль*" />
-            <button class="login-button ">Войти</button>
-            <button class="login-button login-button-second">Зарегистрироваться</button>
-            <button class="login-button-third">Войти без регистрации</button>
+        <form class="login" id="login" action="" onsubmit="controller.userLogin(this.login.value); return false;">
+            <p class="login-text">Войдите</p>
+            <input class="login-input" type="text" placeholder="Логин*" title="введите свой логин" name="login" required/>
+            <p id="login-message" class="invalid"></p>
+            <input class="login-input" type="password" placeholder="Пароль*" title="введите свой пароль" name="password" required/>
+             <p id="password-message" class="invalid"></p>
+            <button class="login-button" id="loginEntry" title="вход в чат">Войти</button>
+            <button class="login-button login-button-second" id="loginRegistratiion" title="регистрация в чате">Зарегистрироваться</button>
+            <button class="login-button-third" id="loginGuest" title="вход в чат гостем">Войти без регистрации</button>
             <p class="login-p">или</p>
-            <button class="login-button login-button-fourth">Продолжить с Google</button>
+            <button class="login-button login-button-fourth" id="loginGoogle" title="вход в чат">Продолжить с Google</button>
+            
         </form>
+
     </div>
-    <div class="registration-page" style="display: none;">
+    <div class="registration-page" id="registration-page" style="display: none;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
-        <form class="registration">
+        <form class="registration" onsubmit="controller.userRegistration(this.newLogin.value); return false;">
             <p class="registration-text">Зарегистрируйтесь</p>
-            <input class="login-input" type="text" placeholder="Придумайте логин*" />
-            <input class="login-input" type="password" placeholder="Придумайте пароль*" />
-            <input class="login-input" type="password" placeholder="Подтвердите пароль*" />
-            <button class="login-button ">Зарегистрироваться</button>
-            <button class="login-button login-button-second">Войти</button>
-            <button class="login-button-third">Войти без регистрации</button>
+            <input class="login-input" type="text" name="newLogin" id="newLogin" title="придумайте свой логин" placeholder="Придумайте логин*" required/>
+            <p id="registration-login-message" class="invalid"></p>
+            <input class="login-input" type="password" name="new-password" title="придумайте свой пароль" placeholder="Придумайте пароль*" required/>
+            <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/>
+            <p id="registration-password-message" class="invalid"></p>
+            <button class="login-button" title="регистрация в чате" >Зарегистрироваться</button>
+            <button class="login-button login-button-second" title="вход в чат" id="registrEntry">Войти</button>
+            <button class="login-button-third" title="вход в чат гостем" id="registrGuest">Войти без регистрации</button>
             <p class="login-p">или</p>
-            <button class="login-button login-button-fourth">Продолжить с Google</button>
+            <button class="login-button login-button-fourth" title="вход в чат" id="registrGoogle">Продолжить с Google</button>
         </form>
     </div>
-    <main class="main" style="display: none;">
+    <main class="main" id="main">
         <div class="flex-container">
             <div class="flex-container-1"> 
-                <div class="listing">
+                <div class="listing" id="listing">
                     <p>Активные пользователи</p>
                     <form method="post" action="" id="active-users">
-                        <label><input type="radio" id="none" name="user"/>none</label>
+                        <!-- <label><input type="radio" id="none" name="user" Checked/>none</label> -->
                     </form>
                 </div>
             </div>
-            <div class="flex-container-2">
+            <div class="flex-container-2" id="flex-container-2">
                 <div class="message_nav">
                     <div class="find">
-                        <input type="text" id="search" placeholder="поиск" title="поиск сообщений"/>
-                         <button class="main-button" title="фильтровать сообщения" onclick="openbox('box'); return false">Фильтры</button>
-                        <button class="main-button" title="загрузить сообщения"> Загрузить ещё</button> 
+                        <form onsubmit ="controller.findText(this); return false">
+                            <input class="find-input" type="text" name="search" placeholder="поиск" title="поиск сообщений"  />
+                        </form>
+                         <button class="main-button" title="фильтровать сообщения" onclick="openbox('box')">Фильтры</button>
+                        <button class="main-button" title="загрузить сообщения" onclick="controller.pagination()"> Загрузить ещё</button> 
                         <div title="фильтровать сообщения" >
                             <button class="img-button" onclick="openbox('box'); return false">
                                 <img alt="кнопка загрузить" src="images/filter.png"/>
                             </button>
                         </div>
-                        <div title="загрузить сообщения">
+                        <div title="загрузить сообщения" onclick="controller.pagination(this)">
                             <button class="img-button">
                                 <img alt="кнопка загрузить" src="images/add-10.png"/>
                             </button>
                         </div> 
                     </div>
                     <div class="filters" id = "box">
-                        <div class="form-filters">
-                            <form class="filters-date">
+                        <form class="form-filters" id="filters" onsubmit ="controller.filterMessages(this); return false">
+                            <div class="filters-date" >
                                 <div>
                                     <label for="date1">Дата от:</label>
-                                    <input type="date" id="date1"/>
+                                    <input type="date" name="date1"/>
                                 </div> 
                                 <div>
                                     <label for="date2">Дата до:</label>
-                                    <input type="date" id="date2"/>
+                                    <input type="date" name="date2"/>
                                 </div> 
-                            </form>
-                            <form class="filters-name">
+                            </div>
+                            <div class="filters-name">
                                 <div>
-                                    <input type="text" id="name" placeholder="Имя автора..." />
+                                    <input type="text" name="name" placeholder="Имя автора..." />
                                 </div> 
-                            </form>
-                            <form class="filters-mess">
+                            </div>
+                            <div class="filters-mess">
                                 <div>
-                                    <input type="text" id="mess" placeholder="Сообщение..." />
+                                    <input type="text" name="mess" placeholder="Сообщение..." />
                                 </div> 
-                            </form>
-                        </div>
-                        <button class="main-button" title="применить">Применить</button>
+                            </div>
+                            <button class="main-button" title="применить">Применить</button>
+                        </form>
+                        
                     </div>
-                    <div class="delete-filters">
+                    <div class="delete-filters" id="box2">
                         <p>Фильтры применены</p>
-                        <button class="main-button" title="Отменить фильтры">Сбросить</button>
+                        <button class="main-button" title="Отменить фильтры" onclick="controller.defaultFilter()">Сбросить</button>
                     </div>
+                     <div class="delete-filters" id="info"><p></p></div>
                 </div>
                 
                 <div class="place-messages">
                     <div class="messages" id="messages-list">
                     </div>
                 </div>
-                <div class="send">
-                    <form action="" onsubmit="controller.addMessage(this.send.value)">
+                <div class="send" id="addmsg">
+                    <form action="" onsubmit="controller.addMessage(this.send.value); return false;">
                         <input type="text" name="send"id="send"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
+                        <button type="submit" title="отправить сообщение" >
+                            <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M41 1.99023L14.0159 29.8538L17.1905 8.84896L1 1.99023H41Z" fill="#00C7B8" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <p>Выберите получателя для личного сообщения.</p>
+                </div>
+                <div class="send" id="editmsg">
+                    <form action="" onsubmit="controller.editMessage(this.send.value); return false;">
+                        <input type="text" name="send"id="edit"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
                         <button type="submit" title="отправить сообщение" >
                             <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M41 1.99023L14.0159 29.8538L17.1905 8.84896L1 1.99023H41Z" fill="#00C7B8" stroke="white" stroke-width="2" stroke-linejoin="round"/>
@@ -151,7 +174,7 @@
         </label>
     </template>
     <template id="msg-template">
-        <div class="own-mess">
+        <div class="own-mess" id="">
             <span class="author"></span>
                 <p class="message-text"></p>
                 <p class="owner"></p>
@@ -162,10 +185,10 @@
         </div>
     </template>
     <template id="msg-template-mine">
-        <div class="own-mess my-mess">
+        <div class="own-mess my-mess" id="">
             <span class="author"></span>
-            <div class="edit-tools">
-                <div class="delete">
+            <div class="edit-tools" >
+                <div class="delete"  id="delete">
                     <p class="text-tool">Удалить</p>
                     <botton class="tool">
                         <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,9 +196,9 @@
                         <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/></svg> 
                     </botton>
                 </div> 
-                <div class="rewrite">
+                <div class="rewrite" id="rewrite">
                     <p class="text-tool">Редактировать</p>
-                    <botton class="tool">
+                    <botton class="tool" >
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
                         <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/></svg>
@@ -192,19 +215,9 @@
         </div>
     </template>
 </body>
+
 <script type="text/javascript" src="Scripts/model.js"></script>
 <script type="text/javascript" src="Scripts/view.js"></script>
 <script type="text/javascript" src="Scripts/controller.js"></script>
-<script type="text/javascript">
-    function openbox(id){
-        display = document.getElementById(id).style.display;
-        if(display=='none'){
-            document.getElementById(id).style.display='block';
-        }
-        else{
-            document.getElementById(id).style.display='none';
-        }
-    }
-    </script>
 </html>
  

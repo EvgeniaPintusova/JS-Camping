@@ -1,18 +1,27 @@
 class UserList {
-  constructor(activeUsers = [], users = []) {
-    this._activeUsers = activeUsers;
-    this._users = users;
+  constructor() {
+    this._users = JSON.parse(localStorage.getItem("userList"));
+    this._activeUsers = JSON.parse(localStorage.getItem("activeUserList"));
   }
-
   get activeUsers() {
     return this._activeUsers;
   }
-
   get users() {
     return this._users;
   }
+  addActiveUser(user) {
+    this._activeUsers.push(user);
+    // this.save();
+  }
+  addUser(user) {
+    this._users.push(user);
+    this.save();
+  }
+  save() {
+    localStorage.setItem("userList", JSON.stringify(this._users));
+    // localStorage.setItem("activeUserList", JSON.stringify(this._activeUsers));
+  }
 }
-
 class HeaderView {
   constructor(containerId) {
     this._headerElement = document.getElementById(containerId);
@@ -22,9 +31,6 @@ class HeaderView {
     this._headerElement.textContent = userName;
   }
 }
-// const b = new HeaderView("nickname");
-// b.display('Zhenya');
-
 class MessagesView {
   constructor(containerId) {
     this._messagesList = document.getElementById(containerId);
@@ -39,6 +45,7 @@ class MessagesView {
     for (const item of msgList) {
       if (item.author === currUser) {
         el = msgTplmine.content.cloneNode(true);
+        el.querySelector(".own-mess").setAttribute("id", item.id);
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -53,6 +60,7 @@ class MessagesView {
         }
       } else {
         el = msgTpl.content.cloneNode(true);
+        el.querySelector(".own-mess").setAttribute("id", item.id);
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
         el.querySelector(
@@ -70,19 +78,21 @@ class MessagesView {
     this._messagesList.appendChild(fragment);
   }
 }
-// const c = new MessagesView('messages-list');
-// c.display(arrMessages, "Zhenya");
 
 class ActiveUsersView {
   constructor(containerId) {
     this._activeUsersView = document.getElementById(containerId);
   }
 
-  display(activeUsers) {
+  display(activeUsers, user) {
+    this._activeUsersView.innerHTML = "";
     let index = 0;
     const tpl = document.getElementById("user-template");
     const fragment = new DocumentFragment();
     for (const item of activeUsers) {
+      if (item === user) {
+        continue;
+      }
       const el = tpl.content.cloneNode(true);
       el.querySelector(".user-name").textContent = item;
       el.querySelector(".input-user").setAttribute("id", ++index);
@@ -91,56 +101,4 @@ class ActiveUsersView {
     this._activeUsersView.appendChild(fragment);
   }
 }
-// const d = new ActiveUsersView('active-users');
-// d.display(a.activeUsers);
 
-const model = new MessageList(arrMessages, "");
-console.log(model);
-const headerView = new HeaderView("nickname");
-const messagesView = new MessagesView("messages-list");
-const activeUsersView = new ActiveUsersView("active-users");
-const users = new UserList(
-  ["mum", "dad", "sis", "bro"],
-  ["mum", "dad", "sis", "bro", "cat", "dog", "gra"]
-);
-
-function setCurrentUser(user) {
-  model.user = user;
-  headerView.display(user);
-  messagesView.display(model.getPage(), user);
-}
-setCurrentUser("mum");
-
-function addMessage(msg) {
-  if (model.add(msg)) {
-    messagesView.display(model.getPage(), model.user);
-  }
-}
-const m = new Message("Приехали?", "mum", true, "Zhenya");
-const m1 = new Message("всё ок", "mum");
-addMessage(m);
-addMessage(m1);
-
-function showActiveUsers() {
-  activeUsersView.display(users.activeUsers);
-}
-showActiveUsers();
-
-function editMessage(id, msg) {
-  if (model.edit(id, msg)) {
-    messagesView.display(model.getPage(), model.user);
-  }
-}
-editMessage("3", { text: "lili", to: "dad" });
-
-function removeMessage(id) {
-  if (model.remove(id)) {
-    messagesView.display(model.getPage(), model.user);
-  }
-}
-removeMessage("2");
-
-function showMessages(skip = 0, top = 10, filterConfig = {}) {
-  messagesView.display(model.getPage(skip, top, filterConfig), model.user);
-}
-// showMessages(0, 1, { text: 'h' });

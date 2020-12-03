@@ -35,7 +35,6 @@ body {
   --text-big: 16px;
   --header-height: 4rem;
 }
-
 button,
 input,
 label,
@@ -47,9 +46,12 @@ svg {
 }
 .find,
 .filters,
-.delete-filters,
 .send {
   padding: var(--space-l) var(--space-m) var(--space-s);
+}
+.invalid {
+  font-size: var(--text-add);
+  color: red;
 }
 /*container for all content*/
 .flex-container {
@@ -72,6 +74,9 @@ svg {
   background-color: var(--color1);
   color: var(--color0);
 }
+#nickname-flex {
+  display: none;
+}
 .nickname {
   color: var(--color0);
   font-size: var(--text-main);
@@ -89,6 +94,7 @@ svg {
 }
 .exit {
   text-align: end;
+  display: none;
 }
 .exit button {
   border: 0;
@@ -101,6 +107,7 @@ svg {
   outline: none;
 }
 .main {
+  display: none;
   position: relative;
   color: var(--color5);
   font-size: var(--text-main);
@@ -121,6 +128,7 @@ svg {
   min-width: 100px;
   min-height: 24px;
   margin: 0 var(--space-s);
+  max-width: 150px;
 }
 .main-button:hover {
   background-color: var(--color0);
@@ -178,15 +186,15 @@ svg {
   display: flex;
   justify-content: space-between;
 }
-.find input {
+.find-input {
   display: block;
   background-color: var(--color0);
-  width: 45%;
   border: 2px solid var(--color6);
   padding: var(--space-xs) var(--space-m);
   border-radius: 10px;
+  min-height: 24px;
 }
-.find input:focus {
+.find-input:focus {
   border: 2px solid var(--color2);
   outline: 0 solid var(--color6);
 }
@@ -201,9 +209,9 @@ svg {
   background-color: var(--color10);
   color: var(--color9);
   font-style: italic;
-  display: flex;
   justify-content: space-between;
   display: none;
+  padding: var(--space-s);
 }
 .delete-filters .main-button:hover {
   background-color: var(--color3);
@@ -222,26 +230,28 @@ svg {
 }
 .form-filters {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   position: relative;
+  flex-wrap: wrap;
+}
+.form-filters button {
+  align-self: start;
 }
 .form-filters p,
 .delete-filters p {
   margin: 0;
   padding: var(--space-xs);
 }
-.form-filters button {
-  word-wrap: wrap;
-}
 .form-filters input[type="text"] {
   border: 2px solid var(--color10);
   border-radius: 5px;
   padding: var(--space-xs);
-  background-image: url("/images/search_.png");
+  background-image: url("images/search_.png");
   background-size: 10px;
   background-repeat: no-repeat;
   background-position: calc(90%);
 }
+
 .form-filters input:focus {
   border: 2px solid var(--color3);
   outline: 2px solid var(--color10);
@@ -253,7 +263,7 @@ svg {
   padding: var(--space-s) var(--space-l);
 }
 .own-mess {
-  width: 80%;
+  width: 60%;
   background-color: var(--color0);
   border-radius: 10px;
   padding: var(--space-s) var(--space-m);
@@ -300,6 +310,7 @@ svg {
 .delete {
   margin-left: var(--space-l);
   position: relative;
+  padding: var(--space-xs);
 }
 .tool path:hover {
   stroke: var(--color3);
@@ -328,6 +339,9 @@ svg {
   position: absolute;
   bottom: 0;
   z-index: 100;
+}
+#editmsg {
+  display: none;
 }
 .send form {
   display: flex;
@@ -452,6 +466,12 @@ svg {
   border: none;
   outline: none;
 }
+.nickname-button {
+  display: block;
+  background: transparent;
+  border: none;
+  outline: none;
+}
 .login-button-third:hover {
   color: var(--color3);
 }
@@ -487,6 +507,7 @@ svg {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  transition: all 2s linear;
 }
 .registration-page {
   background-image: url(images/registr.png);
@@ -508,6 +529,15 @@ svg {
   .registration {
     min-width: 40%;
   }
+  .form-filters {
+    flex-direction: column;
+    text-align: start;
+  }
+  .form-filters input {
+    margin: var(--space-s) 0;
+    width: 90%;
+    min-height: 24px;
+  }
 }
 @media all and (max-width: 770px) {
   .flex-container {
@@ -525,15 +555,7 @@ svg {
   .find input {
     height: 25px;
   }
-  .form-filters {
-    flex-direction: column;
-    text-align: start;
-  }
-  .form-filters input {
-    margin: var(--space-m) 0;
-    width: 90%;
-    min-height: 24px;
-  }
+
   .login-page,
   .registration-page {
     flex-direction: column-reverse;
@@ -559,7 +581,15 @@ svg {
 }
 @media all and (max-width: 450px) {
   .flex-container-1 {
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+  .listing {
+    position: absolute;
+    z-index: 100;
     display: none;
+    background-color: var(--color10);
   }
   :root {
     --space-xs: 4px;
@@ -571,6 +601,6 @@ svg {
     margin-top: var(--space-l);
   }
   .login-picture-mobile {
-    height: 150px;
+    height: 200px;
   }
 }
