@@ -153,7 +153,6 @@ svg {
 .img-button:focus {
   outline: none;
 }
-/* .listing { */
 #active-users {
   height: 60vh;
   overflow: auto;
@@ -198,13 +197,11 @@ svg {
   border: 2px solid var(--color2);
   outline: 0 solid var(--color6);
 }
-/**/
 .filters {
   background-color: var(--color10);
   text-align: end;
   display: none;
 }
-/**/
 .delete-filters {
   background-color: var(--color10);
   color: var(--color9);
@@ -515,6 +512,27 @@ svg {
   background-size: cover;
   justify-content: flex-start;
 }
+.error {
+  display: none;
+}
+.error-img {
+  margin: 0 auto;
+  display: block;
+  height: 400px;
+}
+.error-mobile {
+  display: none;
+}
+.error-button {
+  margin: var(--space-l) auto;
+  display: block;
+  height: 36px;
+  width: auto;
+  font-size: var(--text-big);
+  min-width: auto;
+  min-height: auto;
+  max-width: max-content;
+}
 /*RESIZING*/
 @media all and (min-width: 1440px) {
   .flex-container {
@@ -602,5 +620,19 @@ svg {
   }
   .login-picture-mobile {
     height: 200px;
+  }
+  .error {
+    display: none;
+  }
+  .error-mobile {
+    margin: 0 auto;
+    display: block;
+    height: auto;
+    width: 80%;
+  }
+}
+@media all and (max-width: 320px) {
+  .error-mobile {
+    width: 100%;
   }
 }

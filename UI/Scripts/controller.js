@@ -138,13 +138,22 @@ class Controller {
     }
   }
   editMessage(value) {
-    const msg = { text: value };
-    document.getElementById("edit").value = "";
-    console.log(msg, ID);
+    let msg = { text: value, isPersonal: false, to: "" };
+    const radioTo = document.getElementById("active-users");
+    for (let i = 0; i < radioTo.length; i++) {
+      if (radioTo[0].checked) {
+        break;
+      } else if (radioTo[i].checked) {
+        msg.isPersonal = true;
+        msg.to = radioTo[i].nextSibling.nextElementSibling.textContent;
+      }
+    }
     if (this.model.edit(ID, msg)) {
       this.messagesView.display(this.model.getPage(), this.model.user);
       this.click = 10;
     }
+    document.getElementById("edit").value = "";
+    radioTo[0].checked = true;
     document.getElementById("editmsg").style.display = "none";
     document.getElementById("addmsg").style.display = "block";
   }
@@ -158,11 +167,9 @@ document
       alert("delete");
       const id = event.target.parentNode.parentNode.id;
       controller.removeMessage(id);
-      console.log(id);
     }
     if (event.target.id === "rewrite") {
       alert("rewrite");
-      console.log(document.getElementById("rewrite").parentNode.parentNode);
       const id = event.target.parentNode.parentNode.id;
       ID = id;
       const el = document.getElementById(id);
@@ -171,6 +178,18 @@ document
       document.getElementById("edit").value = el.querySelector(
         ".message-text"
       ).textContent;
+      const newM = controller.model.get(ID);
+      if (newM.to) {
+        const radioTo = document.getElementById("active-users");
+        for (let i = 0; i < radioTo.length; i++) {
+          if (
+            radioTo[i].nextSibling.nextElementSibling.textContent === newM.to
+          ) {
+            radioTo[i].checked = true;
+            break;
+          }
+        }
+      }
     }
   });
 //список пользователей в мобилке

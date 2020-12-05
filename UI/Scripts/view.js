@@ -89,6 +89,9 @@ class ActiveUsersView {
     let index = 0;
     const tpl = document.getElementById("user-template");
     const fragment = new DocumentFragment();
+    const defUser = tpl.content.cloneNode(true);
+    defUser.querySelector(".user-name").textContent = "none";
+    fragment.appendChild(defUser);
     for (const item of activeUsers) {
       if (item === user) {
         continue;
@@ -101,4 +104,3 @@ class ActiveUsersView {
     this._activeUsersView.appendChild(fragment);
   }
 }
-
