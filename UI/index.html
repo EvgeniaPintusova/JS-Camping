@@ -54,7 +54,7 @@
     </div>
     <div class="registration-page" id="registration-page" style="display: none;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
-        <form class="registration" onsubmit="controller.userRegistration(this.newLogin.value); return false;">
+        <form class="registration" onsubmit="controller.userRegistration(this.newLogin.value); return false;" id="registration-form">
             <p class="registration-text">Зарегистрируйтесь</p>
             <input class="login-input" type="text" name="newLogin" id="newLogin" title="придумайте свой логин" placeholder="Придумайте логин*" required/>
             <p id="registration-login-message" class="invalid"></p>
@@ -146,7 +146,7 @@
                     <p>Выберите получателя для личного сообщения.</p>
                 </div>
                 <div class="send" id="editmsg">
-                    <form action="" onsubmit="controller.editMessage(this.send.value); return false;">
+                    <form action="" onsubmit="controller.editMessage(this.send.value); return false;" autofocus>
                         <input type="text" name="send"id="edit"contenteditable="true" placeholder="Напишите сообщение..." autofocus title="напишите своё сообщение"/>
                         <button type="submit" title="отправить сообщение" >
                             <svg width="42" height="31" viewBox="0 0 42 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -172,6 +172,13 @@
             </p>
         </div>
     </footer> 
+    <div class="modal" style="display: none;">
+      <p>Удалить сообщение?</p>
+      <div>
+        <button class="main-button modal-button">Отменить</button>
+        <button class="main-button modal-button">Удалить</button>
+      </div>
+    </div>
     <template id = "user-template">
         <label>
             <input class="input-user" type="radio" id="" name="user"/>
@@ -192,8 +199,9 @@
     <template id="msg-template-mine">
         <div class="own-mess my-mess" id="">
             <span class="author"></span>
-            <div class="edit-tools" >
-                <div class="delete"  id="delete">
+            <div class="edit-tools">
+                <div class="delete">
+                    <div id="delete" style="padding: 10px; position: absolute;"></div>
                     <p class="text-tool">Удалить</p>
                     <botton class="tool">
                         <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -201,7 +209,8 @@
                         <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/></svg> 
                     </botton>
                 </div> 
-                <div class="rewrite" id="rewrite">
+                <div class="rewrite" >
+                     <div id="rewrite" style="padding: 10px; position: absolute;"></div>
                     <p class="text-tool">Редактировать</p>
                     <botton class="tool" >
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,6 +231,7 @@
 </body>
 <script type="text/javascript" src="Scripts/model.js"></script>
 <script type="text/javascript" src="Scripts/view.js"></script>
+<script type="text/javascript" src="Scripts/chatApiService.js"></script>
 <script type="text/javascript" src="Scripts/controller.js"></script>
 <script type="text/javascript" src="Scripts/apiService.js"></script>
 </html>

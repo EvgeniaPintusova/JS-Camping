@@ -1,7 +1,9 @@
 class UserList {
   constructor() {
     this._users = JSON.parse(localStorage.getItem("userList"));
+    // this._users = value1;
     this._activeUsers = JSON.parse(localStorage.getItem("activeUserList"));
+    // this._activeUsers = value2;
   }
   get activeUsers() {
     return this._activeUsers;
@@ -92,12 +94,12 @@ class ActiveUsersView {
     const defUser = tpl.content.cloneNode(true);
     defUser.querySelector(".user-name").textContent = "none";
     fragment.appendChild(defUser);
-    for (const item of activeUsers) {
-      if (item === user) {
+    for (let i = 0; i < activeUsers.length; i++) {
+      if (activeUsers[i] === user) {
         continue;
       }
       const el = tpl.content.cloneNode(true);
-      el.querySelector(".user-name").textContent = item;
+      el.querySelector(".user-name").textContent = activeUsers[i];
       el.querySelector(".input-user").setAttribute("id", ++index);
       fragment.appendChild(el);
     }

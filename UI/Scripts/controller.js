@@ -138,14 +138,19 @@ class Controller {
     }
   }
   editMessage(value) {
-    let msg = { text: value, isPersonal: false, to: "" };
+    let msg = { text: value, isPersonal: false };
     const radioTo = document.getElementById("active-users");
     for (let i = 0; i < radioTo.length; i++) {
       if (radioTo[0].checked) {
+        msg.isPersonal = false;
         break;
       } else if (radioTo[i].checked) {
         msg.isPersonal = true;
-        msg.to = radioTo[i].nextSibling.nextElementSibling.textContent;
+        msg = {
+          text: value,
+          isPersonal: false,
+          to: radioTo[i].nextSibling.nextElementSibling.textContent,
+        };
       }
     }
     if (this.model.edit(ID, msg)) {
@@ -165,12 +170,11 @@ document
   .addEventListener("click", function (event) {
     if (event.target.id === "delete") {
       alert("delete");
-      const id = event.target.parentNode.parentNode.id;
+      const id = event.target.parentNode.parentNode.parentNode.id;
       controller.removeMessage(id);
     }
     if (event.target.id === "rewrite") {
-      alert("rewrite");
-      const id = event.target.parentNode.parentNode.id;
+      const id = event.target.parentNode.parentNode.parentNode.id;
       ID = id;
       const el = document.getElementById(id);
       document.getElementById("editmsg").style.display = "block";
@@ -257,7 +261,7 @@ document
   .addEventListener("click", registrGuest);
 function localStorageCreate() {
   if (localStorage.length === 0) {
-    localStorage.setItem("activeUserList", '["none","David", "Bob"]');
+    localStorage.setItem("activeUserList", '["David", "Bob"]');
     localStorage.setItem("messageList", "[]");
     localStorage.setItem("userList", '["Гость", "David", "Bob", "Zhenya"]');
   }
