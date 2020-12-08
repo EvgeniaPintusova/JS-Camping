@@ -33,7 +33,7 @@
          <img class="error-mobile" src="images/error-mobile.png" alt="картинка ошибки">
          <button class="main-button error-button">Вернуться к списку сообщений</button>
     </div>
-    <div class="login-page" id="login-page" style="display: flex;">
+    <div class="login-page" id="login-page" style="display: none;">
         <img class="login-picture" src="images/login.png" alt="картинка: девушка в чате"/>
         <img class="login-picture-mobile" src="images/login-mobile.png" alt="картинка: девушка в чате"/>
 
@@ -52,16 +52,16 @@
         </form>
 
     </div>
-    <div class="registration-page" id="registration-page" style="display: none;">
+    <div class="registration-page" id="registration-page" style="display: flex;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
-        <form class="registration" onsubmit="controller.userRegistration(this.newLogin.value); return false;" id="registration-form">
+        <form class="registration" id="registration-form">
             <p class="registration-text">Зарегистрируйтесь</p>
             <input class="login-input" type="text" name="newLogin" id="newLogin" title="придумайте свой логин" placeholder="Придумайте логин*" required/>
             <p id="registration-login-message" class="invalid"></p>
-            <input class="login-input" type="password" name="new-password" title="придумайте свой пароль" placeholder="Придумайте пароль*" required/>
-            <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/>
+            <input class="login-input" type="password" name="newPassword" title="придумайте свой пароль" placeholder="Придумайте пароль*" required/>
+            <!-- <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/> -->
             <p id="registration-password-message" class="invalid"></p>
-            <button class="login-button" title="регистрация в чате" >Зарегистрироваться</button>
+            <button class="login-button" type="button" title="регистрация в чате" onclick="chat.registration()">Зарегистрироваться</button>
             <button class="login-button login-button-second" title="вход в чат" id="registrEntry">Войти</button>
             <button class="login-button-third" title="вход в чат гостем" id="registrGuest">Войти без регистрации</button>
             <p class="login-p">или</p>
@@ -233,6 +233,5 @@
 <script type="text/javascript" src="Scripts/view.js"></script>
 <script type="text/javascript" src="Scripts/chatApiService.js"></script>
 <script type="text/javascript" src="Scripts/controller.js"></script>
-<script type="text/javascript" src="Scripts/apiService.js"></script>
 </html>
  

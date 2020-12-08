@@ -12,20 +12,21 @@
         name="pass"
         required
       />
-      <button type="button" onclick="registerrr()">Try it</button>
+      <button type="button" onclick="registr()">Try it</button>
     </form>
     <div
       id="error"
       style="height: 50px; width: 50px; display: none; background-color: red"
     ></div>
+    <div
+      id="ok"
+      style="height: 50px; width: 50px; display: none; background-color: green"
+    ></div>
   </body>
   <script>
-    async function registerrr() {
+    async function registr() {
       try {
         var formdata = new FormData(document.getElementById("demo"));
-        // formdata.append("name", document.getElementById("demo").name.value);
-        // formdata.append("pass", document.getElementById("demo").pass.value);
-        console.log(formdata);
         const response = await fetch(
           "https://jslabdb.datamola.com/auth/register",
           {
@@ -35,11 +36,15 @@
             },
             body: formdata,
           }
-        ).then((data) => data.json());
+        )
+          .then(console.log(data))
+          .then((data) => data.json())
+          .then((data) => console.log(data));
         if (response.error) {
           throw new Error(response.error);
         }
         localStorage.setItem("token", response.token);
+        document.getElementById("ok").style.display = "block";
         return true;
       } catch (e) {
         document.getElementById("error").style.display = "block";
