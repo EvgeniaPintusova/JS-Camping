@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <h1>A Web Page</h1>
+
+    <form id="demo">
+      <input type="text" placeholder="Enter Username" name="name" required />
+      <input
+        type="password"
+        placeholder="Enter Password"
+        name="pass"
+        required
+      />
+      <button type="button" onclick="registr()">Try it</button>
+    </form>
+    <div
+      id="error"
+      style="height: 50px; width: 50px; display: none; background-color: red"
+    ></div>
+    <div
+      id="ok"
+      style="height: 50px; width: 50px; display: none; background-color: green"
+    ></div>
+  </body>
+  <script>
+    async function registr() {
+      try {
+        var formdata = new FormData(document.getElementById("demo"));
+        const response = await fetch(
+          "https://jslabdb.datamola.com/auth/register",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: formdata,
+          }
+        )
+          .then(console.log(data))
+          .then((data) => data.json())
+          .then((data) => console.log(data));
+        if (response.error) {
+          throw new Error(response.error);
+        }
+        localStorage.setItem("token", response.token);
+        document.getElementById("ok").style.display = "block";
+        return true;
+      } catch (e) {
+        document.getElementById("error").style.display = "block";
+        return false;
+      }
+    }
+  </script>
+</html>
