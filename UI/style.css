@@ -43,6 +43,11 @@ svg,
 #delete {
   cursor: pointer;
 }
+#rewrite,
+#delete {
+  padding: 10px;
+  position: absolute;
+}
 :hover {
   transition: 0.1s;
 }
@@ -109,7 +114,7 @@ svg,
   outline: none;
 }
 .main {
-  display: none;
+  display: block;
   position: relative;
   color: var(--color5);
   font-size: var(--text-main);
@@ -299,6 +304,7 @@ svg,
 }
 .my-mess {
   margin-left: auto;
+  position: relative;
 }
 .edit-tools {
   display: flex;
@@ -536,22 +542,44 @@ svg,
   max-width: max-content;
 }
 .modal {
-  height: 100px;
-  width: 300px;
+  padding: var(--space-s);
   background-color: var(--color0);
   border: 2px solid var(--color3);
   color: var(--color5);
   text-align: center;
+  position: absolute;
+  z-index: 120;
+  top: 30%;
+  right: 10%;
+  display: none;
+  /* pointer-events: none; */
+}
+.modal:target {
+  display: block;
+  pointer-events: auto;
 }
 .modal-button {
   background-color: var(--color3);
   color: var(--color0);
   box-shadow: 0 0 0 2px var(--color3);
+  display: inline-block;
+  margin: var(--space-s);
 }
+
 .modal-button:hover {
   background-color: var(--color0);
   color: var(--color3);
   box-shadow: 0 0 0 2px var(--color3);
+}
+.modal-button:hover .modal-a {
+  color: var(--color3);
+}
+.modal-a {
+  text-decoration: none;
+  color: var(--color0);
+}
+.modal-a:hover {
+  color: var(--color3);
 }
 /*RESIZING*/
 @media all and (min-width: 1440px) {

@@ -1,9 +1,7 @@
 class UserList {
   constructor() {
     this._users = JSON.parse(localStorage.getItem("userList"));
-    // this._users = value1;
     this._activeUsers = JSON.parse(localStorage.getItem("activeUserList"));
-    // this._activeUsers = value2;
   }
   get activeUsers() {
     return this._activeUsers;
@@ -43,10 +41,14 @@ class MessagesView {
     const msgTpl = document.getElementById("msg-template");
     const msgTplmine = document.getElementById("msg-template-mine");
     const fragment = new DocumentFragment();
-    let el;
+    let el,
+      i = 0;
     for (const item of msgList) {
       if (item.author === currUser) {
         el = msgTplmine.content.cloneNode(true);
+        el.querySelector(".modal").setAttribute("id", `openModal${i}`);
+        el.querySelector(".delete-a").setAttribute("href", `#openModal${i}`);
+        i++;
         el.querySelector(".own-mess").setAttribute("id", item.id);
         el.querySelector(".author").textContent = item.author;
         el.querySelector(".message-text").textContent = item.text;
