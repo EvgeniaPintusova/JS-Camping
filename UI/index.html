@@ -33,7 +33,7 @@
          <img class="error-mobile" src="images/error-mobile.png" alt="картинка ошибки">
          <button class="main-button error-button">Вернуться к списку сообщений</button>
     </div>
-    <div class="login-page" id="login-page" style="display: none;">
+    <div class="login-page" id="login-page" style="display: flex;">
         <img class="login-picture" src="images/login.png" alt="картинка: девушка в чате"/>
         <img class="login-picture-mobile" src="images/login-mobile.png" alt="картинка: девушка в чате"/>
 
@@ -48,27 +48,25 @@
             <button class="login-button-third" id="loginGuest" title="вход в чат гостем">Войти без регистрации</button>
             <p class="login-p">или</p>
             <button class="login-button login-button-fourth" id="loginGoogle" title="вход в чат">Продолжить с Google</button>
-            
         </form>
-
     </div>
-    <div class="registration-page" id="registration-page" style="display: flex;">
+    <div class="registration-page" id="registration-page" style="display: none;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
-        <form class="registration" id="registration-form">
+        <form class="registration" id="registration-form" onsubmit="controller.userRegistration(this.login.value); return false;">
             <p class="registration-text">Зарегистрируйтесь</p>
             <input class="login-input" type="text" name="newLogin" id="newLogin" title="придумайте свой логин" placeholder="Придумайте логин*" required/>
             <p id="registration-login-message" class="invalid"></p>
             <input class="login-input" type="password" name="newPassword" title="придумайте свой пароль" placeholder="Придумайте пароль*" required/>
-            <!-- <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/> -->
+            <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/>
             <p id="registration-password-message" class="invalid"></p>
-            <button class="login-button" type="button" title="регистрация в чате" onclick="chat.registration()">Зарегистрироваться</button>
+            <button class="login-button" type="button" title="регистрация в чате" >Зарегистрироваться</button>
             <button class="login-button login-button-second" title="вход в чат" id="registrEntry">Войти</button>
             <button class="login-button-third" title="вход в чат гостем" id="registrGuest">Войти без регистрации</button>
             <p class="login-p">или</p>
             <button class="login-button login-button-fourth" title="вход в чат" id="registrGoogle">Продолжить с Google</button>
         </form>
     </div>
-    <main class="main" id="main">
+    <main class="main" id="main" style="display: none;">
         <div class="flex-container">
             <div class="flex-container-1"> 
                 <div class="listing" id="listing">
@@ -172,13 +170,6 @@
             </p>
         </div>
     </footer> 
-    <div class="modal" style="display: none;">
-      <p>Удалить сообщение?</p>
-      <div>
-        <button class="main-button modal-button">Отменить</button>
-        <button class="main-button modal-button">Удалить</button>
-      </div>
-    </div>
     <template id = "user-template">
         <label>
             <input class="input-user" type="radio" id="" name="user"/>
@@ -197,34 +188,43 @@
         </div>
     </template>
     <template id="msg-template-mine">
-        <div class="own-mess my-mess" id="">
-            <span class="author"></span>
+        <div class="own-mess my-mess" id="" >    
+            <div class="modal" id="" >
+                <p>Удалить сообщение?</p>
+                <div style="display: flex;">
+                    <button class="main-button modal-button"><a href="#close" class="modal-a">Отменить</a></button>
+                    <button class="main-button modal-button" id="confirm">Удалить</button>
+                </div>
+            </div>
             <div class="edit-tools">
                 <div class="delete">
-                    <div id="delete" style="padding: 10px; position: absolute;"></div>
+                    <a class="delete-a" id="delete" href=""></a>
                     <p class="text-tool">Удалить</p>
                     <botton class="tool">
                         <svg  width="17" height="23" viewBox="0 0 17 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
-                        <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/></svg> 
+                            <path d="M4.85714 21.6289L1 1.64838C4 0.965282 11.2 0.00894982 16 1.64838L13 21.6289H4.85714Z" fill="white"/>
+                            <path d="M1 1.64838L4.85714 21.6289H13L16 1.64838M1 1.64838C6.48571 6.97651 13.2857 3.86843 16 1.64838M1 1.64838C4 0.965282 11.2 0.00894983 16 1.64838" stroke="#C4C4C4"/>
+                        </svg> 
                     </botton>
                 </div> 
                 <div class="rewrite" >
-                     <div id="rewrite" style="padding: 10px; position: absolute;"></div>
+                    <div id="rewrite"></div>
                     <p class="text-tool">Редактировать</p>
                     <botton class="tool" >
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
-                        <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/></svg>
+                            <path d="M12.25 12.4383L19.3333 2.2002V3.73591L12.25 12.4383Z" fill="#C4C4C4"/>
+                            <path d="M7.66667 5.78353H1V21.1407H21V5.78353M19.3333 2.2002L12.25 12.4383L19.3333 3.73591V2.2002Z" stroke="#C4C4C4"/>
+                        </svg>
                     </botton>
                 </div>
             </div>
+            <span class="author"></span>
             <p class="message-text"></p>
             <p class="owner"></p>
             <p class="to"></p>
             <p class="date-time">
-            <span class="time"></span>
-            <span class="date"></span>
+                <span class="time"></span>
+                <span class="date"></span>
             </p>
         </div>
     </template>

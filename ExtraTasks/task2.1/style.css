@@ -48,12 +48,6 @@
 .close_x svg path:hover {
   stroke: red;
 }
-a {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  padding: 10px;
-}
 button {
   min-width: 100px;
   border: 0;
