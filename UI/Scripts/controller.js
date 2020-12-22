@@ -57,6 +57,7 @@ class Controller {
     }
     document.getElementById("nickname-flex").style.display = "none";
     this.headerView.display("");
+    this.userList.deleteActiveUser(this.model.user);
   }
   addMessage(msg) {
     if (this.model.user === "Гость") {
@@ -265,9 +266,9 @@ document
   .addEventListener("click", registrGuest);
 function localStorageCreate() {
   if (localStorage.length === 0) {
-    localStorage.setItem("activeUserList", '["David", "Bob"]');
+    localStorage.setItem("activeUserList", '["user1", "user2"]');
     localStorage.setItem("messageList", "[]");
-    localStorage.setItem("userList", '["Гость", "David", "Bob", "Zhenya"]');
+    localStorage.setItem("userList", '["Гость", "user1", "user2"]');
   }
 }
 

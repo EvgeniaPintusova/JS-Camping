@@ -11,15 +11,22 @@ class UserList {
   }
   addActiveUser(user) {
     this._activeUsers.push(user);
-    // this.save();
+    this.save();
   }
   addUser(user) {
     this._users.push(user);
     this.save();
   }
+  deleteActiveUser(user) {
+    let removeInd = this._activeUsers.indexOf(user);
+    if (removeInd !== -1) {
+      this._activeUsers.splice(removeInd, 1);
+      this.save();
+    }
+  }
   save() {
     localStorage.setItem("userList", JSON.stringify(this._users));
-    // localStorage.setItem("activeUserList", JSON.stringify(this._activeUsers));
+    localStorage.setItem("activeUserList", JSON.stringify(this._activeUsers));
   }
 }
 class HeaderView {

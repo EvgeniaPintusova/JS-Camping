@@ -52,14 +52,14 @@
     </div>
     <div class="registration-page" id="registration-page" style="display: none;">
         <img class="login-picture-mobile" src="images/registr-mobile.png"/>
-        <form class="registration" id="registration-form" onsubmit="controller.userRegistration(this.login.value); return false;">
+        <form class="registration" id="registration-form" action="">
             <p class="registration-text">Зарегистрируйтесь</p>
             <input class="login-input" type="text" name="newLogin" id="newLogin" title="придумайте свой логин" placeholder="Придумайте логин*" required/>
             <p id="registration-login-message" class="invalid"></p>
             <input class="login-input" type="password" name="newPassword" title="придумайте свой пароль" placeholder="Придумайте пароль*" required/>
             <input class="login-input" type="password" name="new-password-confirm" title="подтвердите введеный пароль" placeholder="Подтвердите пароль*" required/>
             <p id="registration-password-message" class="invalid"></p>
-            <button class="login-button" type="button" title="регистрация в чате" >Зарегистрироваться</button>
+            <button class="login-button" type="button" title="регистрация в чате" onclick="controller.userRegistration(newLogin.value); return false;">Зарегистрироваться</button>
             <button class="login-button login-button-second" title="вход в чат" id="registrEntry">Войти</button>
             <button class="login-button-third" title="вход в чат гостем" id="registrGuest">Войти без регистрации</button>
             <p class="login-p">или</p>
